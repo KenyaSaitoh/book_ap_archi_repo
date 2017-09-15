@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>ap_archi_04_servlet_jsp</name>
-	<comment>Project cdi_inject created by Buildship.</comment>
+	<name>gradle_plugin</name>
+	<comment>Project gradle_basic created by Buildship.</comment>
 	<projects>
 	</projects>
 	<buildSpec>
@@ -17,7 +17,8 @@
 		</buildCommand>
 	</buildSpec>
 	<natures>
-		<nature>org.eclipse.buildship.core.gradleprojectnature</nature>
+		<nature>org.eclipse.jdt.groovy.core.groovyNature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
+		<nature>org.eclipse.buildship.core.gradleprojectnature</nature>
 	</natures>
 </projectDescription>

@@ -2,13 +2,18 @@
 def conf = {
     def slurper = new ConfigSlurper()
     slurper.binding = project.properties
-    def files = files("ap-archi-conf.gradle")
+    def files = files(
+            "${System.properties["user.home"]}/ap-archi-conf.gradle")
     files.inject(new ConfigObject()) { conf, file ->
         file.exists() ? conf.merge(slurper.parse(file.toURL())) : conf
     }
 }()
 
+def param = "aaaa"
+def warFile
+
 task printTask << {
+    println param
     println "rootDir ---> $rootDir" // 組み込み変数
     println "projectDir ---> $projectDir" // 組み込み変数
     println glassfishDir
@@ -96,6 +101,19 @@ task stopDerby << {
         args "stop-database"
         args "--dbhost=${conf.derby.hostName}"
         args "--dbport=${conf.derby.port}"
+    }
+}
+
+task deployGlassFish << {
+    print warFile + "#####"
+    exec {
+        executable conf.glassfish.asadmin
+        args "--user", conf.glassfish.adminUsername
+        args "--host", conf.glassfish.hostName
+        args "--port", conf.glassfish.adminPort
+        args "deploy"
+        args "--force", true
+        args warFile
     }
 }
 

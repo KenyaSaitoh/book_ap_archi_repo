@@ -1,0 +1,59 @@
+// 初期化処理
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath files("setup-plugin.jar")
+    }
+}
+
+// プラグイン読み込み
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'setup-plugin'
+
+// 文字コード設定
+def defaultEncoding = 'UTF-8'
+tasks.withType(AbstractCompile).each { it.options.encoding = defaultEncoding }
+
+// リポジトリ設定
+repositories {
+    jcenter()
+}
+
+// Java EE7依存関係設定
+dependencies {
+    compile 'javax:javaee-api:7.0'
+    providedCompile "javax.servlet:javax.servlet-api:3.1.0"
+}
+
+deployGlassFish {
+    param {
+        warFile = war.getArchivePath().path
+    }
+}
+
+/*
+def conf = {
+    def slurper = new ConfigSlurper()
+    slurper.binding = project.properties
+    def files = files(
+            "${System.properties["user.home"]}/ap-archi-conf.gradle")
+    files.inject(new ConfigObject()) { conf, file ->
+        file.exists() ? conf.merge(slurper.parse(file.toURL())) : conf
+    }
+}()
+
+task deploy << {
+    exec {
+        executable conf.glassfish.asadmin
+        args "--user", conf.glassfish.adminUsername
+        args "--host", conf.glassfish.hostName
+        args "--port", conf.glassfish.adminPort
+        args "deploy"
+        args "--force", true
+        args war.getArchivePath().path
+    }
+}
+*/

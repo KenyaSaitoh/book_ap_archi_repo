@@ -8,6 +8,7 @@ glassfish {
     httpPort = "8080"
     adminPort = "4848"
     adminUsername = "admin"
+    adminPasswordFile = "passwordfile4.txt"
     connPoolName = "DerbyPool2"
     datasourceJndiName = "jdbc/DerbyDS"
 }
@@ -16,7 +17,7 @@ glassfish {
 derby {
     derbyDir = "C:/Java/db-derby-10.12.1.1-bin"
     derbyDBDir = "C:/tmp"
-    driverDir = "${derbyDir}/lib"
+    driverDir= "${derbyDir}/lib"
     driverJar = "derbyclient.jar"
     driverClass = "org.apache.derby.jdbc.ClientDriver"
     datasource = "org.apache.derby.jdbc.ClientDataSource"
@@ -27,5 +28,3 @@ derby {
     user = "TESTUSER"
     password = "PASSWORD"
 }
-
-envSetupDir = "C:/Java/java_repos/ap_archi_repo/env_setup"
