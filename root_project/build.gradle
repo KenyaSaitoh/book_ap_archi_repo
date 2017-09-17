@@ -1,0 +1,221 @@
+import groovy.sql.Sql
+
+// 初期化処理
+buildscript {
+    repositories {
+        jcenter()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "io.spring.gradle:dependency-management-plugin:1.0.0.RC2"
+        classpath files("gradle-plugin.jar")
+        classpath "org.hidetake:gradle-ssh-plugin:2.9.0"
+        classpath "mysql:mysql-connector-java:5.1.6"
+        classpath "org.apache.derby:derbyclient:10.13.1.1"
+    }
+}
+
+// 設定情報の読み込み
+def conf = {
+    def slurper = new ConfigSlurper()
+    slurper.binding = project.properties
+    def files = files(
+            "${System.properties["user.home"]}/ap-archi-conf.gradle")
+    files.inject(new ConfigObject()) { conf, file ->
+        file.exists() ? conf.merge(slurper.parse(file.toURL())) : conf
+    }
+}()
+
+// 設定情報を拡張プロパティにセット
+ext.conf = conf
+
+task printTask << {
+    println "rootDir ---> $rootDir" // 組み込み変数
+    println "projectDir ---> $projectDir" // 組み込み変数
+    println conf
+}
+
+task startGlassFish << {
+    exec {
+        executable conf.glassfish.asadmin
+        args "start-domain", conf.glassfish.domainName
+    }
+}
+
+task stopGlassFish << {
+    exec {
+        executable conf.glassfish.asadmin
+        args "stop-domain", conf.glassfish.domainName
+    }
+}
+
+def createDataSource(datasourceClassName, property, connPoolName,
+        datasourceJndiName) {
+    exec {
+        executable conf.glassfish.asadmin
+        args "--user", conf.glassfish.adminUsername
+        args "--host", conf.glassfish.hostName
+        args "--port", conf.glassfish.adminPort
+        args "create-jdbc-connection-pool"
+        args "--datasourceclassname", datasourceClassName
+        args "--restype", "javax.sql.DataSource"
+        args "--property", property
+        args connPoolName
+    }
+    exec {
+        executable conf.glassfish.asadmin
+        args "--user", conf.glassfish.adminUsername
+        args "--host", conf.glassfish.hostName
+        args "--port", conf.glassfish.adminPort
+        args "create-jdbc-resource"
+        args "--connectionpoolid", connPoolName
+        args "--enabled=true"
+        args datasourceJndiName
+    }
+}
+
+def deleteDataSource(connPoolName, datasourceJndiName) {
+    exec {
+        executable conf.glassfish.asadmin
+        args "--user", conf.glassfish.adminUsername
+        args "--host", conf.glassfish.hostName
+        args "--port", conf.glassfish.adminPort
+        args "delete-jdbc-resource"
+        args datasourceJndiName
+    }
+    exec {
+        executable conf.glassfish.asadmin
+        args "--user", conf.glassfish.adminUsername
+        args "--host", conf.glassfish.hostName
+        args "--port", conf.glassfish.adminPort
+        args "delete-jdbc-connection-pool"
+        args "--cascade"
+        args connPoolName
+    }
+}
+
+task createMySQLDS << {
+    createDataSource(conf.mysql.datasourceClass,
+            "portNumber=${conf.mysql.port}:" +
+            "serverName=${conf.mysql.hostName}:" +
+            "User=${conf.mysql.general.user}:" +
+            "Password=${conf.mysql.general.password}:" +
+            "databaseName=${conf.mysql.general.db}",
+            conf.mysql.general.connPoolName,
+            conf.mysql.general.datasourceJndiName)
+}
+
+task deleteMySQLDS << {
+    deleteDataSource(conf.mysql.general.connPoolName,
+            conf.mysql.general.datasourceJndiName)
+}
+
+task startDerby << {
+    exec {
+        executable conf.glassfish.asadmin
+        args "start-database"
+        args "--dbhost=${conf.derby.hostName}"
+        args "--dbhome=${conf.derby.homeDir}"
+        args "--dbport=${conf.derby.port}"
+    }
+}
+
+task stopDerby << {
+    exec {
+        executable conf.glassfish.asadmin
+        args "stop-database"
+        args "--dbhost=${conf.derby.hostName}"
+        args "--dbport=${conf.derby.port}"
+    }
+}
+
+task createDerbyDS << {
+    createDataSource(conf.derby.datasourceClass,
+            "portNumber=${conf.derby.port}:" +
+            "serverName=${conf.derby.hostName}:" +
+            "User=${conf.derby.general.user}:" +
+            "Password=${conf.derby.general.password}:" +
+            "databaseName=${conf.derby.general.db}",
+            conf.derby.general.connPoolName,
+            conf.derby.general.datasourceJndiName)
+}
+
+task deleteDerbyDS << {
+    deleteDataSource(conf.derby.general.connPoolName,
+            conf.derby.general.datasourceJndiName)
+}
+
+def deploy(warFile) {
+    exec {
+        executable conf.glassfish.asadmin
+        args "--user", conf.glassfish.adminUsername
+        args "--host", conf.glassfish.hostName
+        args "--port", conf.glassfish.adminPort
+        args "deploy"
+        args "--force", true
+        args warFile
+    }
+}
+
+def undeploy(warName) {
+    exec {
+        executable conf.glassfish.asadmin
+        args "--user", conf.glassfish.adminUsername
+        args "--host", conf.glassfish.hostName
+        args "--port", conf.glassfish.adminPort
+        args "undeploy"
+        args warName
+    }
+}
+
+def execSqlDir(dir, url, user, password, driverClass) {
+    new File(dir).listFiles().sort{a, b -> a.name <=> b.name}.each{ File f ->
+        println f
+        ant.sql(url: url,
+            userid: user,
+            password: password,
+            driver: driverClass,
+            classpath: buildscript.configurations.classpath.asPath,
+            encoding: "UTF-8",
+            onerror: "continue") {
+                fileset(file: f)
+            }
+    }
+}
+
+def execSql(file, url, user, password, driverClass) {
+    ant.sql(
+        driver: driverClass,
+        url: url,
+        userid: user,
+        password: password,
+        classpath: buildscript.configurations.classpath.asPath,
+        encoding: "UTF-8",
+        onerror: "continue") {
+            fileset(file: file)
+        }
+}
+
+task initMySQL << {
+    execSql("$projectDir/sql/mysql/DROP_MYSQL_USER.sql",
+            conf.mysql.general.baseUrl, "root", conf.mysql.rootPassword,
+            conf.mysql.driverClass)
+    execSql("$projectDir/sql/mysql/DROP_MYSQL_DATABASE.sql",
+            conf.mysql.general.baseUrl, "root", conf.mysql.rootPassword,
+            conf.mysql.driverClass)
+    execSql("$projectDir/sql/mysql/CREATE_MYSQL_USER.sql",
+            conf.mysql.general.baseUrl, "root", conf.mysql.rootPassword,
+            conf.mysql.driverClass)
+    execSql("$projectDir/sql/mysql/CREATE_MYSQL_DATABASE.sql",
+            conf.mysql.general.baseUrl, "root", conf.mysql.rootPassword,
+            conf.mysql.driverClass)
+}
+
+// タスクをグループ化する
+[startGlassFish, stopGlassFish]*.group = "glassfish"
+[initMySQL]*.group = "mysql"
+[createMySQLDS, deleteMySQLDS]*.group = "mysql-datasource"
+[startDerby, stopDerby]*.group = "derby"
+[createDerbyDS, deleteDerbyDS]*.group = "derby-datasource"
