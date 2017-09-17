@@ -1,4 +1,4 @@
-package jp.mufg.it.ee.presentation;
+package jp.mufg.it.ee.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
