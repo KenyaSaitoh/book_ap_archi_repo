@@ -26,7 +26,7 @@ dependencies {
     providedCompile "javax.servlet:javax.servlet-api:3.1.0"
 }
 
-task deployGlassFish << {
+task deployGlassFish(dependsOn: war) << {
     deploy(war.getArchivePath().path)
 }
 
@@ -45,3 +45,6 @@ task setupDerby << {
             conf.derby.general.user, conf.derby.general.password,
             conf.derby.driverClass)
 }
+
+// タスクをグループ化する
+[deployGlassFish, undeployGlassFish]*.group = "deploy"

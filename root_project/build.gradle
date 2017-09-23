@@ -172,7 +172,6 @@ def undeploy(warName) {
 
 def execSqlDir(dir, url, user, password, driverClass) {
     new File(dir).listFiles().sort{a, b -> a.name <=> b.name}.each{ File f ->
-        println f
         ant.sql(url: url,
             userid: user,
             password: password,
