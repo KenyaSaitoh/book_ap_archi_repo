@@ -36,20 +36,24 @@ subprojects {
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
 
+    // デプロイする（GlassFish）
     task deployGlassFish(dependsOn: war) << {
         deploy(war.getArchivePath().path)
     }
 
+    // アンデプロイする（GlassFish）
     task undeployGlassFish << {
         undeploy(war.archiveName.replaceAll(/\.war/, ""))
     }
 
+    // 初期データをセットアップする（MySQL）
     task setupMySQL << {
         execSqlDir("$projectDir/sql/mysql", conf.mysql.general.url,
                 conf.mysql.general.user, conf.mysql.general.password,
                 conf.mysql.driverClass)
     }
 
+    // 初期データをセットアップする（Derby）
     task setupDerby << {
         execSqlDir("$projectDir/sql/derby", conf.derby.general.url,
                 conf.derby.general.user, conf.derby.general.password,
@@ -75,6 +79,7 @@ def conf = {
 // 設定情報を拡張プロパティにセット
 ext.conf = conf
 
+// GlassFishを起動する
 task startGlassFish << {
     exec {
         executable conf.glassfish.asadmin
@@ -82,6 +87,7 @@ task startGlassFish << {
     }
 }
 
+// GlassFishを停止する
 task stopGlassFish << {
     exec {
         executable conf.glassfish.asadmin
@@ -89,6 +95,7 @@ task stopGlassFish << {
     }
 }
 
+// データソースを作成するメソッド
 def createDataSource(datasourceClassName, property, connPoolName,
         datasourceJndiName) {
     exec {
@@ -114,6 +121,7 @@ def createDataSource(datasourceClassName, property, connPoolName,
     }
 }
 
+// データソースを削除するメソッド
 def deleteDataSource(connPoolName, datasourceJndiName) {
     exec {
         executable conf.glassfish.asadmin
@@ -134,6 +142,7 @@ def deleteDataSource(connPoolName, datasourceJndiName) {
     }
 }
 
+// MySQL用データソースを作成する
 task createMySQLDS << {
     createDataSource(conf.mysql.datasourceClass,
             "portNumber=${conf.mysql.port}:" +
@@ -145,11 +154,13 @@ task createMySQLDS << {
             conf.mysql.general.datasourceJndiName)
 }
 
+// MySQL用データソースを削除する
 task deleteMySQLDS << {
     deleteDataSource(conf.mysql.general.connPoolName,
             conf.mysql.general.datasourceJndiName)
 }
 
+// Derbyを起動する
 task startDerby << {
     exec {
         executable conf.glassfish.asadmin
@@ -160,6 +171,7 @@ task startDerby << {
     }
 }
 
+// Derbyを停止する
 task stopDerby << {
     exec {
         executable conf.glassfish.asadmin
@@ -169,6 +181,7 @@ task stopDerby << {
     }
 }
 
+// Derby用データソースを作成する
 task createDerbyDS << {
     createDataSource(conf.derby.datasourceClass,
             "portNumber=${conf.derby.port}:" +
@@ -180,11 +193,13 @@ task createDerbyDS << {
             conf.derby.general.datasourceJndiName)
 }
 
+// Derby用データソースを削除する
 task deleteDerbyDS << {
     deleteDataSource(conf.derby.general.connPoolName,
             conf.derby.general.datasourceJndiName)
 }
 
+// デプロイメソッド（GlassFish）
 def deploy(warFile) {
     exec {
         executable conf.glassfish.asadmin
@@ -197,6 +212,7 @@ def deploy(warFile) {
     }
 }
 
+// アンデプロイメソッド（GlassFish）
 def undeploy(warName) {
     exec {
         executable conf.glassfish.asadmin
@@ -208,6 +224,7 @@ def undeploy(warName) {
     }
 }
 
+// SQLを発行するメソッド（ディレクトリ指定）
 def execSqlDir(dir, url, user, password, driverClass) {
     new File(dir).listFiles().sort{a, b -> a.name <=> b.name}.each{ File f ->
         ant.sql(url: url,
@@ -222,6 +239,7 @@ def execSqlDir(dir, url, user, password, driverClass) {
     }
 }
 
+// SQLを発行するメソッド（ファイル指定）
 def execSql(file, url, user, password, driverClass) {
     ant.sql(
         driver: driverClass,
@@ -235,6 +253,7 @@ def execSql(file, url, user, password, driverClass) {
         }
 }
 
+// MySQLを初期化する
 task initMySQL << {
     execSql("$projectDir/sql/mysql/DROP_MYSQL_USER.sql",
             conf.mysql.general.baseUrl, "root", conf.mysql.rootPassword,
