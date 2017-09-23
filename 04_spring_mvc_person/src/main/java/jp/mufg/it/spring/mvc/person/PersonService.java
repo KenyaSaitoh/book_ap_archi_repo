@@ -9,12 +9,10 @@ import java.util.StringTokenizer;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.Dependent;
 
 import org.springframework.stereotype.Component;
 
 @Component
-// @Dependent
 public class PersonService {
     private List<Person> personList = new CopyOnWriteArrayList<Person>();
 

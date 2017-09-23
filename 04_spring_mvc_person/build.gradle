@@ -3,18 +3,12 @@ buildscript {
     repositories {
         jcenter()
     }
-    dependencies {
-        classpath 'javax:javaee-api:7.0'
-        classpath 'org.springframework:spring-webmvc:4.2.9.RELEASE'
-        classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.5.7.RELEASE'
-    }
 }
 
 // プラグイン読み込み
 apply plugin: 'java'
 apply plugin: 'war'
 apply plugin: 'eclipse'
-apply plugin: 'org.springframework.boot'
 
 // 文字コード設定
 def defaultEncoding = 'UTF-8'
@@ -29,7 +23,7 @@ repositories {
 dependencies {
     compile 'javax:javaee-api:7.0'
     compile 'org.springframework:spring-webmvc:4.2.9.RELEASE'
-    compile 'org.springframework.boot:spring-boot-gradle-plugin:1.5.7.RELEASE'
+    compile 'org.hibernate:hibernate-validator:4.2.0.Final'
     providedCompile 'javax:javaee-api:7.0'
 }
 
