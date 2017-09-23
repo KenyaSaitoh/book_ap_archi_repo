@@ -3,11 +3,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <html>
-<h:head>
+<head>
 <title>PersonUpdatePage</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-</h:head>
-<h:body>
+</head>
+<body>
   <h2>PersonUpdatePage</h2>
   <hr />
   <form method="POST">
@@ -21,11 +21,11 @@
         <%-- または以下のようにしてエスケープする
              <c:out value="${person.personName}" escapeXml="true" />
               --%>
-      </td>
+      </tr>
       <tr>
         <td>年齢</td>
         <td>${person.age}</td>
-      </td>
+      </tr>
       <tr>
         <td>性別</td>
         <td>${person.gender == null ? '' : person.gender == 'male' ? '男性' : '女性'}</td>
@@ -36,5 +36,5 @@
       <button type="submit" formaction="/spring_mvc_person/update">更新実行</button>
     </div>
   </form>
-</h:body>
+</body>
 </html>
