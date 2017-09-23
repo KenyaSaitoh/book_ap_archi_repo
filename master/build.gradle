@@ -37,12 +37,6 @@ subprojects {
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
 
-    project.webAppDirName = 'WebContent'
-
-    war {
-        webAppDirName = 'webapp'
-    }
-
     eclipse {
         classpath {
             defaultOutputDir = file('classes')
