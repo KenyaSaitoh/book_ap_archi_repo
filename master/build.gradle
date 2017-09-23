@@ -1,20 +1,64 @@
 import groovy.sql.Sql
 
-// 初期化処理
-buildscript {
-    repositories {
-        jcenter()
-        maven {
-            url "https://plugins.gradle.org/m2/"
+allprojects {
+    // 初期化処理
+    buildscript {
+        repositories {
+            jcenter()
+        }
+        dependencies {
+            classpath "mysql:mysql-connector-java:5.1.6"
+            classpath "org.apache.derby:derbyclient:10.13.1.1"
         }
     }
-    dependencies {
-        classpath "io.spring.gradle:dependency-management-plugin:1.0.0.RC2"
-        classpath files("gradle-plugin.jar")
-        classpath "org.hidetake:gradle-ssh-plugin:2.9.0"
-        classpath "mysql:mysql-connector-java:5.1.6"
-        classpath "org.apache.derby:derbyclient:10.13.1.1"
+    // リポジトリ設定
+    repositories {
+        jcenter()
     }
+}
+
+subprojects {
+    // プラグイン読み込み
+    apply plugin: 'java'
+    apply plugin: 'war'
+
+    // 文字コード設定
+    def defaultEncoding = 'UTF-8'
+    tasks.withType(AbstractCompile).each { it.options.encoding = defaultEncoding }
+
+    // Java EE7依存関係設定
+    dependencies {
+        compile 'javax:javaee-api:7.0'
+        compile 'jstl:jstl:1.2'
+    }
+
+    // Javaプラグイン設定
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    task deployGlassFish(dependsOn: war) << {
+        deploy(war.getArchivePath().path)
+    }
+
+    task undeployGlassFish << {
+        undeploy(war.archiveName.replaceAll(/\.war/, ""))
+    }
+
+    task setupMySQL << {
+        execSqlDir("$projectDir/sql/mysql", conf.mysql.general.url,
+                conf.mysql.general.user, conf.mysql.general.password,
+                conf.mysql.driverClass)
+    }
+
+    task setupDerby << {
+        execSqlDir("$projectDir/sql/derby", conf.derby.general.url,
+                conf.derby.general.user, conf.derby.general.password,
+                conf.derby.driverClass)
+    }
+
+    // タスクをグループ化する
+    [deployGlassFish, undeployGlassFish]*.group = "deploy"
+    [setupMySQL, setupDerby]*.group = "setup-init-data"
 }
 
 // 設定情報の読み込み
