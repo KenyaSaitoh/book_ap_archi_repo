@@ -1,0 +1,9 @@
+// 依存関係設定
+dependencies {
+    compile 'org.springframework:spring-webmvc:4.2.9.RELEASE'
+    compile 'org.hibernate:hibernate-validator:4.2.0.Final'
+}
+
+war {
+    archiveName 'spring_mvc_person.war'
+}
