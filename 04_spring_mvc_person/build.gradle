@@ -3,11 +3,18 @@ buildscript {
     repositories {
         jcenter()
     }
+    dependencies {
+        classpath 'javax:javaee-api:7.0'
+        classpath 'org.springframework:spring-webmvc:4.2.9.RELEASE'
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.5.7.RELEASE'
+    }
 }
 
 // プラグイン読み込み
 apply plugin: 'java'
 apply plugin: 'war'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
 
 // 文字コード設定
 def defaultEncoding = 'UTF-8'
@@ -21,8 +28,14 @@ repositories {
 // Java EE7依存関係設定
 dependencies {
     compile 'javax:javaee-api:7.0'
-    providedCompile "javax.servlet:javax.servlet-api:3.1.0"
+    compile 'org.springframework:spring-webmvc:4.2.9.RELEASE'
+    compile 'org.springframework.boot:spring-boot-gradle-plugin:1.5.7.RELEASE'
+    providedCompile 'javax:javaee-api:7.0'
 }
+
+// Javaプラグイン設定
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 task deployGlassFish(dependsOn: war) << {
     deploy(war.getArchivePath().path)

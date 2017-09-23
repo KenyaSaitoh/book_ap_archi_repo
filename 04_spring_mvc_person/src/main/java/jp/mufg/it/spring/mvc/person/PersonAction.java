@@ -1,4 +1,4 @@
-package org.study.spring.mvc.person;
+package jp.mufg.it.spring.mvc.person;
 
 import java.util.List;
 
@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class PersonAction {
-    // @Autowired
     @Inject
     private PersonService personService;
 

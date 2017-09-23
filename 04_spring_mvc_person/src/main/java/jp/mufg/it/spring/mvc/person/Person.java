@@ -1,4 +1,4 @@
-package org.study.spring.mvc.person;
+package jp.mufg.it.spring.mvc.person;
 
 import java.io.Serializable;
 
