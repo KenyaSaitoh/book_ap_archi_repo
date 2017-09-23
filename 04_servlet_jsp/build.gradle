@@ -9,7 +9,7 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'war'
 
-apply from: '../build.gradle'
+apply from: "../${rootProject.name}/build.gradle"
 
 // 文字コード設定
 def defaultEncoding = 'UTF-8'
@@ -48,3 +48,4 @@ task setupDerby << {
 
 // タスクをグループ化する
 [deployGlassFish, undeployGlassFish]*.group = "deploy"
+[setupMySQL, setupDerby]*.group = "setup-init-data"

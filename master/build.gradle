@@ -31,12 +31,6 @@ def conf = {
 // 設定情報を拡張プロパティにセット
 ext.conf = conf
 
-task printTask << {
-    println "rootDir ---> $rootDir" // 組み込み変数
-    println "projectDir ---> $projectDir" // 組み込み変数
-    println conf
-}
-
 task startGlassFish << {
     exec {
         executable conf.glassfish.asadmin

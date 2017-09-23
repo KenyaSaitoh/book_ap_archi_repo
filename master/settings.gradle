@@ -15,6 +15,9 @@ include 'shared'
 include 'api'
 include 'services:webservice'
 */
-
+/*
 rootProject.name = 'root_project'
-include '04_servlet_jsp'
+rootProject.projectDir = new File(settingsDir, 'root_project')
+*/
+
+includeFlat '04_servlet_jsp', '04_spring_mvc_person'
