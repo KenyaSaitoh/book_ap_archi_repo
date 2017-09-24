@@ -31,6 +31,8 @@ subprojects {
     dependencies {
         providedCompile "javax:javaee-api:7.0"
         providedCompile "jstl:jstl:1.2"
+        compile "junit:junit:4.12"
+        testCompile "junit:junit:4.12"
     }
 
     // Javaプラグイン設定

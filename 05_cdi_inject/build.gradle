@@ -1,0 +1,9 @@
+// Java EE7依存関係設定
+dependencies {
+    compile "junit:junit:4.12"
+    testCompile 'junit:junit:4.+'
+}
+
+war {
+    archiveName "cdi_inject.war"
+}

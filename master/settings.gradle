@@ -20,5 +20,6 @@ rootProject.name = 'root_project'
 rootProject.projectDir = new File(settingsDir, 'root_project')
 */
 
-includeFlat '04_servlet_jsp', '04_spring_mvc_person', '04_jsf_person',
-'04_jsf_person_html_friendly', '04_jsf_layout', '04_jsf_ajax'
+includeFlat '04_servlet_jsp', '04_spring_mvc_person', '04_jsf_person',\
+'04_jsf_person_html_friendly', '04_jsf_layout', '04_jsf_ajax',\
+'05_cdi_inject'
