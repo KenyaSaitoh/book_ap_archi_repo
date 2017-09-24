@@ -1,4 +1,4 @@
-package jp.mufg.it.spring.mvc.person;
+package jp.mufg.it.ee.jsf.person;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,10 +9,9 @@ import java.util.StringTokenizer;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.Stateless;
 
-import org.springframework.stereotype.Component;
-
-@Component
+@Stateless
 public class PersonService {
     private List<Person> personList = new CopyOnWriteArrayList<Person>();
 

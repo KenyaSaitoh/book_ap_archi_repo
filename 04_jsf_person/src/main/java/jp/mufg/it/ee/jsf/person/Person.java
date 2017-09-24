@@ -1,30 +1,15 @@
-package jp.mufg.it.spring.mvc.person;
+package jp.mufg.it.ee.jsf.person;
 
 import java.io.Serializable;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
-import org.hibernate.validator.constraints.NotEmpty;
-
 public class Person implements Serializable {
     private Integer personId;
-
-    @NotEmpty
-    @Size(min = 1, max = 20)
     private String personName;
-
-    @NotNull
-    @Min(20)
-    @Max(100)
     private Integer age;
-
-    @NotEmpty
     private String gender;
 
-    public Person() {};
+    public Person() {
+    }
 
     public Person(Integer personId, String personName, Integer age,
             String gender) {

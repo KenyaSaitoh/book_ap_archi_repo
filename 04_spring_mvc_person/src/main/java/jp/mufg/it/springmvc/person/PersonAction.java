@@ -1,4 +1,4 @@
-package jp.mufg.it.spring.mvc.person;
+package jp.mufg.it.springmvc.person;
 
 import java.util.List;
 
@@ -18,13 +18,13 @@ public class PersonAction {
     @Inject
     private PersonService personService;
 
-    // アクションメソッド（新規作成画面に遷移する）
+    // アクションメソッド（「入力画面」に遷移する）
     @RequestMapping("/create")
     public String createPerson() {
         return "PersonInputPage";
     }
 
-    // アクションメソッド（確認画面に遷移する）
+    // アクションメソッド（「確認画面」に遷移する）
     @RequestMapping("/confirm")
     public String confirm(@Valid @ModelAttribute Person person,
             BindingResult errors, HttpSession session) {
@@ -35,7 +35,7 @@ public class PersonAction {
         return "PersonUpdatePage";
     }
 
-    // アクションメソッド（新規作成画面に戻る）
+    // アクションメソッド（「入力画面」に戻る）
     @RequestMapping("/back")
     public String back() {
         return "PersonInputPage";
@@ -44,8 +44,8 @@ public class PersonAction {
     // アクションメソッド（人員を更新・追加する）
     @RequestMapping("/update")
     public String updatePerson(Model model, HttpSession session) {
-        Person person = (Person)session.getAttribute("person");
-        if (person.getPersonId() != null) {
+        Person person = (Person) session.getAttribute("person");
+        if (person.getPersonId() != null) { // 更新か追加を判定
             personService.updatePerson(person);
         } else {
             personService.addPerson(person);

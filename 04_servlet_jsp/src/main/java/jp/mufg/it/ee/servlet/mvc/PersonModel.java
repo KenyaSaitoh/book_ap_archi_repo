@@ -5,11 +5,13 @@ public class PersonModel {
     private String personName;
     private String country;
     private String message;
+
     // コンストラクタ
     public PersonModel(String personName, String country) {
         this.personName = personName;
         this.country = country;
     }
+
     // アクセサメソッド
     public String getPersonName() {
         return personName;
@@ -34,6 +36,7 @@ public class PersonModel {
     public void setMessage(String message) {
         this.message = message;
     }
+
     // ビジネスメソッド
     public void sayHello() {
         if (country != null && country.equals("japan")) {
