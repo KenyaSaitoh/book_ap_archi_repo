@@ -1,0 +1,46 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/LayoutPage.xhtml">
+  <ui:param name="title" value="CustomerInputPage" />
+  <ui:define name="main">
+    <h2>CustomerInputPage</h2>
+    <hr />
+    <h:form id="form1">
+      <h:panelGrid border="0" columns="3">
+        <!-- 顧客名 -->
+        <h:outputText value="顧客名" />
+        <h:inputText id="customerName" value="#{customerInput.customerName}"
+          required="true">
+          <f:validateLength maximum="10" />
+        </h:inputText>
+        <h:message for="customerName" errorStyle="color: red" />
+        <!-- 性別 -->
+        <h:outputText value="性別" />
+        <h:selectOneRadio id="gender" value="#{customerInput.gender}"
+          required="true">
+          <f:selectItem itemValue="男性" itemLabel="男性" />
+          <f:selectItem itemValue="女性" itemLabel="女性" />
+        </h:selectOneRadio>
+        <h:message for="gender" errorStyle="color: red" />
+        <!-- 年齢 -->
+        <h:outputText value="年齢(20～80)" />
+        <h:inputText id="age" value="#{customerInput.age}" required="true">
+          <f:validateLongRange minimum="20" maximum="80" />
+        </h:inputText>
+        <h:message for="age" errorStyle="color: red" />
+        <!-- 生年月日 -->
+        <h:outputText value="生年月日(yyyy/MM/dd)" />
+        <h:inputText id="birthday" value="#{customerInput.birthday}"
+          required="true">
+          <f:convertDateTime pattern="yyyy/MM/dd" />
+        </h:inputText>
+        <h:message for="birthday" errorStyle="color: red" />
+      </h:panelGrid>
+      <div>
+        <h:commandButton value="次へ" action="CustomerInputPage" />
+      </div>
+    </h:form>
+  </ui:define>
+</ui:composition>

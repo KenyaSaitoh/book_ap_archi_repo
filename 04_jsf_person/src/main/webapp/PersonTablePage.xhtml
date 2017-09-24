@@ -30,12 +30,12 @@
           person.gender == 'male' ? '男性' : '女性'}" />
       </h:column>
       <h:column>
-        <f:facet name="header">Edit</f:facet>
+        <f:facet name="header">編集</f:facet>
         <h:commandButton value="編集"
           action="#{personTable.editPerson(person.personId)}" />
       </h:column>
       <h:column>
-        <f:facet name="header">Delete</f:facet>
+        <f:facet name="header">削除</f:facet>
         <h:commandButton value="削除"
           action="#{personTable.removePerson(person.personId)}" />
       </h:column>

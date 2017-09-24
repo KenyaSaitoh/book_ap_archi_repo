@@ -7,8 +7,8 @@ allprojects {
             jcenter()
         }
         dependencies {
-            classpath 'mysql:mysql-connector-java:5.1.6'
-            classpath 'org.apache.derby:derbyclient:10.13.1.1'
+            classpath "mysql:mysql-connector-java:5.1.6"
+            classpath "org.apache.derby:derbyclient:10.13.1.1"
         }
     }
     // リポジトリ設定
@@ -19,18 +19,18 @@ allprojects {
 
 subprojects {
     // プラグイン読み込み
-    apply plugin: 'java'
-    apply plugin: 'war'
-    apply plugin: 'eclipse'
+    apply plugin: "java"
+    apply plugin: "war"
+    apply plugin: "eclipse"
 
     // 文字コード設定
-    def defaultEncoding = 'UTF-8'
+    def defaultEncoding = "UTF-8"
     tasks.withType(AbstractCompile).each { it.options.encoding = defaultEncoding }
 
     // Java EE7依存関係設定
     dependencies {
-        providedCompile 'javax:javaee-api:7.0'
-        providedCompile 'jstl:jstl:1.2'
+        providedCompile "javax:javaee-api:7.0"
+        providedCompile "jstl:jstl:1.2"
     }
 
     // Javaプラグイン設定
@@ -39,7 +39,7 @@ subprojects {
 
     eclipse {
         classpath {
-            defaultOutputDir = file('classes')
+            defaultOutputDir = file("classes")
         }
     }
 
