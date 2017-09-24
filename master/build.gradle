@@ -29,8 +29,8 @@ subprojects {
 
     // Java EE7依存関係設定
     dependencies {
-        compile 'javax:javaee-api:7.0'
-        compile 'jstl:jstl:1.2'
+        providedCompile 'javax:javaee-api:7.0'
+        providedCompile 'jstl:jstl:1.2'
     }
 
     // Javaプラグイン設定
@@ -44,7 +44,7 @@ subprojects {
     }
 
     // デプロイする（GlassFish）
-    task deployGlassFish(dependsOn: war) << {
+    task deployGlassFish(dependsOn: [clean, war]) << {
         deploy(war.getArchivePath().path)
     }
 

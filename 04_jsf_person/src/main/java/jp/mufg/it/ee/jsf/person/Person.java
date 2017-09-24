@@ -1,15 +1,18 @@
 package jp.mufg.it.ee.jsf.person;
 
-import java.io.Serializable;
-
-public class Person implements Serializable {
+public class Person {
+    // IDフィールド
     private Integer personId;
+    // 名前フィールド
     private String personName;
+    // 年齢フィールド
     private Integer age;
+    // 性別フィールド
     private String gender;
 
+    // コンストラクタ
     public Person() {
-    }
+    };
 
     public Person(Integer personId, String personName, Integer age,
             String gender) {
