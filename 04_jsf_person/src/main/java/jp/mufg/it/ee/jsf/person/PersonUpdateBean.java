@@ -12,7 +12,7 @@ import javax.inject.Named;
 @ViewScoped
 @Named("personUpdate")
 public class PersonUpdateBean implements Serializable {
-    // 入出力値のプロパティ
+    // UIコンポーネントの値を保持するためのプロパティ
     private Person person;
 
     public Person getPerson() {
@@ -23,12 +23,21 @@ public class PersonUpdateBean implements Serializable {
         this.person = person;
     }
 
-    // フラッシュスコープ
-    private Flash flash;
-
     // インジェクションポイント
     @Inject
     private PersonService personService;
+
+    // ライフサイクルメソッド
+    @PostConstruct
+    public void postConstruct() {
+        System.out.println("[ PersonUpdateBean#postConstruct ]");
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        flash = facesContext.getExternalContext().getFlash();
+        person = (Person) flash.get("person");
+    }
+
+    // フラッシュスコープ
+    private Flash flash;
 
     // アクションメソッド（人員を更新・追加する）
     public String updatePerson() {
@@ -40,17 +49,9 @@ public class PersonUpdateBean implements Serializable {
         return "PersonTablePage";
     }
 
-    // アクションメソッド（新規作成画面に戻る）
+    // アクションメソッド（「入力画面」に戻る）
     public String back() {
         flash.put("person", person);
         return "PersonInputPage";
-    }
-
-    @PostConstruct
-    public void postConstruct() {
-        System.out.println("[ PersonUpdateBean#postConstruct ]");
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        flash = facesContext.getExternalContext().getFlash();
-        person = (Person)flash.get("person");
     }
 }

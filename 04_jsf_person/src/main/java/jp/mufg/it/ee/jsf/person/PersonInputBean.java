@@ -11,7 +11,7 @@ import javax.inject.Named;
 @ViewScoped
 @Named("personInput")
 public class PersonInputBean implements Serializable {
-    // 入出力値のプロパティ
+    // UIコンポーネントの値を保持するためのプロパティ
     private Person person;
 
     public Person getPerson() {
@@ -28,12 +28,7 @@ public class PersonInputBean implements Serializable {
     // フラッシュスコープ
     private Flash flash;
 
-    // アクションメソッド（確認画面に遷移する）
-    public String confirm() {
-        flash.put("person", person);
-        return "PersonUpdatePage";
-    }
-
+    // ライフサイクルメソッド
     @PostConstruct
     public void postConstruct() {
         System.out.println("[ PersonInput#postConstruct ]");
@@ -43,5 +38,11 @@ public class PersonInputBean implements Serializable {
         if (person == null) {
             person = new Person();
         }
+    }
+
+    // アクションメソッド（「確認画面」に遷移する）
+    public String confirm() {
+        flash.put("person", person);
+        return "PersonUpdatePage";
     }
 }

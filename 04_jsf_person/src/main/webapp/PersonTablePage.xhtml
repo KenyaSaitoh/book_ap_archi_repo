@@ -26,8 +26,8 @@
       </h:column>
       <h:column>
         <f:facet name="header">性別</f:facet>
-        <h:outputText id="gender"
-          value="#{person.gender == null ? '' : person.gender == 'male' ? '男性' : '女性'}" />
+        <h:outputText id="gender" value="#{person.gender == null ? '' :
+          person.gender == 'male' ? '男性' : '女性'}" />
       </h:column>
       <h:column>
         <f:facet name="header">Edit</f:facet>
@@ -41,7 +41,7 @@
       </h:column>
     </h:dataTable>
     <div>
-      <h:commandButton value="作成" action="PersonInputPage" />
+      <h:commandButton value="作成" action="PersonInputPage" />
     </div>
   </h:form>
 </h:body>
