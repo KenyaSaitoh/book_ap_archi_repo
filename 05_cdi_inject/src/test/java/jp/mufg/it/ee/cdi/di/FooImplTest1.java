@@ -4,7 +4,7 @@ import junit.framework.TestCase;
 
 import org.junit.Test;
 
-public class FooImplTest {
+public class FooImplTest1 {
 
     @Test
     public void testDoBusiness() throws Exception {
