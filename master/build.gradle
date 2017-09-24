@@ -276,6 +276,19 @@ task initMySQL << {
             conf.mysql.driverClass)
 }
 
+task copyClasspathFile << {
+    subprojects.project.projectDir.each { File dir ->
+        println dir.getAbsolutePath()
+        copy {
+            from "master.classpath"
+            into dir.getPath()
+            rename { String fileName ->
+                fileName.replace("master.classpath", ".classpath")
+            }
+        }
+    }
+}
+
 // タスクをグループ化する
 [startGlassFish, stopGlassFish]*.group = "glassfish"
 [initMySQL]*.group = "mysql"
