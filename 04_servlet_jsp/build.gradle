@@ -1,3 +1,7 @@
+// プラグイン読み込み
+apply plugin: "war"
+
+// WARプラグイン設定
 war {
     archiveName "servlet_jsp.war"
 }

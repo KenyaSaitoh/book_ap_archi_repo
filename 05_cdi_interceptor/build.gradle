@@ -1,4 +1,4 @@
 // WARプラグイン設定
 war {
-    archiveName "jsf_ajax.war"
+    archiveName "cdi_interceptor.war"
 }

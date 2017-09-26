@@ -4,6 +4,7 @@ dependencies {
     compile "org.hibernate:hibernate-validator:4.2.0.Final"
 }
 
+// WARプラグイン設定
 war {
     archiveName 'spring_mvc_person.war'
 }

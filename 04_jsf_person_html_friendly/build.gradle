@@ -1,3 +1,4 @@
+// WARプラグイン設定
 war {
     archiveName 'jsf_person.war'
 }
