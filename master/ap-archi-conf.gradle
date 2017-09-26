@@ -34,7 +34,6 @@ mysql {
 // Derby
 derby {
     derbyDir = "D:/Java/db-derby-10.13.1.1-bin"
-    derbyDBDir = "C:/tmp"
     driverDir = "${derbyDir}/lib"
     driverJar = "derbyclient.jar"
     driverClass = "org.apache.derby.jdbc.ClientDriver"
@@ -45,7 +44,7 @@ derby {
         user = "TESTUSER"
         password = "PASSWORD"
         db = "TESTDB"
-        url = "jdbc:derby://${hostName}:${port}/${System.properties['user.home']}/${general.db};create=true"
+        url = "jdbc:derby://${hostName}:${port}/${general.db};create=true"
         connPoolName = "DerbyPool2"
         datasourceJndiName = "jdbc/DerbyDS"
     }

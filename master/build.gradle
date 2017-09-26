@@ -7,8 +7,8 @@ allprojects {
             jcenter()
         }
         dependencies {
-            classpath "mysql:mysql-connector-java:5.1.6"
-            classpath "org.apache.derby:derbyclient:10.13.1.1"
+            classpath "mysql:mysql-connector-java:5.1.29"
+            classpath "org.apache.derby:derbyclient:10.12.1.1"
         }
     }
     // リポジトリ設定
@@ -279,6 +279,24 @@ task initMySQL << {
             conf.mysql.driverClass)
 }
 
+// MySQLのJDBCドライバをコピーする
+task copyMySQLJDBCDriver << {
+    copy {
+        from conf.mysql.driverDir + "/" + conf.mysql.driverJar
+        into conf.glassfish.glassfishDir + "/domains/" +
+             conf.glassfish.domainName + "/lib/ext"
+    }
+}
+
+// DerbyのJDBCドライバをコピーする
+task copyDerbyJDBCDriver << {
+    copy {
+        from conf.derby.driverDir + "/" + conf.derby.driverJar
+        into conf.glassfish.glassfishDir + "/domains/" +
+             conf.glassfish.domainName + "/lib/ext"
+    }
+}
+
 task copyClasspathFile << {
     subprojects.project.projectDir.each { File dir ->
         println dir.getAbsolutePath()
@@ -294,7 +312,7 @@ task copyClasspathFile << {
 
 // タスクをグループ化する
 [startGlassFish, stopGlassFish]*.group = "glassfish"
-[initMySQL]*.group = "mysql"
+[initMySQL, copyMySQLJDBCDriver]*.group = "mysql"
 [createMySQLDS, deleteMySQLDS]*.group = "mysql-datasource"
-[startDerby, stopDerby]*.group = "derby"
+[startDerby, stopDerby, copyDerbyJDBCDriver]*.group = "derby"
 [createDerbyDS, deleteDerbyDS]*.group = "derby-datasource"
