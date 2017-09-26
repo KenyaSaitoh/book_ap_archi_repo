@@ -15,13 +15,14 @@ allprojects {
     repositories {
         jcenter()
     }
+    apply plugin: "eclipse"
 }
 
 subprojects {
     // プラグイン読み込み
     apply plugin: "java"
     apply plugin: "war"
-    apply plugin: "eclipse"
+    // apply plugin: "eclipse"
 
     // 文字コード設定
     def defaultEncoding = "UTF-8"
