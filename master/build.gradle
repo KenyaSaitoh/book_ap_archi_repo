@@ -22,6 +22,8 @@ subprojects {
     apply plugin: "java"
     apply plugin: "war"
     apply plugin: "eclipse"
+    apply plugin: "jacoco"
+    apply plugin: "findbugs"
 
     // 文字コード設定
     def defaultEncoding = "UTF-8"
@@ -58,6 +60,11 @@ subprojects {
 
     // 初期データをセットアップする（MySQL）
     task setupMySQL << {
+        /*
+        println("$projectDir/sql/mysql", conf.mysql.general.url,
+                conf.mysql.general.user, conf.mysql.general.password,
+                conf.mysql.driverClass)
+        */
         execSqlDir("$projectDir/sql/mysql", conf.mysql.general.url,
                 conf.mysql.general.user, conf.mysql.general.password,
                 conf.mysql.driverClass)

@@ -43,7 +43,7 @@ derby {
     general {
         user = "TESTUSER"
         password = "PASSWORD"
-        db = "TESTDB"
+        db = "C\\:/Users/itpuser/TESTDB"
         url = "jdbc:derby://${hostName}:${port}/${general.db};create=true"
         connPoolName = "DerbyPool2"
         datasourceJndiName = "jdbc/DerbyDS"
