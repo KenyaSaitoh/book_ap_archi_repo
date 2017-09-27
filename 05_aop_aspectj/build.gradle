@@ -5,5 +5,5 @@ dependencies {
 
 // Javaプラグイン設定
 jar {
-    archiveName "aspectj_aop.jar"
+    archiveName "aop_aspectj.jar"
 }
