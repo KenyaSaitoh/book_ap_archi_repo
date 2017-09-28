@@ -1,0 +1,4 @@
+// JARプラグイン設定
+jar {
+    archiveName "jpa_relation.jar"
+}
