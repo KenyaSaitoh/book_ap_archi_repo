@@ -35,4 +35,6 @@ includeFlat '04_servlet_jsp',
 '05_cdi_observer',
 '06_domain_model',
 '06_transaction_script',
-'07_jta_transactional'
+'07_jta_transactional',
+'08_jpa_1table',
+'08_jpa_relation'
