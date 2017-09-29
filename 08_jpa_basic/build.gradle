@@ -1,0 +1,11 @@
+// Java EE7依存関係設定
+dependencies {
+    runtime "org.eclipse.persistence:eclipselink:2.5.1"
+    testCompile "junit:junit:4.12"
+    testRuntime "org.eclipse.persistence:eclipselink:2.5.1"
+}
+
+// JARプラグイン設定
+jar {
+    archiveName "jpa_basic.jar"
+}

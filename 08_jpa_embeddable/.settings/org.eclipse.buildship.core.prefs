@@ -8,4 +8,4 @@ containers=org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debu
 derived.resources=.gradle,build
 eclipse.preferences.version=1
 natures=org.eclipse.jdt.core.javanature,org.eclipse.wst.common.project.facet.core.nature,org.eclipse.wst.common.modulecore.ModuleCoreNature,org.eclipse.jem.workbench.JavaEMFNature
-project.path=\:08_jpa_1table
+project.path=\:08_jpa_embeddable

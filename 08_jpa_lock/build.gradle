@@ -1,4 +1,4 @@
 // JARプラグイン設定
 jar {
-    archiveName "jpa_1table.jar"
+    archiveName "jpa_lock.jar"
 }
