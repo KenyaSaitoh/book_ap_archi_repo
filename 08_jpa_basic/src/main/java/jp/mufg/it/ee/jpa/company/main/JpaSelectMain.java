@@ -19,7 +19,7 @@ public class JpaSelectMain {
         // findメソッドによりEmployeeインスタンスを取得する
         Employee employee = em.find(Employee.class, 10001);
 
-        // Employeeインスタンスのゲッタにより、カラム値を取得する（②）
+        // Employeeインスタンスのゲッタにより、カラム値を取得する
         String employeeName = employee.getEmployeeName();
 
         // 検索結果を標準出力する

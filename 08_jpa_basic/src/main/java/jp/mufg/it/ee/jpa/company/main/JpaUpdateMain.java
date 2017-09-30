@@ -10,27 +10,27 @@ import jp.mufg.it.ee.jpa.company.entity.Employee;
 public class JpaUpdateMain {
 
     public static void main(String[] args) {
-        // エンティティマネージャファクトリを取得する。
+        // エンティティマネージャファクトリを取得する
         EntityManagerFactory emf =
                 Persistence.createEntityManagerFactory("MyPersistenceUnit");
 
-        // エンティティマネージャを取得する。
+        // エンティティマネージャを取得する
         EntityManager em = emf.createEntityManager();
 
-        // エンティティトランザクションを開始する。
+        // エンティティトランザクションを開始する
         EntityTransaction et = em.getTransaction();
         et.begin();
 
-        // findメソッドにより更新対象のEmployeeオブジェクトを取得する（①）。
+        // findメソッドにより更新対象のEmployeeインスタンスを取得する
         Employee employee = em.find(Employee.class, 10001);
 
-        // Employeeオブジェクトの永続フィールドの値を書き換える（②）。
-        employee.setMonthlySalary(employee.getMonthlySalary() + 10000);
+        // Employeeインスタンスの永続フィールドの値を書き換える
+        employee.setSalary(employee.getSalary() + 10000);
 
-        // エンティティトランザクションをコミットする。
+        // エンティティトランザクションをコミットする
         et.commit();
 
-        // エンティティマネージャをクローズする。
+        // エンティティマネージャをクローズする
         em.close();
     }
 }

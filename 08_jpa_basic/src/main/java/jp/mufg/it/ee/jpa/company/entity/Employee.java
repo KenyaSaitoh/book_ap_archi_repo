@@ -16,12 +16,23 @@ import jp.mufg.it.ee.jpa.company.type.JobType;
 @Entity
 @Table(name = "EMPLOYEE")
 public class Employee {
+    @Id
+    @Column(name = "EMPLOYEE_ID")
     private Integer employeeId;
+    @Column(name = "EMPLOYEE_NAME")
     private String employeeName;
+    @Column(name = "DEPARTMENT_NAME")
     private String departmentName;
+    @Column(name = "ENTRANCE_DATE")
+    @Temporal(TemporalType.DATE)
     private Date entranceDate;
+    @Column(name = "JOB_NAME")
+    @Enumerated(EnumType.STRING)
     private JobType jobType;
-    private Integer monthlySalary;
+    @Column(name = "MONTHLY_SALARY")
+    private Integer salary;
+    @Column(name = "PHOTO")
+    @Lob
     private byte[] photo;
 
     // 引数なしのコンストラクタ
@@ -29,19 +40,18 @@ public class Employee {
     }
 
     // コンストラクタ
-    public Employee(Integer employeeId, String employeeName, String departmentName,
-            Date entranceDate, JobType jobType, Integer monthlySalary) {
+    public Employee(Integer employeeId, String employeeName,
+            String departmentName, Date entranceDate, JobType jobType,
+            Integer salary) {
         this.employeeId = employeeId;
         this.employeeName = employeeName;
         this.departmentName = departmentName;
         this.entranceDate = entranceDate;
         this.jobType = jobType;
-        this.monthlySalary = monthlySalary;
+        this.salary = salary;
     }
 
     // 社員番号へのアクセサメソッド
-    @Id
-    @Column(name = "EMPLOYEE_ID")
     public Integer getEmployeeId() {
         return employeeId;
     }
@@ -51,7 +61,6 @@ public class Employee {
     }
 
     // 社員名へのアクセサメソッド
-    @Column(name = "EMPLOYEE_NAME")
     public String getEmployeeName() {
         return employeeName;
     }
@@ -61,7 +70,6 @@ public class Employee {
     }
 
     // 部署名へのアクセサメソッド
-    @Column(name = "DEPARTMENT_NAME")
     public String getDepartmentName() {
         return departmentName;
     }
@@ -71,18 +79,15 @@ public class Employee {
     }
 
     // 月給へのアクセサメソッド
-    @Column(name = "MONTHLY_SALARY")
-    public Integer getMonthlySalary() {
-        return monthlySalary;
+    public Integer getSalary() {
+        return salary;
     }
 
-    public void setMonthlySalary(Integer monthlySalary) {
-        this.monthlySalary = monthlySalary;
+    public void setSalary(Integer salary) {
+        this.salary = salary;
     }
 
     // 入社年月日へのアクセサメソッド
-    @Column(name = "ENTRANCE_DATE")
-    @Temporal(TemporalType.DATE)
     public Date getEntranceDate() {
         return entranceDate;
     }
@@ -92,8 +97,6 @@ public class Employee {
     }
 
     // 役職名へのアクセサメソッド
-    @Column(name = "JOB_NAME")
-    @Enumerated(EnumType.STRING)
     public JobType getJobType() {
         return jobType;
     }
@@ -103,8 +106,6 @@ public class Employee {
     }
 
     // 写真へのアクセサメソッド
-    @Column(name = "PHOTO")
-    @Lob
     public byte[] getPhoto() {
         return photo;
     }

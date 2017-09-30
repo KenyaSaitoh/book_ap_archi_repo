@@ -8,29 +8,29 @@ import javax.persistence.Query;
 
 public class JpaBulkDeleteMain {
     public static void main(String[] args) {
-        // エンティティマネージャファクトリを取得する。
+        // エンティティマネージャファクトリを取得する
         EntityManagerFactory emf =
                 Persistence.createEntityManagerFactory("MyPersistenceUnit");
 
-        // エンティティマネージャを取得する。
+        // エンティティマネージャを取得する
         EntityManager em = emf.createEntityManager();
 
-        // エンティティトランザクションを開始する。
+        // エンティティトランザクションを開始する
         EntityTransaction et = em.getTransaction();
         et.begin();
 
-        // バルクで削除する。
+        // バルクで削除する
         Query query = em.createQuery(
                 "DELETE FROM Employee AS e " +
-                "WHERE :monthlySalary <= e.monthlySalary")
-                .setParameter("monthlySalary", 400000);
+                "WHERE :salary <= e.salary")
+                .setParameter("salary", 400000);
         int hitCount = query.executeUpdate();
         System.out.println("ヒット件数 ---> " + hitCount);
 
-        // エンティティトランザクションをコミットする。
+        // エンティティトランザクションをコミットする
         et.commit();
 
-        // エンティティマネージャをクローズする。
+        // エンティティマネージャをクローズする
         em.close();
     }
 }

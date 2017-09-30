@@ -21,7 +21,7 @@ public class ResultUtil {
                             + cal.get(Calendar.DATE) + "日";
             System.out.print(entranceDate + " / ");
             System.out.print(employee.getJobType() + " / ");
-            System.out.println(employee.getMonthlySalary() + " / ");
+            System.out.println(employee.getSalary() + " / ");
         }
     }
 
