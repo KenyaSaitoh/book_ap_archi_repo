@@ -304,9 +304,9 @@ task copyDerbyJDBCDriver << {
     }
 }
 
+// Classpathファイル（マスター）を各プロジェクトに配布する
 task copyClasspathFile << {
     subprojects.project.projectDir.each { File dir ->
-        println dir.getAbsolutePath()
         copy {
             from "master.classpath"
             into dir.getPath()
@@ -316,6 +316,41 @@ task copyClasspathFile << {
         }
     }
 }
+
+//
+def setUpJpaWithMySQL(projectDir, provider) {
+    new File(projectDir + "/src/main/resources/META-INF/persistence.xml")
+        .withWriter { writer ->
+            new File(projectDir + "/config/jpa/" + provider + "/persistence.xml")
+                .newReader().eachLine { line ->
+                    line = line.replaceAll("#DRIVER#", conf.mysql.driverClass)
+                    line = line.replaceAll("#URL#", conf.mysql.general.url)
+                    line = line.replaceAll("#USER#", conf.mysql.general.user)
+                    line = line.replaceAll("#PASSWORD#", conf.mysql.general.password)
+                    line = line.replaceAll("#TARGET#", "MySQL")
+                    line = line.replaceAll("#DIALECT#", "org.hibernate.dialect.MySQLDialect")
+                    writer.println(line)
+                }
+        }
+}
+
+//
+def setUpJpaWithDerby(projectDir, provider) {
+    new File(projectDir + "/src/main/resources/META-INF/persistence.xml")
+        .withWriter { writer ->
+            new File(projectDir + "/config/jpa/" + provider + "/persistence.xml")
+                .newReader().eachLine { line ->
+                    line = line.replaceAll("#DRIVER#", conf.derby.driverClass)
+                    line = line.replaceAll("#URL#", conf.derby.general.url)
+                    line = line.replaceAll("#USER#", conf.derby.general.user)
+                    line = line.replaceAll("#PASSWORD#", conf.derby.general.password)
+                    line = line.replaceAll("#TARGET#", "Derby")
+                    line = line.replaceAll("#DIALECT#", "org.hibernate.dialect.DerbyDialect")
+                    writer.println(line)
+                }
+        }
+}
+
 
 // タスクをグループ化する
 [startGlassFish, stopGlassFish]*.group = "glassfish"

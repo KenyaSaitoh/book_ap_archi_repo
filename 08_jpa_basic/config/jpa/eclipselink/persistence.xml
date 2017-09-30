@@ -11,14 +11,14 @@
     <class>jp.mufg.it.ee.jpa.company.entity.Employee</class>
     <properties>
       <property name="javax.persistence.jdbc.driver"
-                value="com.mysql.jdbc.Driver" />
+                value="#DRIVER#" />
       <property name="javax.persistence.jdbc.url"
-                value="jdbc:mysql://localhost:3306/TESTDB" />
+                value="#URL#" />
       <property name="javax.persistence.jdbc.user"
-                value="TESTUSER" />
+                value="#USER#" />
       <property name="javax.persistence.jdbc.password"
-                value="PASSWORD" />
-      <property name="eclipselink.target-database" value="MySQL" />
+                value="#PASSWORD#" />
+      <property name="eclipselink.target-database" value="#TARGET#" />
       <property name="eclipselink.logging.level"   value="FINE" />
     </properties>
   </persistence-unit>

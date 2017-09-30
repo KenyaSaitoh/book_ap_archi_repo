@@ -1,11 +1,35 @@
 // Java EE7依存関係設定
 dependencies {
-    runtime "org.eclipse.persistence:eclipselink:2.5.1"
+    runtime "mysql:mysql-connector-java:5.1.29"
+    runtime "org.apache.derby:derbyclient:10.12.1.1"
+    runtime "org.eclipse.persistence:eclipselink:2.6.5"
+    runtime "org.hibernate:hibernate-core:5.1.10.Final"
     testCompile "junit:junit:4.12"
-    testRuntime "org.eclipse.persistence:eclipselink:2.5.1"
+    // testRuntime "org.eclipse.persistence:eclipselink:2.6.5"
+    // testRuntime "org.hibernate:hibernate-core:5.1.10.Final"
 }
 
 // JARプラグイン設定
 jar {
     archiveName "jpa_basic.jar"
 }
+
+task setUpJpaWithMySQLEclipseLink << {
+    setUpJpaWithMySQL(projectDir.path, "eclipselink")
+}
+
+task setUpJpaWithMySQLHibernate << {
+    setUpJpaWithMySQL(projectDir.path, "hibernate")
+}
+
+task setUpJpaWithDerbyEclipseLink << {
+    setUpJpaWithDerby(projectDir.path, "eclipselink")
+}
+
+task setUpJpaWithDerbyHibernate << {
+    setUpJpaWithDerby(projectDir.path, "hibernate")
+}
+
+// タスクをグループ化する
+[setUpJpaWithMySQLEclipseLink, setUpJpaWithMySQLHibernate,
+    setUpJpaWithDerbyEclipseLink, setUpJpaWithDerbyHibernate,]*.group = "jpa"

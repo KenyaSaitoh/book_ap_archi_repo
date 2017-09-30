@@ -9,23 +9,23 @@ import jp.mufg.it.ee.jpa.company.entity.Employee;
 public class JpaSelectMain {
 
     public static void main(String[] args) {
-        // エンティティマネージャファクトリを取得する。
-        EntityManagerFactory emf = 
+        // エンティティマネージャファクトリを取得する
+        EntityManagerFactory emf =
                 Persistence.createEntityManagerFactory("MyPersistenceUnit");
 
-        // エンティティマネージャを取得する。
+        // エンティティマネージャを取得する
         EntityManager em = emf.createEntityManager();
 
-        // findメソッドによりEmployeeオブジェクトを取得する。（①）
+        // findメソッドによりEmployeeインスタンスを取得する
         Employee employee = em.find(Employee.class, 10001);
 
-        // Employeeオブジェクトのゲッタにより、カラム値を取得する。（②）
+        // Employeeインスタンスのゲッタにより、カラム値を取得する（②）
         String employeeName = employee.getEmployeeName();
 
-        // 検索結果を標準出力する。
+        // 検索結果を標準出力する
         System.out.println("employeeName ---> " + employeeName);
 
-        // エンティティマネージャをクローズする。
+        // エンティティマネージャをクローズする
         em.close();
     }
 }
