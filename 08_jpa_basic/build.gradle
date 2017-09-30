@@ -1,4 +1,4 @@
-// Java EE7依存関係設定
+// JPA依存関係設定
 dependencies {
     runtime "mysql:mysql-connector-java:5.1.29"
     runtime "org.apache.derby:derbyclient:10.12.1.1"
@@ -14,18 +14,22 @@ jar {
     archiveName "jpa_basic.jar"
 }
 
+// MySQL+EclipseLinkの設定ファイルをセットアップ
 task setUpJpaWithMySQLEclipseLink << {
     setUpJpaWithMySQL(projectDir.path, "eclipselink")
 }
 
+// MySQL+Hibernateの設定ファイルをセットアップ
 task setUpJpaWithMySQLHibernate << {
     setUpJpaWithMySQL(projectDir.path, "hibernate")
 }
 
+// Derby+EclipseLinkの設定ファイルをセットアップ
 task setUpJpaWithDerbyEclipseLink << {
     setUpJpaWithDerby(projectDir.path, "eclipselink")
 }
 
+// Derby+Hibernateの設定ファイルをセットアップ
 task setUpJpaWithDerbyHibernate << {
     setUpJpaWithDerby(projectDir.path, "hibernate")
 }
