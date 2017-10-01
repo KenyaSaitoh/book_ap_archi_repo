@@ -42,8 +42,7 @@ public class ResultUtil {
         if (department != null) {
             System.out.print(department.getDepartmentId() + " / ");
             System.out.print(department.getDepartmentName() + " / ");
-            System.out.print(department.getBuildingName() + " / ");
-            System.out.println(department.getFloor());
+            System.out.print(department.getLocation());
         }
     }
 

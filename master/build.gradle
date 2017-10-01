@@ -60,11 +60,6 @@ subprojects {
 
     // 初期データをセットアップする（MySQL）
     task setupMySQL << {
-        /*
-        println("$projectDir/sql/mysql", conf.mysql.general.url,
-                conf.mysql.general.user, conf.mysql.general.password,
-                conf.mysql.driverClass)
-        */
         execSqlDir("$projectDir/sql/mysql", conf.mysql.general.url,
                 conf.mysql.general.user, conf.mysql.general.password,
                 conf.mysql.driverClass)

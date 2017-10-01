@@ -19,10 +19,10 @@ public class JpaCascadeStrategyTest extends JpaTestBase {
         System.out.println("[ test1 ] Start");
         List<Employee> employees = new ArrayList<Employee>();
         Department department =
-                new Department(7, "人事部", "日本橋第一ビル", 10, employees, 0);
+                new Department(4, "総務部", "東京本社",  employees, 0L);
         Employee employee =
-                new Employee(10051, "てらだ てっぺい", department, new Date(),
-                        JobType.MANAGER, 270000, 0);
+                new Employee(10051, "Steve", department, new Date(),
+                        JobType.LEADER, 380000, 0);
         department.getEmployees().add(employee);
         em.persist(employee);
         commit();
@@ -35,10 +35,10 @@ public class JpaCascadeStrategyTest extends JpaTestBase {
         System.out.println("[ test2 ] Start");
         List<Employee> employees = new ArrayList<Employee>();
         Department department =
-                new Department(8, "管理部", "大手町ビル", 10, employees, 0);
+                new Department(5, "管理部", "東京本社", employees, 0L);
         Employee employee =
-                new Employee(10061, "おざき ゆういち", department, new Date(),
-                        JobType.MANAGER, 270000, 0);
+                new Employee(10052, "Trent", department, new Date(),
+                        JobType.CHIEF, 310000, 0);
         department.getEmployees().add(employee);
         em.persist(department);
         commit();
@@ -69,11 +69,11 @@ public class JpaCascadeStrategyTest extends JpaTestBase {
     @Test
     public void test5() {
         System.out.println("[ test5 ] Start");
-        Employee employee = em.find(Employee.class, 10014);
+        Employee employee = em.find(Employee.class, 10012);
         Department department = employee.getDepartment();
         em.clear();  // mergeのテストのために、取得したエンティティオブジェクトを意図的にDETACHED状態にする
-        employee.setMonthlySalary(500000);
-        department.setBuildingName("日本橋第一ビル"); // もともとは日本橋第二ビル
+        employee.setSalary(500000);
+        department.setLocation("品川支社"); // もともとは東京本社
         employee.setDepartment(department);
         em.merge(employee);
         commit();
@@ -84,10 +84,10 @@ public class JpaCascadeStrategyTest extends JpaTestBase {
     @Test
     public void test6() {
         System.out.println("[ test6 ] Start");
-        Employee employee = em.find(Employee.class, 10016);
+        Employee employee = em.find(Employee.class, 10001);
         Department department = employee.getDepartment();
-        employee.setMonthlySalary(999999);
-        department.setFloor(19);
+        employee.setSalary(999999);
+        department.setDepartmentName("営業一部"); // もともとは営業部
         em.refresh(employee);
         commit();
         System.out.println("[ test6 ] End\n");

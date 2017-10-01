@@ -16,7 +16,7 @@ public class JpaOptimisticLockConflicter {
         EntityTransaction et = em.getTransaction();
         et.begin();
         Employee employee = em.find(Employee.class, 10001);
-        employee.setMonthlySalary(550000);
+        employee.setSalary(550000);
         et.commit();
         em.close();
     }

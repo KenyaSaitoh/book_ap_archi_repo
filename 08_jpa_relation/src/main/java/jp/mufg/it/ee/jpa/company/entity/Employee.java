@@ -43,7 +43,7 @@ public class Employee {
     @Enumerated(EnumType.STRING)
     private JobType jobType;
 
-    @Column(name = "MONTHLY_SALARY")
+    @Column(name = "SALARY")
     private Integer salary;
 
     @Column(name = "PHOTO")
@@ -120,7 +120,7 @@ public class Employee {
         return salary;
     }
 
-    public void setMonthlySalary(Integer salary) {
+    public void setSalary(Integer salary) {
         this.salary = salary;
     }
 

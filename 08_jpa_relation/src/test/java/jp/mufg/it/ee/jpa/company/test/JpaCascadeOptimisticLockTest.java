@@ -19,7 +19,7 @@ public class JpaCascadeOptimisticLockTest extends JpaTestBase {
         Department department = em.find(Department.class, 1);
         List<Employee> employees = department.getEmployees();
         Employee employee = employees.get(0);
-        employee.setMonthlySalary(600000);
+        employee.setSalary(510000);
 
         em.clear();
         em.merge(department);
