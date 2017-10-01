@@ -1,20 +1,16 @@
 package jp.mufg.it.ee.jpa.company.entity;
 
-import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.Version;
 
 import jp.mufg.it.ee.jpa.company.type.JobType;
 
@@ -35,10 +31,6 @@ public class Employee {
             referencedColumnName = "DEPARTMENT_ID")
     private Department department;
 
-    @Column(name = "ENTRANCE_DATE")
-    @Temporal(TemporalType.DATE)
-    private Date entranceDate;
-
     @Column(name = "JOB_ID")
     @Enumerated(EnumType.ORDINAL)
     private JobType jobType;
@@ -46,12 +38,8 @@ public class Employee {
     @Column(name = "SALARY")
     private Integer salary;
 
-    @Column(name = "PHOTO")
-    @Lob
-    private byte[] photo;
-
-    @Version
-    private Long version;
+    @Embedded
+    private Address address; // エンベッダブルクラス
 
     // 引数なしのコンストラクタ
     public Employee() {
@@ -59,15 +47,12 @@ public class Employee {
 
     // コンストラクタ
     public Employee(Integer employeeId, String employeeName,
-            Department department, Date entranceDate, JobType jobType,
-            Integer salary, Long version) {
+            Department department, JobType jobType, Integer salary) {
         this.employeeId = employeeId;
         this.employeeName = employeeName;
         this.department = department;
-        this.entranceDate = entranceDate;
         this.jobType = jobType;
         this.salary = salary;
-        this.version = version;
     }
 
     // 社員番号へのアクセサメソッド
@@ -97,15 +82,6 @@ public class Employee {
         this.department = department;
     }
 
-    // 入社年月日へのアクセサメソッド
-    public Date getEntranceDate() {
-        return entranceDate;
-    }
-
-    public void setEntranceDate(Date entranceDate) {
-        this.entranceDate = entranceDate;
-    }
-
     // 役職名へのアクセサメソッド
     public JobType getJobType() {
         return jobType;
@@ -124,21 +100,12 @@ public class Employee {
         this.salary = salary;
     }
 
-    // 写真へのアクセサメソッド
-    public byte[] getPhoto() {
-        return photo;
+    // 住所（エンベッダブルクラス）へのアクセサメソッド
+    public Address getAddress() {
+        return address;
     }
 
-    public void setPhoto(byte[] photo) {
-        this.photo = photo;
-    }
-
-    // バージョン（楽観的ロックで使用）へのアクセサメソッド
-    public Long getVersion() {
-        return version;
-    }
-
-    public void setVersion(Long version) {
-        this.version = version;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 }

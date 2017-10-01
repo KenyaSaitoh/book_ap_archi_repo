@@ -19,18 +19,24 @@ public class Employee {
     @Id
     @Column(name = "EMPLOYEE_ID")
     private Integer employeeId;
+
     @Column(name = "EMPLOYEE_NAME")
     private String employeeName;
+
     @Column(name = "DEPARTMENT_NAME")
     private String departmentName;
+
     @Column(name = "ENTRANCE_DATE")
     @Temporal(TemporalType.DATE)
     private Date entranceDate;
-    @Column(name = "JOB_NAME")
+
+    @Column(name = "JOB_ID")
     @Enumerated(EnumType.STRING)
     private JobType jobType;
+
     @Column(name = "MONTHLY_SALARY")
     private Integer salary;
+
     @Column(name = "PHOTO")
     @Lob
     private byte[] photo;

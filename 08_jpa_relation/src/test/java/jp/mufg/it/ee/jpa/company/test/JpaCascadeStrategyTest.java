@@ -19,10 +19,10 @@ public class JpaCascadeStrategyTest extends JpaTestBase {
         System.out.println("[ test1 ] Start");
         List<Employee> employees = new ArrayList<Employee>();
         Department department =
-                new Department(4, "総務部", "東京本社",  employees, 0L);
+                new Department(5, "総務部", "東京本社",  employees, 0L);
         Employee employee =
                 new Employee(10051, "Steve", department, new Date(),
-                        JobType.LEADER, 380000, 0);
+                        JobType.LEADER, 380000, 0L);
         department.getEmployees().add(employee);
         em.persist(employee);
         commit();
@@ -35,10 +35,10 @@ public class JpaCascadeStrategyTest extends JpaTestBase {
         System.out.println("[ test2 ] Start");
         List<Employee> employees = new ArrayList<Employee>();
         Department department =
-                new Department(5, "管理部", "東京本社", employees, 0L);
+                new Department(6, "管理部", "東京本社", employees, 0L);
         Employee employee =
                 new Employee(10052, "Trent", department, new Date(),
-                        JobType.CHIEF, 310000, 0);
+                        JobType.CHIEF, 310000, 0L);
         department.getEmployees().add(employee);
         em.persist(department);
         commit();
@@ -84,10 +84,10 @@ public class JpaCascadeStrategyTest extends JpaTestBase {
     @Test
     public void test6() {
         System.out.println("[ test6 ] Start");
-        Employee employee = em.find(Employee.class, 10001);
+        Employee employee = em.find(Employee.class, 10002);
         Department department = employee.getDepartment();
         employee.setSalary(999999);
-        department.setDepartmentName("営業一部"); // もともとは営業部
+        department.setDepartmentName("経営企画部"); // もともとは企画部
         em.refresh(employee);
         commit();
         System.out.println("[ test6 ] End\n");
