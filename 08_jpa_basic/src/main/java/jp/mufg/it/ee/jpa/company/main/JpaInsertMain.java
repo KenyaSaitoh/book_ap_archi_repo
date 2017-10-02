@@ -30,7 +30,7 @@ public class JpaInsertMain {
         cal.set(2006, 3, 1);
         Employee employee = new Employee(10031, "ふくもと けんじ",
                 "基盤技術部", new Date(cal.getTimeInMillis()),
-                JobType.PROGRAMMER, 270000);
+                JobType.CHIEF, 270000);
 
         // persistメソッドに、生成したEmployeeインスタンスを渡す
         em.persist(employee);

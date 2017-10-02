@@ -39,4 +39,6 @@ includeFlat '04_servlet_jsp',
 '08_jpa_basic',
 '08_jpa_lock',
 '08_jpa_relation',
-'08_jpa_embeddable'
+'08_jpa_embeddable',
+'08_jpa_inheritance_1',
+'08_jpa_inheritance_2'

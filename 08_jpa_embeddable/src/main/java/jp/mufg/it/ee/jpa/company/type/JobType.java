@@ -2,7 +2,7 @@ package jp.mufg.it.ee.jpa.company.type;
 
 public enum JobType {
     MANAGER("マネージャ"),
-    LEADER("リーダ"),
+    LEADER("リーダー"),
     CHIEF("チーフ"),
     ASSOCIATE("アソシエイト");
 

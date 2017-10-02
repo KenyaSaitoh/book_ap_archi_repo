@@ -7,5 +7,6 @@ ENTRANCE_DATE   DATE NOT NULL,        -- 入社年月日
 JOB_NAME        VARCHAR(30) NOT NULL, -- 役職名
 SALARY          INT NOT NULL,          -- 月給
 PHOTO           BLOB,                   -- 写真
+VERSION         INT,                   -- バージョン
 PRIMARY KEY(EMPLOYEE_ID)
 );

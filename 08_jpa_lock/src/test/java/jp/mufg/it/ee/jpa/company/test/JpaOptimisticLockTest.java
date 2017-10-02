@@ -1,6 +1,7 @@
 package jp.mufg.it.ee.jpa.company.test;
 
 import javax.persistence.OptimisticLockException;
+
 import org.junit.Test;
 
 import jp.mufg.it.ee.jpa.company.entity.Employee;
@@ -12,7 +13,7 @@ public class JpaOptimisticLockTest extends JpaTestBase {
     @Test
     public void test1() {
         System.out.println("[ test1 ] Start");
-        Employee employee = em.find(Employee.class, 10016);
+        Employee employee = em.find(Employee.class, 10010);
         employee.setSalary(employee.getSalary() + 10000);
         try {
             Thread.sleep(20000);

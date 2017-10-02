@@ -2,10 +2,9 @@ package jp.mufg.it.ee.jpa.company.type;
 
 public enum JobType {
     MANAGER("マネージャ"),
-    PROJECT_LEADER("プロジェクトリーダ"),
-    ARCHITECT("アーキテクト"),
-    SYSTEM_ENGINEER("システムエンジニア"),
-    PROGRAMMER("プログラマ");
+    LEADER("リーダー"),
+    CHIEF("チーフ"),
+    ASSOCIATE("アソシエイト");
 
     private final String jobType;
 

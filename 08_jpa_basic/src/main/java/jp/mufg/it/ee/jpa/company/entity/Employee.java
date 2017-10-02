@@ -30,11 +30,11 @@ public class Employee {
     @Temporal(TemporalType.DATE)
     private Date entranceDate;
 
-    @Column(name = "JOB_ID")
+    @Column(name = "JOB_NAME")
     @Enumerated(EnumType.STRING)
     private JobType jobType;
 
-    @Column(name = "MONTHLY_SALARY")
+    @Column(name = "SALARY")
     private Integer salary;
 
     @Column(name = "PHOTO")

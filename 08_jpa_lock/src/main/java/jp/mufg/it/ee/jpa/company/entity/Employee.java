@@ -1,6 +1,7 @@
 package jp.mufg.it.ee.jpa.company.entity;
 
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -10,6 +11,7 @@ import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Version;
 
 import jp.mufg.it.ee.jpa.company.type.JobType;
 
@@ -30,16 +32,19 @@ public class Employee {
     @Temporal(TemporalType.DATE)
     private Date entranceDate;
 
-    @Column(name = "JOB_ID")
+    @Column(name = "JOB_NAME")
     @Enumerated(EnumType.STRING)
     private JobType jobType;
 
-    @Column(name = "MONTHLY_SALARY")
+    @Column(name = "SALARY")
     private Integer salary;
 
     @Column(name = "PHOTO")
     @Lob
     private byte[] photo;
+
+    @Version
+    private Long version;
 
     // 引数なしのコンストラクタ
     public Employee() {
@@ -48,13 +53,14 @@ public class Employee {
     // コンストラクタ
     public Employee(Integer employeeId, String employeeName,
             String departmentName, Date entranceDate, JobType jobType,
-            Integer salary) {
+            Integer salary, Long version) {
         this.employeeId = employeeId;
         this.employeeName = employeeName;
         this.departmentName = departmentName;
         this.entranceDate = entranceDate;
         this.jobType = jobType;
         this.salary = salary;
+        this.version = version;
     }
 
     // 社員番号へのアクセサメソッド
@@ -118,5 +124,14 @@ public class Employee {
 
     public void setPhoto(byte[] photo) {
         this.photo = photo;
+    }
+
+    // バージョン（楽観的ロックで使用）へのアクセサメソッド
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
     }
 }

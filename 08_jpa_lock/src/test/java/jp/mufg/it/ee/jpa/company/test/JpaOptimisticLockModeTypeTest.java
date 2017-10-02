@@ -2,6 +2,7 @@ package jp.mufg.it.ee.jpa.company.test;
 
 import javax.persistence.LockModeType;
 import javax.persistence.OptimisticLockException;
+
 import org.junit.Test;
 
 import jp.mufg.it.ee.jpa.company.entity.Employee;
@@ -16,7 +17,7 @@ public class JpaOptimisticLockModeTypeTest extends JpaTestBase {
 
         // 以下のいずれは、どれも同じ動きをする模様。
         // Employee employee = em.find(Employee.class, 10016);
-        Employee employee = em.find(Employee.class, 10016,
+        Employee employee = em.find(Employee.class, 10010,
                 LockModeType.OPTIMISTIC);
         // Employee employee = em.find(Employee.class, 10016,
         //        LockModeType.OPTIMISTIC_FORCE_INCREMENT);
