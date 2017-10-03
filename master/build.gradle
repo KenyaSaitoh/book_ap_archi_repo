@@ -346,6 +346,35 @@ def setUpJpaWithDerby(projectDir, provider) {
         }
 }
 
+//
+def setUpMyBatisWithMySQL(projectDir) {
+    new File(projectDir + "/src/main/resources/mybatis-config.xml")
+        .withWriter { writer ->
+            new File(projectDir + "/config/mybatis/mybatis-config.xml")
+                .newReader().eachLine { line ->
+                    line = line.replaceAll("#DRIVER#", conf.mysql.driverClass)
+                    line = line.replaceAll("#URL#", conf.mysql.general.url)
+                    line = line.replaceAll("#USER#", conf.mysql.general.user)
+                    line = line.replaceAll("#PASSWORD#", conf.mysql.general.password)
+                    writer.println(line)
+                }
+        }
+}
+
+//
+def setUpMyBatisWithDerby(projectDir) {
+    new File(projectDir + "/src/main/resources/mybatis-config.xml")
+        .withWriter { writer ->
+            new File(projectDir + "/config/mybatis/mybatis-config.xml")
+                .newReader().eachLine { line ->
+                    line = line.replaceAll("#DRIVER#", conf.derby.driverClass)
+                    line = line.replaceAll("#URL#", conf.derby.general.url)
+                    line = line.replaceAll("#USER#", conf.derby.general.user)
+                    line = line.replaceAll("#PASSWORD#", conf.derby.general.password)
+                    writer.println(line)
+                }
+        }
+}
 
 // タスクをグループ化する
 [startGlassFish, stopGlassFish]*.group = "glassfish"

@@ -18,9 +18,7 @@ public class ResultUtil {
                     .print(employee.getDepartment().getDepartmentId() + " / ");
             System.out.print(employee.getDepartment().getDepartmentName()
                     + " / ");
-            System.out
-                    .print(employee.getDepartment().getBuildingName() + " / ");
-            System.out.print(employee.getDepartment().getFloor() + " / ");
+            System.out.println(employee.getDepartment().getLocation() + " / ");
         }
         Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(employee.getEntranceDate().getTime());

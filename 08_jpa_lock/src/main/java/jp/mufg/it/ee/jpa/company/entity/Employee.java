@@ -13,8 +13,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
-import jp.mufg.it.ee.jpa.company.type.JobType;
-
 @Entity
 @Table(name = "EMPLOYEE")
 public class Employee {

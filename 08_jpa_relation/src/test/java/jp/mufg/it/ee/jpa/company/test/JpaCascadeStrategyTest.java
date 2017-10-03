@@ -1,6 +1,7 @@
 package jp.mufg.it.ee.jpa.company.test;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import org.junit.Test;
@@ -18,11 +19,12 @@ public class JpaCascadeStrategyTest extends JpaTestBase {
     public void test1() {
         System.out.println("[ test1 ] Start");
         List<Employee> employees = new ArrayList<Employee>();
-        Department department =
-                new Department(5, "総務部", "東京本社",  employees, 0L);
-        Employee employee =
-                new Employee(10051, "Steve", department, new Date(),
-                        JobType.LEADER, 380000, 0L);
+        Department department = new Department(5, "総務部", "東京本社",
+                employees, 0L);
+        Calendar cal = Calendar.getInstance();
+        cal.set(2017, 10, 1);
+        Employee employee = new Employee(10021, "Steve", department,
+                new Date(cal.getTimeInMillis()),  JobType.LEADER, 380000, 0L);
         department.getEmployees().add(employee);
         em.persist(employee);
         commit();
@@ -34,11 +36,12 @@ public class JpaCascadeStrategyTest extends JpaTestBase {
     public void test2() {
         System.out.println("[ test2 ] Start");
         List<Employee> employees = new ArrayList<Employee>();
-        Department department =
-                new Department(6, "管理部", "東京本社", employees, 0L);
-        Employee employee =
-                new Employee(10052, "Trent", department, new Date(),
-                        JobType.CHIEF, 310000, 0L);
+        Department department = new Department(6, "品質管理部", "東京本社",
+                employees, 0L);
+        Calendar cal = Calendar.getInstance();
+        cal.set(2017, 11, 1);
+        Employee employee = new Employee(10022, "Trent", department,
+                new Date(cal.getTimeInMillis()), JobType.CHIEF, 310000, 0L);
         department.getEmployees().add(employee);
         em.persist(department);
         commit();

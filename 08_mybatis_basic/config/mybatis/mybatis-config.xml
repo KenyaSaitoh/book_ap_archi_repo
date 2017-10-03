@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+  <settings>
+    <setting name="mapUnderscoreToCamelCase" value="true" />
+  </settings>
+  <typeAliases>
+    <typeAlias alias="Employee" type="jp.mufg.it.mybatis.company.dto.Employee"/>
+  </typeAliases>
+  <environments default="development">
+    <environment id="development">
+      <transactionManager type="JDBC"/>
+      <dataSource type="POOLED">
+        <property name="driver"
+                  value="#DRIVER#" />
+        <property name="url"
+                  value="#URL#" />
+        <property name="username"
+                  value="#USER#" />
+        <property name="password"
+                  value="#PASSWORD#" />
+      </dataSource>
+    </environment>
+  </environments>
+  <mappers>
+    <mapper resource="mybatis-mapper-1.xml"/>
+    <mapper resource="mybatis-mapper-2.xml"/>
+  </mappers>
+</configuration>
+

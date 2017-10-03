@@ -27,11 +27,9 @@ public class JpaInsertMain {
 
         // 挿入対象のEmployeeクラスのインスタンスを生成する
         Calendar cal = Calendar.getInstance();
-        cal.set(2006, 3, 1);
-        Employee employee = new Employee(10031, "ふくもと けんじ",
-                "基盤技術部", new Date(cal.getTimeInMillis()),
-                JobType.CHIEF, 270000);
-
+        cal.set(2017, 11, 1);
+        Employee employee = new Employee(10021, "Steve", "総務部",
+                new Date(cal.getTimeInMillis()), JobType.LEADER, 380000);
         // persistメソッドに、生成したEmployeeインスタンスを渡す
         em.persist(employee);
 
