@@ -2,20 +2,37 @@ package jp.mufg.it.ee.jpa.company.entity;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 @Entity
 @Table(name = "DEPARTMENT")
 public class Department {
+    @Id
+    @Column(name = "DEPARTMENT_ID")
     private Integer departmentId;
+
+    @Column(name = "DEPARTMENT_NAME")
     private String departmentName;
-    private String buildingName;
-    private Integer floor;
+
+    @Column(name = "LOCATION")
+    private String location;
+
+    @OneToMany(targetEntity = Employee.class,
+            mappedBy = "department",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY)
     private List<Employee> employees = new ArrayList<Employee>();
+
+    @Column(name = "VERSION")
+    @Version
+    private Long version;
 
     // 引数なしのコンストラクタ
     public Department() {
@@ -23,17 +40,15 @@ public class Department {
 
     // コンストラクタ
     public Department(Integer departmentId, String departmentName,
-            String buildingName, Integer floor, List<Employee> employees) {
+            String location, List<Employee> employees, Long version) {
         this.departmentId = departmentId;
         this.departmentName = departmentName;
-        this.buildingName = buildingName;
-        this.floor = floor;
+        this.location = location;
         this.employees = employees;
+        this.version = version;
     }
 
     // 部署番号へのアクセサメソッド
-    @Id
-    @Column(name = "DEPARTMENT_ID")
     public Integer getDepartmentId() {
         return departmentId;
     }
@@ -43,7 +58,6 @@ public class Department {
     }
 
     // 部署名へのアクセサメソッド
-    @Column(name = "DEPARTMENT_NAME")
     public String getDepartmentName() {
         return departmentName;
     }
@@ -52,34 +66,30 @@ public class Department {
         this.departmentName = departmentName;
     }
 
-    // ビル名へのアクセサメソッド
-    @Column(name = "BUILDING_NAME")
-    public String getBuildingName() {
-        return buildingName;
+    // 所在地へのアクセサメソッド
+    public String getLocation() {
+        return location;
     }
 
-    public void setBuildingName(String buildingName) {
-        this.buildingName = buildingName;
-    }
-
-    // 階数へのアクセサメソッド
-    @Column(name = "FLOOR")
-    public Integer getFloor() {
-        return floor;
-    }
-
-    public void setFloor(Integer floor) {
-        this.floor = floor;
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     // 社員のリストへのアクセサメソッド
-    @OneToMany(targetEntity = Employee.class,
-            mappedBy = "department")
     public List<Employee> getEmployees() {
         return employees;
     }
 
     public void setEmployees(List<Employee> employees) {
         this.employees = employees;
+    }
+
+    // バージョン（楽観的ロックで使用）へのアクセサメソッド
+    public long getVersion() {
+        return version;
+    }
+
+    public void setVersion(long version) {
+        this.version = version;
     }
 }

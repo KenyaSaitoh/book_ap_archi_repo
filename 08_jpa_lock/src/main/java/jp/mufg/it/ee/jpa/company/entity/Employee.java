@@ -28,20 +28,8 @@ public class Employee {
     @Column(name = "DEPARTMENT_NAME")
     private String departmentName;
 
-    @Column(name = "ENTRANCE_DATE")
-    @Temporal(TemporalType.DATE)
-    private Date entranceDate;
-
-    @Column(name = "JOB_NAME")
-    @Enumerated(EnumType.STRING)
-    private JobType jobType;
-
     @Column(name = "SALARY")
     private Integer salary;
-
-    @Column(name = "PHOTO")
-    @Lob
-    private byte[] photo;
 
     @Version
     private Long version;
@@ -52,13 +40,10 @@ public class Employee {
 
     // コンストラクタ
     public Employee(Integer employeeId, String employeeName,
-            String departmentName, Date entranceDate, JobType jobType,
-            Integer salary, Long version) {
+            String departmentName, Integer salary, Long version) {
         this.employeeId = employeeId;
         this.employeeName = employeeName;
         this.departmentName = departmentName;
-        this.entranceDate = entranceDate;
-        this.jobType = jobType;
         this.salary = salary;
         this.version = version;
     }
@@ -97,33 +82,6 @@ public class Employee {
 
     public void setSalary(Integer salary) {
         this.salary = salary;
-    }
-
-    // 入社年月日へのアクセサメソッド
-    public Date getEntranceDate() {
-        return entranceDate;
-    }
-
-    public void setEntranceDate(Date entranceDate) {
-        this.entranceDate = entranceDate;
-    }
-
-    // 役職名へのアクセサメソッド
-    public JobType getJobType() {
-        return jobType;
-    }
-
-    public void setJobType(JobType jobType) {
-        this.jobType = jobType;
-    }
-
-    // 写真へのアクセサメソッド
-    public byte[] getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(byte[] photo) {
-        this.photo = photo;
     }
 
     // バージョン（楽観的ロックで使用）へのアクセサメソッド

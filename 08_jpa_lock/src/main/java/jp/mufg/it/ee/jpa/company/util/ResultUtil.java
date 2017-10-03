@@ -1,6 +1,5 @@
 package jp.mufg.it.ee.jpa.company.util;
 
-import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 
@@ -13,15 +12,7 @@ public class ResultUtil {
             System.out.print(employee.getEmployeeId() + " / ");
             System.out.print(employee.getEmployeeName() + " / ");
             System.out.print(employee.getDepartmentName() + " / ");
-            Calendar cal = Calendar.getInstance();
-            cal.setTimeInMillis(employee.getEntranceDate().getTime());
-            String entranceDate =
-                    cal.get(Calendar.YEAR) + "年"
-                            + (cal.get(Calendar.MONTH) + 1) + "月"
-                            + cal.get(Calendar.DATE) + "日";
-            System.out.print(entranceDate + " / ");
-            System.out.print(employee.getJobType() + " / ");
-            System.out.println(employee.getSalary() + " / ");
+            System.out.println(employee.getSalary());
         }
     }
 
