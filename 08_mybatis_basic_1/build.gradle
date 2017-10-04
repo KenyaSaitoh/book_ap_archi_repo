@@ -1,0 +1,26 @@
+// JPA依存関係設定
+dependencies {
+    runtime "mysql:mysql-connector-java:5.1.29"
+    runtime "org.apache.derby:derbyclient:10.12.1.1"
+    runtime "org.mybatis:mybatis:3.2.2"
+    testCompile "junit:junit:4.12"
+    testRuntime "org.mybatis:mybatis:3.2.2"
+}
+
+// JARプラグイン設定
+jar {
+    archiveName "mybatis_basic_1.jar"
+}
+
+// MyBatis(MySQL)の設定ファイルをセットアップ
+task setUpMyBatisWithMySQL << {
+    setUpMyBatisWithMySQL(projectDir.path)
+}
+
+// MyBatis(Derby)の設定ファイルをセットアップ
+task setUpMyBatisWithDerby << {
+    setUpMyBatisWithDerby(projectDir.path)
+}
+
+// タスクをグループ化する
+[setUpMyBatisWithMySQL, setUpMyBatisWithDerby]*.group = "mybatis"

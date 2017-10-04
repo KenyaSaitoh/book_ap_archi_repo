@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jp.mufg.it.mybatis.company.dto.EmployeeMapper">
+
+  <insert id="insertEmployeeWithKeyGen"
+    parameterType="jp.mufg.it.mybatis.company.dto.Employee">
+    <selectKey keyProperty="employeeId" resultType="int" order="AFTER">
+      VALUES IDENTITY_VAL_LOCAL()
+    </selectKey>
+    INSERT INTO EMPLOYEE(EMPLOYEE_NAME, DEPARTMENT_NAME, SALARY)
+    VALUES (#{employeeName}, #{departmentName}, #{monthlySalary})
+  </insert>
+
+  <insert id="insertEmployeeWithMySQL"
+    parameterType="jp.mufg.it.mybatis.company.dto.Employee">
+    <selectKey keyProperty="employeeId" resultType="int" order="AFTER">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    INSERT INTO EMPLOYEE(EMPLOYEE_NAME, DEPARTMENT_NAME, SALARY)
+    VALUES (#{employeeName}, #{departmentName}, #{monthlySalary})
+  </insert>
+
+  <insert id="insertEmployeeWithOracleSequence"
+    parameterType="jp.mufg.it.mybatis.company.dto.Employee">
+    <selectKey keyProperty="employeeId" resultType="int" order="AFTER">
+      SELECT EMPLOYEE_SEQ.CURRVAL FROM DUAL
+    </selectKey>
+    INSERT INTO EMPLOYEE
+    VALUES (EMPLOYEE_SEQ.NEXTVAL, #{employeeName}, #{departmentName}, #{monthlySalary})
+  </insert>
+
+  <select id="selectNextval" resultType="int">
+    SELECT EMPLOYEE_SEQ.NEXTVAL FROM DUAL
+  </select>
+
+</mapper>
