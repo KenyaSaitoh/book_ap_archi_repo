@@ -48,7 +48,7 @@ public class Department {
         this.version = version;
     }
 
-    // 部署番号へのアクセサメソッド
+    // 部署IDへのアクセサメソッド
     public Integer getDepartmentId() {
         return departmentId;
     }

@@ -65,7 +65,7 @@ public class Employee {
         this.version = version;
     }
 
-    // 社員番号へのアクセサメソッド
+    // 社員IDへのアクセサメソッド
     public Integer getEmployeeId() {
         return employeeId;
     }

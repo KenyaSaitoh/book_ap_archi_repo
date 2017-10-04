@@ -56,7 +56,7 @@ public class Department {
         this.employees = employees;
     }
 
-    // 部署番号へのアクセサメソッド
+    // 部署IDへのアクセサメソッド
     public Integer getDepartmentId() {
         return departmentId;
     }

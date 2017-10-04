@@ -29,7 +29,7 @@ public class Employee {
         this.salary = salary;
     }
 
-    // 社員番号へのアクセサメソッド
+    // 社員IDへのアクセサメソッド
     public Integer getEmployeeId() {
         return employeeId;
     }

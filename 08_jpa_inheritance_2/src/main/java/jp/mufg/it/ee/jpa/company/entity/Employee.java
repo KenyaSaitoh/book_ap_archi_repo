@@ -37,7 +37,7 @@ public class Employee {
         this.entranceDate = entranceDate;
     }
 
-    // 社員番号へのアクセサメソッド
+    // 社員IDへのアクセサメソッド
     @Id
     @Column(name = "EMPLOYEE_ID")
     public Integer getEmployeeId() {

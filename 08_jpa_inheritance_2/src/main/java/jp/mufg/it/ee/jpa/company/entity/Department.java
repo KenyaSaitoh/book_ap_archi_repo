@@ -31,7 +31,7 @@ public class Department {
         this.employees = employees;
     }
 
-    // 部署番号へのアクセサメソッド
+    // 部署IDへのアクセサメソッド
     @Id
     @Column(name = "DEPARTMENT_ID")
     public Integer getDepartmentId() {
