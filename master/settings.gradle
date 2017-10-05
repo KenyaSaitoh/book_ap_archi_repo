@@ -22,7 +22,9 @@ rootProject.projectDir = new File(settingsDir, 'root_project')
 
 includeFlat '04_servlet_jsp',
 '04_spring_mvc_person',
+'04_spring_mvc_person_rdb',
 '04_jsf_person',
+'04_jsf_person_rdb',
 '04_jsf_person_html_friendly',
 '04_jsf_layout',
 '04_jsf_ajax',
@@ -49,5 +51,13 @@ includeFlat '04_servlet_jsp',
 '08_mybatis_basic_2',
 '08_mybatis_lock',
 '08_mybatis_relation',
-'08_mybatis_dynamic'
+'08_mybatis_dynamic',
+'11_file_up_download',
+'11_file_up_down_stream',
+'20_jaxrs_hello_service',
+'20_jaxrs_greeting_service',
+'20_jaxrs_person_service',
+'20_jaxrs_employee_service'
+
+
 
