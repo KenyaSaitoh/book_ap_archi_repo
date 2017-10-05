@@ -1,4 +1,4 @@
 // WARプラグイン設定
 war {
-    archiveName "XXX.war"
+    archiveName "hello_service.war"
 }

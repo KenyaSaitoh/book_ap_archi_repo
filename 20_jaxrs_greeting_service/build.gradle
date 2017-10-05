@@ -1,0 +1,4 @@
+// WARプラグイン設定
+war {
+    archiveName "greeting_service.war"
+}
