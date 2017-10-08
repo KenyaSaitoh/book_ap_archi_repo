@@ -1,0 +1,4 @@
+// WARプラグイン設定
+war {
+    archiveName "servlet_jsp.war"
+}

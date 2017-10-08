@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<title>FileUploadInputPage</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+  <h2>FileUploadInputPage</h2>
+  <hr />
+  <form action="/servlet_upload/FileUploadServlet" method="post"
+    enctype="multipart/form-data">
+    <div>
+      <span>ファイル：</span>
+      <input type="file" name="inputedFile" size="80" />
+    </div>
+    <input type="submit" value="リクエスト送信" />
+  </form>
+</body>
+</html>
