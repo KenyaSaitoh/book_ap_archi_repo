@@ -8,24 +8,23 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class Person {
-    // IDフィールド
+    // ID
     private Integer personId;
-    // 名前フィールド
+    // 名前
     @NotEmpty
     @Size(min = 1, max = 20)
     private String personName;
-    // 年齢フィールド
+    // 年齢
     @NotNull
     @Min(20)
     @Max(100)
     private Integer age;
-    // 性別フィールド
+    // 性別
     @NotEmpty
     private String gender;
 
     // コンストラクタ
-    public Person() {
-    };
+    public Person() {}
 
     public Person(Integer personId, String personName, Integer age,
             String gender) {

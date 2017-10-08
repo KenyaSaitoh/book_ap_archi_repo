@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+<?xml version="1.0" encoding="UTF-8"?>
+<project-modules id="moduleCoreId" project-version="1.5.0">
 	<wb-module deploy-name="14_person_service">
 		<property name="context-root" value="14_person_service"/>
 		<wb-resource deploy-path="/WEB-INF/classes" source-path="src/main/resources"/>
@@ -7,6 +8,6 @@
 		<wb-resource deploy-path="/WEB-INF/classes" source-path="src/main/webapp"/>
 		<wb-resource deploy-path="/WEB-INF/classes" source-path="src/test/java"/>
 		<wb-resource deploy-path="/WEB-INF/classes" source-path="src/test/resources"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/webapp"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/webapp"/>
 	</wb-module>
 </project-modules>

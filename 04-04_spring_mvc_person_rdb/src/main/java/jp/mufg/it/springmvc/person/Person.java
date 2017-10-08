@@ -1,5 +1,9 @@
 package jp.mufg.it.springmvc.person;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -7,25 +11,34 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+@Entity
+@Table(name = "PERSON")
 public class Person {
-    // IDフィールド
+    // ID
+    @Id
+    @Column(name = "PERSON_ID")
     private Integer personId;
-    // 名前フィールド
+
+    // 名前
+    @Column(name = "PERSON_NAME")
     @NotEmpty
     @Size(min = 1, max = 20)
     private String personName;
-    // 年齢フィールド
+
+    // 年齢
+    @Column(name = "AGE")
     @NotNull
     @Min(20)
     @Max(100)
     private Integer age;
-    // 性別フィールド
+
+    // 性別
+    @Column(name = "GENDER")
     @NotEmpty
     private String gender;
 
     // コンストラクタ
-    public Person() {
-    };
+    public Person() {}
 
     public Person(Integer personId, String personName, Integer age,
             String gender) {

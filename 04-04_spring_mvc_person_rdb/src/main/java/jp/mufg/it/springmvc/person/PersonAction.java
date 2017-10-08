@@ -6,6 +6,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class PersonAction {
-    @Inject
+    @Autowired
     private PersonService personService;
 
     // アクションメソッド（「入力画面」に遷移する）
@@ -44,7 +45,7 @@ public class PersonAction {
     // アクションメソッド（人員を更新・追加する）
     @RequestMapping("/update")
     public String updatePerson(Model model, HttpSession session) {
-        Person person = (Person) session.getAttribute("person");
+        Person person = (Person)session.getAttribute("person");
         if (person.getPersonId() != null) { // 更新か追加を判定
             personService.updatePerson(person);
         } else {
