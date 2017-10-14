@@ -2,9 +2,12 @@ package jp.mufg.it.ee.servlet;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -17,38 +20,36 @@ import javax.servlet.http.Part;
 @MultipartConfig(maxFileSize = 10 * 1024)
 public class FileUploadServlet extends HttpServlet {
 
+    @Inject
+    private FileBean fileBean;
+
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         for(Part part: request.getParts()){
-            String contentType = part.getContentType();
             String fileName = part.getSubmittedFileName();
-            // String fileName = FileUtil.getFileName(part);
-            long fileSize = part.getSize();
+            String contentType = part.getContentType();
 
-            System.out.println("contentType ---> " + contentType);
-            // System.out.println("name ---> " + name);
-            System.out.println("fileName ---> " + fileName);
-            System.out.println("size ---> " + fileSize);
-
-            // GlassFishの場合、C:\Java\glassfish4\glassfish\domains\domain1\configの下に出力される模様
-            File outputFile = new File(fileName);
+            // ファイルを読み込んでByteArrayOutputStreamに出力する
             BufferedInputStream bis = null;
-            BufferedOutputStream bos = null;
+            ByteArrayOutputStream baos = null;
             try {
                 bis = new BufferedInputStream(part.getInputStream());
-                bos = new BufferedOutputStream(new FileOutputStream(outputFile));
+                baos = new ByteArrayOutputStream();
                 byte[] buf = new byte[50];
                 int size;
                 while ((size = bis.read(buf, 0, buf.length)) != -1) {
-                    bos.write(buf, 0, size);
+                    baos.write(buf, 0, size);
                 }
             } catch(IOException ioe) {
                 throw new RuntimeException(ioe);
             } finally {
-                bos.close();
+                baos.close();
                 bis.close();
             }
+            // ファイル本体（バイナリデータ）を取得する
+            byte[] file = baos.toByteArray();
+            // 取得したファイルと付属情報をRDBに保存する
+            fileBean.uploadFile(fileName, contentType, file);
         }
     }
 }

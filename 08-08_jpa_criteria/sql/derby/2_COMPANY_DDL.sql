@@ -3,7 +3,7 @@ CREATE TABLE DEPARTMENT (
 DEPARTMENT_ID   INT PRIMARY KEY,      -- 部署ID
 DEPARTMENT_NAME VARCHAR(30) NOT NULL, -- 部署名
 LOCATION        VARCHAR(30) NOT NULL, -- 所在地
-VERSION         INT                    -- バージョン
+VERSION         INT                   -- バージョン
 );
 
 -- 社員テーブル
