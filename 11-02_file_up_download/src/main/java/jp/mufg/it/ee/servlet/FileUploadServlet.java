@@ -1,11 +1,11 @@
 package jp.mufg.it.ee.servlet;
 
 import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -17,17 +17,23 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 @WebServlet("/FileUploadServlet")
-@MultipartConfig(maxFileSize = 10 * 1024)
+@MultipartConfig(maxFileSize = 10000000000L)
 public class FileUploadServlet extends HttpServlet {
 
     @Inject
-    private FileBean fileBean;
+    private FileProcessorBean fileProcessorBean;
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        List<Integer> fileIdList = new ArrayList<Integer>();
+
         for(Part part: request.getParts()){
             String fileName = part.getSubmittedFileName();
             String contentType = part.getContentType();
+
+            System.out.println("fileName ---> " + fileName);
+            System.out.println("contentType ---> " + contentType);
 
             // ファイルを読み込んでByteArrayOutputStreamに出力する
             BufferedInputStream bis = null;
@@ -48,8 +54,16 @@ public class FileUploadServlet extends HttpServlet {
             }
             // ファイル本体（バイナリデータ）を取得する
             byte[] file = baos.toByteArray();
+
             // 取得したファイルと付属情報をRDBに保存する
-            fileBean.uploadFile(fileName, contentType, file);
+            int fileId = fileProcessorBean.uploadFile(fileName, contentType, file);
+
+            fileIdList.add(fileId);
         }
+
+        // 結果を画面に出力する
+        PrintWriter out = response.getWriter();
+        out.print("NORMAL END ---> " + fileIdList);
+        out.close();
     }
 }

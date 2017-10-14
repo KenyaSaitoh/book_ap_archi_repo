@@ -1,34 +1,25 @@
 package jp.mufg.it.ee.servlet;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.Table;
-
-@Entity
-@Table(name = "FILE_STORE")
-public class FileStore {
+public class FileInfo {
     private Integer fileId;
     private String fileName;
+    private String contentType;
     private byte[] file;
 
     // 引数なしのコンストラクタ
-    public FileStore() {
+    public FileInfo() {
     }
 
     // コンストラクタ
-    public FileStore(String fileName, byte[] file) {
+    public FileInfo(Integer fileId, String fileName, String contentType,
+            byte[] file) {
+        this.fileId = fileId;
         this.fileName = fileName;
+        this.contentType = contentType;
         this.file = file;
     }
 
     // ファイル番号へのアクセサメソッド
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "FILE_ID")
     public Integer getFileId() {
         return fileId;
     }
@@ -38,7 +29,6 @@ public class FileStore {
     }
 
     // ファイル名へのアクセサメソッド
-    @Column(name = "FILE_NAME")
     public String getFileName() {
         return fileName;
     }
@@ -47,9 +37,16 @@ public class FileStore {
         this.fileName = fileName;
     }
 
+    // コンテントタイプへのアクセスメソッド
+    public String getContentType() {
+        return contentType;
+    }
+
+    public void setContentType(String contentType) {
+        this.contentType = contentType;
+    }
+
     // ファイルへのアクセサメソッド
-    @Column(name = "FILE")
-    @Lob
     public byte[] getFile() {
         return file;
     }
