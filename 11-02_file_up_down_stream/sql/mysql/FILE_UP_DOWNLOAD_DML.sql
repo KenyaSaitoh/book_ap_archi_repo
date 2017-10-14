@@ -1,0 +1,2 @@
+-- 一括削除
+DELETE FROM FILE_STORE;
