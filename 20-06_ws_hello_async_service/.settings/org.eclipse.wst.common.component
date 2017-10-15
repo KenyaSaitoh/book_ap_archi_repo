@@ -8,5 +8,19 @@
 		<wb-resource deploy-path="/WEB-INF/classes" source-path="src/main/webapp"/>
 		<wb-resource deploy-path="/WEB-INF/classes" source-path="src/test/java"/>
 		<wb-resource deploy-path="/WEB-INF/classes" source-path="src/test/resources"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="src/provider/main/resources"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="src/requestor/main/resources"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="src/provider/main/java"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="src/provider/main/webapp"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="src/requestor/main/java"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="/src/provider/main/java"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="/src/requestor/main/java"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="/src/provider/main/webapp"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="/src/provider/main/resources"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="/src/requestor/main/resources"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="/src/provider/test/java"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="/src/requestor/test/java"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="/src/provider/test/resources"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="/src/requestor/test/resources"/>
 	</wb-module>
 </project-modules>
