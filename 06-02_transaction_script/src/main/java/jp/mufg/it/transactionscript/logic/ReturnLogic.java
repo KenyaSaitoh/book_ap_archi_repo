@@ -1,11 +1,11 @@
-package org.study.pattern.transactionscript.logic;
+package jp.mufg.it.transactionscript.logic;
 
-import org.study.pattern.transactionscript.dto.CustomerDTO;
-import org.study.pattern.transactionscript.dto.OrderDetailDTO;
-import org.study.pattern.transactionscript.dto.OrderTransactionDTO;
-import org.study.pattern.transactionscript.dto.ProductDTO;
-import org.study.pattern.transactionscript.dto.ReturnTransactionDTO;
-import org.study.pattern.transactionscript.util.Util;
+import jp.mufg.it.transactionscript.dto.CustomerDTO;
+import jp.mufg.it.transactionscript.dto.OrderDetailDTO;
+import jp.mufg.it.transactionscript.dto.OrderTransactionDTO;
+import jp.mufg.it.transactionscript.dto.ProductDTO;
+import jp.mufg.it.transactionscript.dto.ReturnTransactionDTO;
+import jp.mufg.it.transactionscript.util.Util;
 
 public class ReturnLogic {
 

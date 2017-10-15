@@ -1,4 +1,4 @@
-package org.study.pattern.transactionscript.dto;
+package jp.mufg.it.transactionscript.dto;
 
 import java.util.Date;
 import java.util.List;

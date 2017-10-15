@@ -1,4 +1,4 @@
-package org.study.pattern.transactionscript.util;
+package jp.mufg.it.transactionscript.util;
 
 public class Util {
     public static boolean isRemoteLocation(String address) {

@@ -1,4 +1,4 @@
-package org.study.pattern.transactionscript.dto;
+package jp.mufg.it.transactionscript.dto;
 
 public class ProductDTO {
     private Integer id;
