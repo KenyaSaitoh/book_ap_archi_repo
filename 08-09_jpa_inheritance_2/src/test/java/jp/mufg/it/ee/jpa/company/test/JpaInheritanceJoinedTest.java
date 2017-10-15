@@ -18,7 +18,7 @@ public class JpaInheritanceJoinedTest extends JpaTestBase {
     public void test1() {
         System.out.println("[ test1 ] Start");
         Fulltimer fulltimer = em.find(Fulltimer.class, 10015);
-        fulltimer.setMonthlySalary(fulltimer.getMonthlySalary() + 5000);
+        fulltimer.setsalary(fulltimer.getsalary() + 5000);
         commit();
         ResultUtil.showStaff(fulltimer);
         System.out.println("[ test1 ] End\n");

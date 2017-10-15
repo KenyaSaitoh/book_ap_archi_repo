@@ -1,0 +1,4 @@
+// WARプラグイン設定
+war {
+    archiveName "ws_hello_async_service.war"
+}

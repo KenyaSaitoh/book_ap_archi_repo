@@ -3,21 +3,21 @@ package jp.mufg.it.mybatis.company.dto;
 import java.io.Serializable;
 
 public class EmployeeSalaryParam implements Serializable {
-    private int monthlySalary;
+    private int salary;
     private int payCut;
 
-    public EmployeeSalaryParam(int monthlySalary, int payCut) {
+    public EmployeeSalaryParam(int salary, int payCut) {
         super();
-        this.monthlySalary = monthlySalary;
+        this.salary = salary;
         this.payCut = payCut;
     }
 
-    public int getMonthlySalary() {
-        return monthlySalary;
+    public int getsalary() {
+        return salary;
     }
 
-    public void setMonthlySalary(int monthlySalary) {
-        this.monthlySalary = monthlySalary;
+    public void setsalary(int salary) {
+        this.salary = salary;
     }
 
     public int getPayCut() {

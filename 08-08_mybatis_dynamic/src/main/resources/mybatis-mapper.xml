@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jp.mufg.it.mybatis.company.dao.EmployeeMapper">
+
+  <!-- CRUD Operations -->
+  <select id="selectDynamicEmployees"
+    resultType="jp.mufg.it.mybatis.company.dto.Employee">
+    SELECT * FROM EMPLOYEE
+    <where>
+      <if test="departmentName != null">
+        AND DEPARTMENT_NAME = #{departmentName}
+      </if>
+      <if test="lowersalary != null">
+        <![CDATA[AND #{lowersalary} <= SALARY]]>
+      </if>
+      <if test="uppersalary != null">
+        <![CDATA[AND SALARY <= #{uppersalary}]]>
+      </if>
+    </where>
+  </select>
+
+  <select id="selectVariousDepartment"
+    resultType="jp.mufg.it.mybatis.company.dto.Employee">
+    SELECT * FROM EMPLOYEE
+    <where>
+      DEPARTMENT_NAME IN
+      <foreach item="item" index="index" collection="list"
+               open="(" close=")" separator=",">
+        #{item}
+      </foreach>
+    </where>
+  </select>
+</mapper>

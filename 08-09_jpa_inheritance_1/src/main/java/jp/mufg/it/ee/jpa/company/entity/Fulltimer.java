@@ -9,7 +9,7 @@ import javax.persistence.Entity;
 @DiscriminatorValue(value = "1")
 public class Fulltimer extends Employee {
     private String jobName;
-    private Integer monthlySalary;
+    private Integer salary;
 
     // 引数なしのコンストラクタ
     public Fulltimer() {
@@ -18,10 +18,10 @@ public class Fulltimer extends Employee {
 
     // コンストラクタ
     public Fulltimer(Integer employeeId, String employeeName, Department department,
-            Date entranceDate, String jobName, Integer monthlySalary) {
+            Date entranceDate, String jobName, Integer salary) {
         super(employeeId, employeeName, department, entranceDate);
         this.jobName = jobName;
-        this.monthlySalary = monthlySalary;
+        this.salary = salary;
     }
 
     // 役職名へのアクセサメソッド
@@ -35,12 +35,12 @@ public class Fulltimer extends Employee {
     }
 
     // 月給（社員）へのアクセサメソッド
-    @Column(name = "MONTHLY_SALARY")
-    public Integer getMonthlySalary() {
-        return monthlySalary;
+    @Column(name = "SALARY")
+    public Integer getsalary() {
+        return salary;
     }
 
-    public void setMonthlySalary(Integer monthlySalary) {
-        this.monthlySalary = monthlySalary;
+    public void setsalary(Integer salary) {
+        this.salary = salary;
     }
 }

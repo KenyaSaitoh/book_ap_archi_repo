@@ -47,8 +47,8 @@ public class MyBatisSelectMain {
         ResultUtil.showEmployeeList(result6);
 
         Map<String, Object> param2 = new HashMap<String, Object>();
-        param2.put("lowerMonthlySalary", 300000);
-        param2.put("upperMonthlySalary", 400000);
+        param2.put("lowersalary", 300000);
+        param2.put("uppersalary", 400000);
         List<Employee> result7 = sqlSession.selectList("selectEmployeesWithMap",
                 param2);
         ResultUtil.showEmployeeList(result7);

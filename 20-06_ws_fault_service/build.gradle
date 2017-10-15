@@ -1,0 +1,4 @@
+// WARプラグイン設定
+war {
+    archiveName "ws_fault_service.war"
+}

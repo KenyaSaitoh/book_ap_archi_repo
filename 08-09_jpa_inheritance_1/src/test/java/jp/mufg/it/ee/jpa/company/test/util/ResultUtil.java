@@ -31,7 +31,7 @@ public class ResultUtil {
     public static void showStaff(Fulltimer staff) {
         showEmployee(staff);
         System.out.print(staff.getJobName() + " / ");
-        System.out.print(staff.getMonthlySalary());
+        System.out.print(staff.getsalary());
         System.out.println();
     }
 

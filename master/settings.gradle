@@ -58,7 +58,12 @@ includeFlat '04-01_servlet_jsp',
 '14_person_service',
 '20-03_rs_hello_service',
 '20-03_rs_greeting_service',
-'20-03_rs_employee_service'
+'20-03_rs_employee_service',
+'20-06_ws_hello_service',
+'20-06_ws_hello_oneway_service',
+'20-06_ws_hello_async_service',
+'20-06_ws_fault_service',
+'20-06_ws_mtom_service'
 
 
 

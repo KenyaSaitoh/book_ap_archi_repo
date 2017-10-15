@@ -26,7 +26,7 @@ public class MyBatisUpdateMain {
 
         //
         Map<String, Object> param3 = new HashMap<String, Object>();
-        param3.put("monthlySalary", 350000);
+        param3.put("salary", 350000);
         param3.put("payCut", 3000);
         sqlSession.update("subtractEmployeeSalaryWithMap", param3);
         sqlSession.commit();
