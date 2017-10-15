@@ -56,9 +56,9 @@ includeFlat '04-01_servlet_jsp',
 '11-02_file_up_download',
 '11-02_file_up_down_stream',
 '14_person_service',
-'20-03_jaxrs_hello_service',
-'20-03_jaxrs_greeting_service',
-'20-03_jaxrs_employee_service'
+'20-03_rs_hello_service',
+'20-03_rs_greeting_service',
+'20-03_rs_employee_service'
 
 
 
