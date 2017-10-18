@@ -20,11 +20,6 @@
 			<attribute name="FROM_GRADLE_MODEL" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="src" path="src/requestor/main/resources">
-		<attributes>
-			<attribute name="FROM_GRADLE_MODEL" value="true"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="src" path="src/provider/test/java">
 		<attributes>
 			<attribute name="FROM_GRADLE_MODEL" value="true"/>
