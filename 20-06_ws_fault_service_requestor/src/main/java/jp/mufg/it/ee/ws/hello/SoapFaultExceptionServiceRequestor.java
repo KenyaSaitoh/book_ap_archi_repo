@@ -15,14 +15,14 @@ public class SoapFaultExceptionServiceRequestor {
     public static void main(String[] args) {
         System.out.println("[ SoapFaultExceptionServiceRequestor ] Start");
 
-        // サービスオブジェクトを生成する。
+        // サービスオブジェクトを生成する
         SoapFaultExceptionService service = new SoapFaultExceptionService();
 
-        // サービスオブジェクトからSEIオブジェクトを取得する。
+        // サービスオブジェクトからSEIオブジェクトを取得する
         SoapFaultExceptionServicePortType portType =
                 service.getSoapFaultExceptionServicePortTypePort();
 
-        // サービスメソッドを呼び出す。 → SOAPフォールト例外発生
+        // サービスメソッドを呼び出す → SOAPフォールト例外発生
         try {
             portType.sayHello("Webservice", 3);
         } catch(SOAPFaultException sfe) {

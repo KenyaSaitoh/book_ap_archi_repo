@@ -9,7 +9,7 @@ public class HelloAsyncService {
 
     // サービスメソッド
     // リクエスタからは非同期に呼び出されるが、サービス実装クラスの中では
-    // 非同期であることを意識しない。
+    // 非同期であることを意識しない
     @WebMethod
     public String sayHello(String personName, int count) {
         System.out.println("[ HelloAsyncService#sayHello ] Start");
@@ -22,7 +22,7 @@ public class HelloAsyncService {
             c++;
         }
 
-        String message = "Hello! 私は" + personName + "です。";
+        String message = "Hello! 私は" + personName + "です";
         System.out.println("[ HelloAsyncService#sayHello ] End");
         return message;
     }

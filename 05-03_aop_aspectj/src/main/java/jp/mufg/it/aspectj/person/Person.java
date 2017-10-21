@@ -40,8 +40,8 @@ public class Person {
     }
 
     public void sayHello() {
-        String message = "Hello! 私は" + personName + "、" + age + "歳です。";
-        if (isAdult()) message += "私は成人です。";
+        String message = "Hello! 私は" + personName + "、" + age + "歳です";
+        if (isAdult()) message += "私は成人です";
         System.out.println(message);
     }
 

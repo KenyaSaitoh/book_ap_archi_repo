@@ -51,6 +51,12 @@ derby {
     }
 }
 
+// ActiveMQ
+activemq {
+    activemqDir = "D:/Java/apache-activemq-5.12.0"
+    startCommand = "${activemqDir}/bin/win64/activemq.bat"
+}
+
 // JAX-WS
 wsgen = "${System.properties['java.home']}/../bin/wsgen.exe"
 wsimport = "${System.properties['java.home']}/../bin/wsimport.exe"

@@ -1,0 +1,4 @@
+// Javaプラグイン設定
+jar {
+    archiveName "domain_model.jar"
+}

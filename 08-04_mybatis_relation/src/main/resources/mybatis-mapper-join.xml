@@ -25,9 +25,9 @@
 
   <!--
   e.*などとした場合、resultMapの自動マッピングは適用されず、
-  プロパティにセットしたい全カラム分を設定する必要がある模様。
+  プロパティにセットしたい全カラム分を設定する必要がある模様
   さらにカラム名が衝突した場合は、resultMap上に"e.XXX"とは書けないので、
-  SELECT句にカラムを指定し、エイリアスを使って識別するしかない。
+  SELECT句にカラムを指定し、エイリアスを使って識別するしかない
   -->
 
   <resultMap id="DepartmentResult"
@@ -41,9 +41,9 @@
   </resultMap>
 
   <!--
-  以下では、associationのresultMapにDepartmentResultを指定したらNGだった。
-  employeesプロパティでエラーになってしまう。
-  よってわざわざDepartmentResult2を作る。
+  以下では、associationのresultMapにDepartmentResultを指定したらNGだった
+  employeesプロパティでエラーになってしまう
+  よってわざわざDepartmentResult2を作る
   -->
   <resultMap id="EmployeeResult"
     type="jp.mufg.it.mybatis.company.dto.Employee">

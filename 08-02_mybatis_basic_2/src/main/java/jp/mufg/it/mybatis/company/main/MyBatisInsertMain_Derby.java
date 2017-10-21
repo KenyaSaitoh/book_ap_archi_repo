@@ -12,7 +12,7 @@ import jp.mufg.it.mybatis.company.type.JobType;
 public class MyBatisInsertMain_Derby {
 
     public static void main(String[] args) {
-        // キーの"0"はマッピングの中で無視される。
+        // キーの"0"はマッピングの中で無視される
         SqlSession sqlSession = SqlSessionHolder.getInstance().getSqlSession();
 
         // 挿入対象のEmployeeクラスのインスタンスを生成する

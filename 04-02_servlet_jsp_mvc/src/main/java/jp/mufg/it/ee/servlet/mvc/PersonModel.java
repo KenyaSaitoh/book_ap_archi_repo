@@ -40,7 +40,7 @@ public class PersonModel {
     // ビジネスメソッド
     public void sayHello() {
         if (country != null && country.equals("japan")) {
-            message = "こんにちは！私は" + personName + "です。";
+            message = "こんにちは！私は" + personName + "です";
         } else {
             message = "Hello! I'm " + personName + ".";
         }

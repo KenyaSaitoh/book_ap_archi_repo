@@ -8,7 +8,7 @@
 <body>
 <div><%= personName %>さんのメッセージ</div>
 <% if (country != null && country.equals("japan")) { %>
-  <div>こんにちは！私は<%= personName %>です。</div>
+  <div>こんにちは！私は<%= personName %>です</div>
 <% } else { %>
   <div>Hello! I'm <%= personName %>.</div>
 <% } %>

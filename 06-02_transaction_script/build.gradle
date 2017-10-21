@@ -1,0 +1,4 @@
+// Javaプラグイン設定
+jar {
+    archiveName "transaction_script.jar"
+}

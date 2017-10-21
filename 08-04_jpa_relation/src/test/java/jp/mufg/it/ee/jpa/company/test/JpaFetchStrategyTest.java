@@ -65,7 +65,7 @@ public class JpaFetchStrategyTest extends JpaTestBase {
                 "SELECT DISTINCT d FROM Department AS d JOIN FETCH d.employees");
         List<Department> departmentList = (List<Department>)query.getResultList();
         // DICTINCTをつけない場合、結果が重複するので、
-        // Setに代入して重複を取り除くこともできる。
+        // Setに代入して重複を取り除くこともできる
         // Set<Department> results = new HashSet<Department>(departmentList);
         for (Department department: departmentList) {
             System.out.println("### " + department.getDepartmentName() + " ###");

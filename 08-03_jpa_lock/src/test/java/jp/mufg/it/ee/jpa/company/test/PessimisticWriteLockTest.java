@@ -16,7 +16,7 @@ public class PessimisticWriteLockTest extends JpaTestBase {
 
         Employee employee = em.find(Employee.class, 10001,
                 LockModeType.PESSIMISTIC_WRITE);
-        // 以下のようにして、後からロックをかけることもできる。
+        // 以下のようにして、後からロックをかけることもできる
         /*
         Employee employee = em.find(Employee.class, 10001);
         em.lock(employee, LockModeType.PESSIMISTIC_WRITE);

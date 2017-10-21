@@ -20,6 +20,7 @@ allprojects {
         dependencies {
             classpath "mysql:mysql-connector-java:5.1.29"
             classpath "org.apache.derby:derbyclient:10.12.1.1"
+            classpath "org.apache.activemq:activemq-all:5.12.0"
         }
     }
     // リポジトリ設定
@@ -343,6 +344,13 @@ task copyClasspathFile << {
     }
 }
 
+// ActiveMQを起動する
+task startActiveMQ << {
+    exec {
+        executable conf.activemq.startCommand
+    }
+}
+
 // 永続化設定ファイルをセットアップする（MySQL）
 def setUpJpaWithMySQL(projectDir, provider) {
     new File(projectDir + "/src/main/resources/META-INF/persistence.xml")
@@ -452,3 +460,4 @@ def wsimport(wsdlFile, proxyDir) {
 [createMySQLDS, deleteMySQLDS]*.group = "mysql-datasource"
 [startDerby, stopDerby, copyDerbyJDBCDriver]*.group = "derby"
 [createDerbyDS, deleteDerbyDS]*.group = "derby-datasource"
+[startActiveMQ]*.group = "activemq"

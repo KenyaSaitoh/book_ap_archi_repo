@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<title>ChatPage</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<script type="text/javascript" src="./js/lib/jquery-1.12.1.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#connect').click(function(event) {
+            connect();
+        });
+        $('#send').click(function(event) {
+            send();
+            $('#message').val('');
+        });
+    });
+    function connect() {
+        $.ajax({
+            url : '/servlet_chat/MessageListenServlet',
+            type : 'GET',
+            data : {},
+            success : function(response) {
+                console.log(response);
+                $('#messages').append(response + "<br />");
+            },
+            // 1メッセージが配信されるたびに接続が終了するため、
+            // 接続が終了するたびに再接続を行う
+            complete : connect
+        });
+    }
+    function send() {
+        var request = {
+            message : $("#message").val()
+        }
+        $.ajaxSetup({
+            cache : false
+        });
+        $.ajax({
+            url : '/servlet_chat/MessagePushServlet',
+            type : 'POST',
+            data : request
+        });
+    }
+</script>
+</head>
+<body>
+  <input type="button" id="connect" value="Connect" />
+  <hr />
+  <div>
+    <input type="text" id="message" />
+    <input type="button" id="send" value="Send" />
+  </div>
+  <hr />
+  <div id="messages"></div>
+</body>
+</html>

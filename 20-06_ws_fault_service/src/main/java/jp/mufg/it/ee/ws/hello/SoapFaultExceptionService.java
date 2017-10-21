@@ -16,17 +16,17 @@ public class SoapFaultExceptionService {
     @WebMethod
     public String sayHello(String personName, int count) {
         System.out.println("[ SoapFaultExceptionService#sayHello ] Start");
-        // SAAJによって明示的にSOAPFaultException例外を生成する。
+        // SAAJによって明示的にSOAPFaultException例外を生成する
         SOAPFault fault;
         try {
             SOAPFactory factory = SOAPFactory.newInstance();
 
-            // SOAPフォールトの情報をセットする。
+            // SOAPフォールトの情報をセットする
             fault = factory.createFault();
             fault.setFaultCode("HogeFaultCode");
             fault.setFaultString("HogeFaultString");
 
-            /* 上記は、以下のようにしてもよい。
+            /* 上記は、以下のようにしてもよい
             fault = factory.createFault("HogeFaultString",
                     new QName("", "HogeFaultCode"));
             */

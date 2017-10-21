@@ -21,9 +21,9 @@ public class FooBean {
 
     // ビジネスメソッド
     public int doBusiness(int param) {
-        // Barのビジネスメソッドを呼び出す。
+        // Barのビジネスメソッドを呼び出す
         int retVal = bar.doBusiness(param);
-        // Barの結果を受けてビジネスロジックを実行する。
+        // Barの結果を受けてビジネスロジックを実行する
         int result = retVal + retVal;
         return result;
     }

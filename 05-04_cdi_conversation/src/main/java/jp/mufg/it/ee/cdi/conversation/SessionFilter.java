@@ -20,12 +20,12 @@ public class SessionFilter implements Filter {
 
         HttpServletRequest hreq = (HttpServletRequest)request;
 
-        // リクエストの文字コードをUTF-8にセットする。
+        // リクエストの文字コードをUTF-8にセットする
         hreq.setCharacterEncoding("UTF-8");
 
-        // セッションを生成しておく。
+        // セッションを生成しておく
         HttpSession session = hreq.getSession(true);
-        // セッションに対して同期処理を行う。
+        // セッションに対して同期処理を行う
         synchronized(session) {
             chain.doFilter(request, response);
         }

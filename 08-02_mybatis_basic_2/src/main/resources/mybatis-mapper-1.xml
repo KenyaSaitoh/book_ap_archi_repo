@@ -5,8 +5,8 @@
 <mapper namespace="jp.mufg.it.mybatis.company.dao.EmployeeMapper">
 
   <!-- CRUD Operations -->
-  <!-- 以下で実はparameterTypeは省略可能。
-       Mapperを使うケース、SqlSessionを使うケース、いずれも省略可能。
+  <!-- 以下で実はparameterTypeは省略可能
+       Mapperを使うケース、SqlSessionを使うケース、いずれも省略可能
        どういう場合に省略不可なのか？ -->
   <select id="selectEmployee"
     parameterType="int"
@@ -27,8 +27,8 @@
   </select>
 
   <!--
-  以下では、カラム名とプロパティは自動的にマッピング。
-  またparameterTypeは省略可能（resultTypeは省略不可）。
+  以下では、カラム名とプロパティは自動的にマッピング
+  またparameterTypeは省略可能（resultTypeは省略不可）
   戻り値にTypeAlias使っている -->
   <select id="selectEmployeeWithAutoMapping"
     resultType="Employee">

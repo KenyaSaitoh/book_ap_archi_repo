@@ -81,7 +81,7 @@ public class EmployeeResource {
     }
 
     // リソース（社員1名）の置換
-    // 冪等性あり。
+    // 冪等性あり
     @PUT
     @Path("/{employeeId}")
     public Response replaceEmployee(@PathParam("employeeId") int employeeId,

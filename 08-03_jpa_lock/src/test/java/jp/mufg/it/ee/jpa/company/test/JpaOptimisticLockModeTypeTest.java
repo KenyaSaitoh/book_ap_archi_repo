@@ -15,7 +15,7 @@ public class JpaOptimisticLockModeTypeTest extends JpaTestBase {
     public void test1() {
         System.out.println("[ test1 ] Start");
 
-        // 以下のいずれは、どれも同じ動きをする模様。
+        // 以下のいずれは、どれも同じ動きをする模様
         // Employee employee = em.find(Employee.class, 10016);
         Employee employee = em.find(Employee.class, 10010,
                 LockModeType.OPTIMISTIC);

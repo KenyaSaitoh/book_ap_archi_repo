@@ -12,7 +12,7 @@ public class HelloService {
     public String sayHello(String personName, int count) {
         System.out.println("[ HelloService#sayHello ] Start");
 
-        String message = "Hello! 私は" + personName + "です。";
+        String message = "Hello! 私は" + personName + "です";
         for (int i = 0; i < count; i++) {
             System.out.println("  " + i + " : message ---> " + message);
         }

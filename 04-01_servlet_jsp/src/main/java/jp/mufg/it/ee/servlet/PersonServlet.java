@@ -24,7 +24,7 @@ public class PersonServlet extends HttpServlet {
         // ビジネスロジックを実行する
         String message = null;
         if (country != null && country.equals("japan")) {
-            message = "こんにちは！私は" + personName + "です。";
+            message = "こんにちは！私は" + personName + "です";
         } else {
             message = "Hello! I'm " + personName + ".";
         }

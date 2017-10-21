@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+<title>ParamRedirectInputPage</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+  <h2>ParamRedirectInputPage</h2>
+  <hr />
+  <form action="/servlet_dispatch/ParamRedirectServlet" method="GET">
+    <div>
+      <span>名前：</span>
+      <input type="text" name="userName" size="20">
+    </div>
+    <div>
+      <span>E-Mail：</span>
+      <input type="text" name="email" size="50">
+    </div>
+    <input type="submit" value="リクエスト送信[GET]">
+  </form>
+  <hr />
+  <form action="/servlet_dispatch/ParamRedirectServlet" method="POST">
+    <div>
+      <span>名前：</span>
+      <input type="text" name="userName" size="20">
+    </div>
+    <div>
+      <span>E-Mail：</span>
+      <input type="text" name="email" size="50">
+    </div>
+    <input type="submit" value="リクエスト送信[POST]">
+  </form>
+</body>
+</html>

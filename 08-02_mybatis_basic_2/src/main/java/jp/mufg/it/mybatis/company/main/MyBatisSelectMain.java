@@ -53,11 +53,11 @@ public class MyBatisSelectMain {
                 param2);
         ResultUtil.showEmployeeList(result7);
 
-        // Employeeを単独で受け取るメソッドの場合、ヒットしない場合はnullが返される。
+        // Employeeを単独で受け取るメソッドの場合、ヒットしない場合はnullが返される
         Employee result8 = sqlSession.selectOne("selectEmployee", 99999);
         System.out.println(result8 == null);
 
-        // Employeeをリストで受け取るメソッドの場合、ヒットしない場合は空のリストが返される。
+        // Employeeをリストで受け取るメソッドの場合、ヒットしない場合は空のリストが返される
         Employee param3 = new Employee(null, null, "総務部", null, null, 300000);
         List<Employee> result9 = sqlSession.selectList("selectEmployees",
                 param3);

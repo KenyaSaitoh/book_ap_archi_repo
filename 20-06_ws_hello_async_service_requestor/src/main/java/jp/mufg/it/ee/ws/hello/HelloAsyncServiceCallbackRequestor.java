@@ -10,7 +10,7 @@ public class HelloAsyncServiceCallbackRequestor {
     public static void main(String[] args) {
         System.out.println("[ HelloAsyncServiceCallbackRequestor2 ] Start");
 
-        // サービスオブジェクトを生成する。
+        // サービスオブジェクトを生成する
         HelloAsyncService service = new HelloAsyncService();
 
         // サービスオブジェクトからSEIオブジェクトを取得する

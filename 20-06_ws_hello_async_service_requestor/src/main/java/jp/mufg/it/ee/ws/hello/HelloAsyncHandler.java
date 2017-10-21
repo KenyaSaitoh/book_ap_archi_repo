@@ -11,7 +11,7 @@ public class HelloAsyncHandler implements AsyncHandler<SayHelloResponse> {
 
         String message = null;
         try {
-            // サービスの実行結果を受け取る。（③）
+            // サービスの実行結果を受け取る（③）
             SayHelloResponse sayHelloResponse = response.get();
             message = sayHelloResponse.getReturn();
         } catch (InterruptedException ie) {

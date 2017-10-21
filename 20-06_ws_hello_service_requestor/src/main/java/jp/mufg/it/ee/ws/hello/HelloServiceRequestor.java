@@ -5,14 +5,14 @@ public class HelloServiceRequestor {
     public static void main(String[] args) {
         System.out.println("[ HelloServiceRequestor ] Start");
 
-        // サービスオブジェクトを生成する。
+        // サービスオブジェクトを生成する
         HelloService service = new HelloService();
 
-        // サービスオブジェクトからSEIオブジェクトを取得する。
+        // サービスオブジェクトからSEIオブジェクトを取得する
         HelloServicePortType portType =
                 service.getHelloServicePortTypePort();
 
-        // サービスメソッドを呼び出す。
+        // サービスメソッドを呼び出す
         String message = portType.sayHello("Webservice", 3);
         System.out.println("  message ---> " + message);
 

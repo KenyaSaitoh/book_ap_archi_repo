@@ -31,7 +31,7 @@ public class JpaCascadeOptimisticLockTest extends JpaTestBase {
         }
         try {
             // 親をマージした場合、カスケードされて子が更新されると、
-            // 子の楽観ロックは有効に作用する。
+            // 子の楽観ロックは有効に作用する
             em.flush();
         } catch(OptimisticLockException ole) {
             throw ole;

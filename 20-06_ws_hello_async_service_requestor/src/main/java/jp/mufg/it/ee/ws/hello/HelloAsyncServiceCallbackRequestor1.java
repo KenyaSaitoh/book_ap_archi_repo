@@ -19,11 +19,11 @@ public class HelloAsyncServiceCallbackRequestor1 {
                 portType.sayHelloAsync("Webservice", 3, new HelloAsyncHandler());
 
         /*
-         * コールバックのリスンスレッドは、デーモンスレッドとして起動される。
+         * コールバックのリスンスレッドは、デーモンスレッドとして起動される
          * 従って、メインスレッドが終了してしまうと、デーモンスレッドも消滅し、
-         * リスンも終了してしまう。
+         * リスンも終了してしまう
          * ダミーの非デーモンスレッドを立ち上げておけば、リスンし続けることが
-         * できる。
+         * できる
          */
 
         Thread.currentThread().setDaemon(false);
@@ -32,7 +32,7 @@ public class HelloAsyncServiceCallbackRequestor1 {
         //deamon.start();
 
         /*
-         * 以下のようにして、応答が返ってくるまで別の処理を続けてもよい。
+         * 以下のようにして、応答が返ってくるまで別の処理を続けてもよい
         while (!response.isDone()) {
             try {
                 System.out.println("応答が返ってくるまで別の処理を続けます...");

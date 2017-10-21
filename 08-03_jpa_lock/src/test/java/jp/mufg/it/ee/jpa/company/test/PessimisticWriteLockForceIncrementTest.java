@@ -14,11 +14,11 @@ public class PessimisticWriteLockForceIncrementTest extends JpaTestBase {
 
         Employee employee = em.find(Employee.class, 10001);
 
-        // スリープしている間に、以下のいずれかを実行する。
+        // スリープしている間に、以下のいずれかを実行する
         // ①：PessimisticWriteLockConflicter
-        // この場合は、単なる読み込みでありバージョン番号は更新されないため、このテストは成功する。
+        // この場合は、単なる読み込みでありバージョン番号は更新されないため、このテストは成功する
         // ②：PessimisticWriteLockForceIncrementConflicter
-        // この場合は、単なる読み込みであるにも関わらずバージョン番号が更新されるため、このテストは失敗（楽観的ロックエラー）する。
+        // この場合は、単なる読み込みであるにも関わらずバージョン番号が更新されるため、このテストは失敗（楽観的ロックエラー）する
         try {
             Thread.sleep(20000);
         } catch (Exception e) {

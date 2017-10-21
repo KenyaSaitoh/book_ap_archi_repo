@@ -8,11 +8,11 @@ import javax.transaction.Transactional.TxType;
 @RequestScoped
 @Transactional(TxType.REQUIRED)
 public class FooBean {
-    // インジェクションポイント（フィールドインジェクション）。
+    // インジェクションポイント（フィールドインジェクション）
     @Inject
     private BarBean barBean;
 
-    // インジェクションポイント（フィールドインジェクション）。
+    // インジェクションポイント（フィールドインジェクション）
     @Inject
     private QuxBean quxBean;
 
