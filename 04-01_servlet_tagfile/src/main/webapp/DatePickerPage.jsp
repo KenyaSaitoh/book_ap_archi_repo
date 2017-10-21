@@ -2,11 +2,11 @@
 <%@ taglib tagdir="/WEB-INF/tags/foo" prefix="foo"%>
 <html>
 <head>
-<title>PersonListPage</title>
+<title>DatePickerPage</title>
 </head>
 <body>
-  <h2>PersonListPage</h2>
+  <h2>DatePickerPage</h2>
   <hr />
-  <foo:personTable border="3" style="color: red" />
+  <foo:datePicker id="birthday" dateFormat="yy-mm-dd" />
 </body>
 </html>
