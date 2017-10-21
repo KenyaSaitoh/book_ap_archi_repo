@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project-modules id="moduleCoreId" project-version="1.5.0">
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
 	<wb-module deploy-name="20-06_ws_mtom_service">
 		<property name="context-root" value="20-06_ws_mtom_service"/>
 		<wb-resource deploy-path="/WEB-INF/classes" source-path="src/main/resources"/>
@@ -23,5 +22,7 @@
 		<wb-resource deploy-path="/WEB-INF/classes" source-path="/src/requestor/test/java"/>
 		<wb-resource deploy-path="/WEB-INF/classes" source-path="/src/provider/test/resources"/>
 		<wb-resource deploy-path="/WEB-INF/classes" source-path="/src/requestor/test/resources"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="src/main/proxy"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/proxy"/>
 	</wb-module>
 </project-modules>

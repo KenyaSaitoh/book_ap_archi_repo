@@ -1,5 +1,16 @@
 import groovy.sql.Sql
 
+configurations {
+    jaxws
+}
+
+dependencies {
+    jaxws "com.sun.xml.ws:jaxws-tools:2.1.4"
+}
+
+// プラグイン読み込み
+apply plugin: "java"
+
 allprojects {
     // 初期化処理
     buildscript {
@@ -19,7 +30,6 @@ allprojects {
 
 subprojects {
     // プラグイン読み込み
-    apply plugin: "java"
     apply plugin: "war"
     apply plugin: "eclipse"
     apply plugin: "jacoco"
@@ -395,6 +405,45 @@ def setUpMyBatisWithDerby(projectDir) {
                     writer.println(line)
                 }
         }
+}
+
+// WSGEN
+def wsgen(serviceClass, classesDir, srcDir, wsdlDir) {
+    exec {
+        executable conf.wsgen
+        args "-cp", classesDir
+        args "-d", classesDir
+        args "-s", srcDir
+        args "-r", wsdlDir
+        args "-keep"
+        args "-wsdl"
+        args serviceClass
+    }
+}
+
+def replaceWsdl(wsdlFile, warName, serviceName) {
+    File tmpFile = new File(wsdlFile.getParent() + "/tmp.wsdl")
+    tmpFile.withWriter { writer ->
+        wsdlFile.newReader().eachLine { line ->
+            line = line.replaceAll("REPLACE_WITH_ACTUAL_URL",
+            "http://" + conf.glassfish.hostName + ":" +
+            conf.glassfish.httpPort + "/" +
+            warName.replaceAll(/\.war/, "") + "/" + serviceName)
+            writer.println(line)
+        }
+    }
+    wsdlFile.delete()
+    tmpFile.renameTo(wsdlFile.path)
+}
+
+// WSIMPORT
+def wsimport(wsdlFile, proxyDir) {
+    exec {
+        executable conf.wsimport
+        args "-d", proxyDir
+        args "-keep"
+        args wsdlFile
+    }
 }
 
 // タスクをグループ化する

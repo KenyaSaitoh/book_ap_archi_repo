@@ -11,16 +11,21 @@
 		<wb-resource deploy-path="/WEB-INF/classes" source-path="src/provider/main/resources"/>
 		<wb-resource deploy-path="/WEB-INF/classes" source-path="src/provider/main/java"/>
 		<wb-resource deploy-path="/WEB-INF/classes" source-path="src/provider/main/webapp"/>
-		<wb-resource deploy-path="/WEB-INF/classes" source-path="/src/provider/main/java"/>
-		<wb-resource deploy-path="/WEB-INF/classes" source-path="/src/provider/main/webapp"/>
-		<wb-resource deploy-path="/WEB-INF/classes" source-path="/src/provider/main/resources"/>
-		<wb-resource deploy-path="/WEB-INF/classes" source-path="/src/provider/test/java"/>
-		<wb-resource deploy-path="/WEB-INF/classes" source-path="/src/provider/test/resources"/>
 		<wb-resource deploy-path="/WEB-INF/classes" source-path="src/requestor/main/resources"/>
 		<wb-resource deploy-path="/WEB-INF/classes" source-path="src/requestor/main/java"/>
-		<wb-resource deploy-path="/WEB-INF/classes" source-path="/src/requestor/main/java"/>
 		<wb-resource deploy-path="/WEB-INF/classes" source-path="/src/requestor/main/resources"/>
-		<wb-resource deploy-path="/WEB-INF/classes" source-path="/src/requestor/test/java"/>
-		<wb-resource deploy-path="/WEB-INF/classes" source-path="/src/requestor/test/resources"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="src1/main/resources"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="src2/main/resources"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="src1/main/java"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="src1/main/webapp"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="src2/main/java"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="/src2/main/java"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="/src2/main/resources"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="/src1/test/java"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="/src2/test/java"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="/src1/test/resources"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="/src2/test/resources"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="src/main/proxy"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/proxy"/>
 	</wb-module>
 </project-modules>

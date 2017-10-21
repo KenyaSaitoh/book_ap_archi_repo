@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" targetNamespace="http://hello.ws.ee.it.mufg.jp/" xmlns:tns="http://hello.ws.ee.it.mufg.jp/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="BusinessException" type="tns:BusinessException"/>
+
+  <xs:element name="FooException" type="tns:FooException"/>
+
+  <xs:element name="doBusiness" type="tns:doBusiness"/>
+
+  <xs:element name="doBusinessResponse" type="tns:doBusinessResponse"/>
+
+  <xs:element name="sayHello" type="tns:sayHello"/>
+
+  <xs:element name="sayHelloResponse" type="tns:sayHelloResponse"/>
+
+  <xs:complexType name="doBusiness">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="doBusinessResponse">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="BusinessException">
+    <xs:sequence>
+      <xs:element name="message" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="sayHello">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:string" minOccurs="0"/>
+      <xs:element name="arg1" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="sayHelloResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="FooException">
+    <xs:sequence>
+      <xs:element name="message" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+

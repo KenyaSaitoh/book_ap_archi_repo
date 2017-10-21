@@ -60,10 +60,15 @@ includeFlat '04-01_servlet_jsp',
 '20-03_rs_greeting_service',
 '20-03_rs_employee_service',
 '20-06_ws_hello_service',
+'20-06_ws_hello_service_requestor',
 '20-06_ws_hello_oneway_service',
+'20-06_ws_hello_oneway_service_requestor',
 '20-06_ws_hello_async_service',
+'20-06_ws_hello_async_service_requestor',
 '20-06_ws_fault_service',
-'20-06_ws_mtom_service'
+'20-06_ws_fault_service_requestor',
+'20-06_ws_mtom_service',
+'20-06_ws_mtom_service_requestor'
 
 
 

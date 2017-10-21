@@ -7,7 +7,7 @@ dependencies {
     testRuntime "org.mybatis:mybatis:3.2.2"
 }
 
-// JARプラグイン設定
+// Javaプラグイン設定
 jar {
     archiveName "mybatis_lock.jar"
 }

@@ -7,23 +7,30 @@ war {
 sourceSets {
     main {
         java {
-            srcDir "src/provider/main/java"
-            srcDir "src/provider/main/webapp"
-            srcDir "src/requestor/main/java"
-        }
-        resources {
-            srcDir "src/provider/main/resources"
-            srcDir "src/requestor/main/resources"
-        }
-    }
-    test {
-        java {
-            srcDir "src/provider/test/java"
-            srcDir "src/requestor/test/java"
-        }
-        resources {
-            srcDir "src/provider/test/resources"
-            srcDir "src/requestor/test/resources"
+            srcDir "src/main/proxy"
         }
     }
 }
+
+def services = ["jp.mufg.it.ee.ws.hello.HelloFaultService",
+    "jp.mufg.it.ee.ws.hello.SoapFaultExceptionService"]
+
+task generateWSDL(dependsOn: classes) << {
+    def proxyDir = new File("$projectDir/src/main/proxy")
+    proxyDir.deleteDir(); proxyDir.mkdir()
+    def wsdlDir = new File("$projectDir/wsdl")
+    wsdlDir.deleteDir(); wsdlDir.mkdir()
+
+    services.each { service ->
+        // サービス名を取得する
+        def serviceName = service.substring(service.lastIndexOf(".") + 1)
+        // WSDLを生成する
+        wsgen(service, sourceSets.main.output.classesDir, proxyDir, wsdlDir)
+        // WSDL内のエンドポイントを書き換える
+        def wsdlFile = new File(wsdlDir.path + "/" + serviceName + ".wsdl")
+        replaceWsdl(wsdlFile, war.archiveName, serviceName)
+    }
+}
+
+// タスクをグループ化する
+[generateWSDL]*.group = "jaxws"

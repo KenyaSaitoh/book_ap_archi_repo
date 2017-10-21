@@ -1,46 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src/provider/main/java">
+	<classpathentry kind="src" path="src/main/java">
 		<attributes>
 			<attribute name="FROM_GRADLE_MODEL" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="src" path="src/requestor/main/java">
+	<classpathentry kind="src" path="src/main/webapp">
 		<attributes>
 			<attribute name="FROM_GRADLE_MODEL" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="src" path="src/provider/main/webapp">
+	<classpathentry kind="src" path="src/main/proxy">
 		<attributes>
 			<attribute name="FROM_GRADLE_MODEL" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="src" path="src/provider/main/resources">
+	<classpathentry kind="src" path="src/main/resources">
 		<attributes>
 			<attribute name="FROM_GRADLE_MODEL" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="src" path="src/requestor/main/resources">
+	<classpathentry kind="src" path="src/test/java">
 		<attributes>
 			<attribute name="FROM_GRADLE_MODEL" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="src" path="src/provider/test/java">
-		<attributes>
-			<attribute name="FROM_GRADLE_MODEL" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="src" path="src/requestor/test/java">
-		<attributes>
-			<attribute name="FROM_GRADLE_MODEL" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="src" path="src/provider/test/resources">
-		<attributes>
-			<attribute name="FROM_GRADLE_MODEL" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="src" path="src/requestor/test/resources">
+	<classpathentry kind="src" path="src/test/resources">
 		<attributes>
 			<attribute name="FROM_GRADLE_MODEL" value="true"/>
 		</attributes>

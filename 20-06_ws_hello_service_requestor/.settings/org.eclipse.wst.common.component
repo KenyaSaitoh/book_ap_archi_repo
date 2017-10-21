@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-modules id="moduleCoreId" project-version="1.5.0">
+	<wb-module deploy-name="20-06_ws_hello_service_requestor">
+		<property name="context-root" value="20-06_ws_hello_service_requestor"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="src/main/resources"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="src/main/java"/>
+		<wb-resource deploy-path="/" source-path="src/main/webapp"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="src/main/webapp"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="src/test/java"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="src/test/resources"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="src/provider/main/resources"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="src/provider/main/java"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="src/provider/main/webapp"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="src/requestor/main/resources"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="src/requestor/main/java"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="/src/requestor/main/resources"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="src1/main/resources"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="src2/main/resources"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="src1/main/java"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="src1/main/webapp"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="src2/main/java"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="/src2/main/java"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="/src2/main/resources"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="/src1/test/java"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="/src2/test/java"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="/src1/test/resources"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="/src2/test/resources"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="src/main/proxy"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/proxy"/>
+	</wb-module>
+</project-modules>

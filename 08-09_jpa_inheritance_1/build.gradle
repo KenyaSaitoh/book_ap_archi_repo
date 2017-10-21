@@ -9,7 +9,7 @@ dependencies {
     testRuntime "org.hibernate:hibernate-core:5.1.10.Final"
 }
 
-// JARプラグイン設定
+// Javaプラグイン設定
 jar {
     archiveName "jpa_inheritance_1.jar"
 }

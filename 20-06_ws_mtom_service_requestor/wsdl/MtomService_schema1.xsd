@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" targetNamespace="http://mtom.ws.ee.it.mufg.jp/" xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:tns="http://mtom.ws.ee.it.mufg.jp/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:import namespace="http://www.w3.org/2005/05/xmlmime" schemaLocation="http://www.w3.org/2005/05/xmlmime"/>
+  <xs:element name="byteTransfer" type="tns:byteTransfer"/>
+
+  <xs:element name="byteTransferResponse" type="tns:byteTransferResponse"/>
+
+  <xs:element name="dataTransfer" type="tns:dataTransfer"/>
+
+  <xs:element name="dataTransferResponse" type="tns:dataTransferResponse"/>
+
+  <xs:complexType name="dataTransfer">
+    <xs:sequence>
+      <xs:element name="arg0" xmime:expectedContentTypes="application/octet-stream" type="xs:base64Binary" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="dataTransferResponse">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="byteTransfer">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:base64Binary" nillable="true" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="byteTransferResponse">
+    <xs:sequence/>
+  </xs:complexType>
+</xs:schema>
+
