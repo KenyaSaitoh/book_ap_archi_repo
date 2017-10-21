@@ -1,0 +1,9 @@
+// GlassFish Naming依存関係設定
+dependencies {
+    runtime "org.glassfish.common:glassfish-naming:3.1.1"
+}
+
+// WARプラグイン設定
+war {
+    archiveName "ejb_remote_client.war"
+}

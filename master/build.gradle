@@ -344,6 +344,30 @@ task copyClasspathFile << {
     }
 }
 
+// ManagedExecutorServiceを作成する
+task createManagedExecutorService << {
+    exec {
+        executable conf.glassfish.asadmin
+        args "--user", conf.glassfish.adminUsername
+        args "--host", conf.glassfish.hostName
+        args "--port", conf.glassfish.adminPort
+        args "create-managed-executor-service"
+        args "concurrent/MyExecutorService"
+    }
+}
+
+// ManagedExecutorServiceを削除する
+task deleteManagedExecutorService << {
+    exec {
+        executable conf.glassfish.asadmin
+        args "--user", conf.glassfish.adminUsername
+        args "--host", conf.glassfish.hostName
+        args "--port", conf.glassfish.adminPort
+        args "delete-managed-executor-service"
+        args "concurrent/MyExecutorService"
+    }
+}
+
 // ActiveMQを起動する
 task startActiveMQ << {
     exec {
@@ -460,4 +484,5 @@ def wsimport(wsdlFile, proxyDir) {
 [createMySQLDS, deleteMySQLDS]*.group = "mysql-datasource"
 [startDerby, stopDerby, copyDerbyJDBCDriver]*.group = "derby"
 [createDerbyDS, deleteDerbyDS]*.group = "derby-datasource"
+[createManagedExecutorService, deleteManagedExecutorService]*.group = "managed-executor-service"
 [startActiveMQ]*.group = "activemq"

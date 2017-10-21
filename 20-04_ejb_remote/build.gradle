@@ -1,0 +1,17 @@
+// Javaプラグイン設定
+jar {
+    archiveName "ejb_remote_ejbjar.jar"
+}
+
+// デプロイする（GlassFish）
+task deployJarGlassFish(dependsOn: [clean, jar]) << {
+    deploy(jar.getArchivePath().path)
+}
+
+// アンデプロイする（GlassFish）
+task undeployJarGlassFish << {
+    undeploy(jar.archiveName.replaceAll(/\.jar/, ""))
+}
+
+// タスクをグループ化する
+[deployJarGlassFish, undeployJarGlassFish]*.group = "deploy"
