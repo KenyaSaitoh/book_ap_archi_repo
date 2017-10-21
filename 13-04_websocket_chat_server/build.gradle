@@ -1,0 +1,4 @@
+// WARプラグイン設定
+war {
+    archiveName "websocket_chat_server.war"
+}
