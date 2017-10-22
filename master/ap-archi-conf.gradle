@@ -29,6 +29,15 @@ mysql {
         connPoolName = "MySQLPool"
         datasourceJndiName = "jdbc/MySQLDS"
     }
+    sales {
+        user = "USER_S"
+        password = "PASSWORD"
+        db = "DB_S"
+        baseUrl = "jdbc:mysql://localhost:${port}"
+        url = "${baseUrl}/${general.db}"
+        connPoolName = "MySQLSalesPool"
+        datasourceJndiName = "jdbc/MySQLSalesDS"
+    }
 }
 
 // Derby

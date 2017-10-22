@@ -205,6 +205,24 @@ task deleteMySQLDS << {
             conf.mysql.general.datasourceJndiName)
 }
 
+// MySQL用データソースを作成する
+task createMySQLSalesDS << {
+    createDataSource(conf.mysql.datasourceClass,
+            "portNumber=${conf.mysql.port}:" +
+            "serverName=${conf.mysql.hostName}:" +
+            "User=${conf.mysql.sales.user}:" +
+            "Password=${conf.mysql.sales.password}:" +
+            "databaseName=${conf.mysql.sales.db}",
+            conf.mysql.sales.connPoolName,
+            conf.mysql.sales.datasourceJndiName)
+}
+
+// MySQL用データソースを削除する
+task deleteMySQLSalesDS << {
+    deleteDataSource(conf.mysql.sales.connPoolName,
+            conf.mysql.sales.datasourceJndiName)
+}
+
 // Derbyを起動する
 task startDerby << {
     exec {
@@ -519,7 +537,7 @@ def wsimport(wsdlFile, proxyDir) {
 // タスクをグループ化する
 [startGlassFish, stopGlassFish]*.group = "glassfish"
 [initMySQL, copyMySQLJDBCDriver]*.group = "mysql"
-[createMySQLDS, deleteMySQLDS]*.group = "mysql-datasource"
+[createMySQLDS, deleteMySQLDS, createMySQLSalesDS, deleteMySQLSalesDS]*.group = "mysql-datasource"
 [startDerby, stopDerby, copyDerbyJDBCDriver]*.group = "derby"
 [createDerbyDS, deleteDerbyDS]*.group = "derby-datasource"
 [createManagedExecutorService, deleteManagedExecutorService]*.group = "managed-executor-service"
