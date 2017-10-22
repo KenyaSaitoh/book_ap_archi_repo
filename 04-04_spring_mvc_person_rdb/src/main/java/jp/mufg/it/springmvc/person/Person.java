@@ -2,6 +2,8 @@ package jp.mufg.it.springmvc.person;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
@@ -17,6 +19,7 @@ public class Person {
     // ID
     @Id
     @Column(name = "PERSON_ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer personId;
 
     // 名前

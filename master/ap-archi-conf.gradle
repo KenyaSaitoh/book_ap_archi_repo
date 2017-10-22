@@ -45,7 +45,7 @@ derby {
         user = "TESTUSER"
         password = "PASSWORD"
         db = "TESTDB"
-        url = "jdbc:derby://${hostName}:${port}/${System.properties['user.home']}/${general.db};create=true"
+        url = "jdbc:derby://${hostName}:${port}/C:Users/kenya/${general.db};create=true"
         connPoolName = "DerbyPool2"
         datasourceJndiName = "jdbc/DerbyDS"
     }

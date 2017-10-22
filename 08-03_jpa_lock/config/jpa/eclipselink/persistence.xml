@@ -18,7 +18,7 @@
                 value="#USER#" />
       <property name="javax.persistence.jdbc.password"
                 value="#PASSWORD#" />
-      <property name="eclipselink.target-database" value="#TARGET#" />
+      <property name="eclipselink.target-database" value="#RDB#" />
       <property name="eclipselink.logging.level"   value="FINE" />
     </properties>
   </persistence-unit>

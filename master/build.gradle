@@ -386,7 +386,7 @@ def setUpJpaWithMySQL(projectDir, provider) {
                     line = line.replaceAll("#URL#", conf.mysql.general.url)
                     line = line.replaceAll("#USER#", conf.mysql.general.user)
                     line = line.replaceAll("#PASSWORD#", conf.mysql.general.password)
-                    line = line.replaceAll("#TARGET#", "MySQL")
+                    line = line.replaceAll("#RDB#", "MySQL")
                     line = line.replaceAll("#DIALECT#", "org.hibernate.dialect.MySQLDialect")
                     writer.println(line)
                 }
@@ -403,7 +403,7 @@ def setUpJpaWithDerby(projectDir, provider) {
                     line = line.replaceAll("#URL#", conf.derby.general.url)
                     line = line.replaceAll("#USER#", conf.derby.general.user)
                     line = line.replaceAll("#PASSWORD#", conf.derby.general.password)
-                    line = line.replaceAll("#TARGET#", "Derby")
+                    line = line.replaceAll("#RDB#", "Derby")
                     line = line.replaceAll("#DIALECT#", "org.hibernate.dialect.DerbyDialect")
                     writer.println(line)
                 }
@@ -450,6 +450,7 @@ def setUpSpringWithMySQL(projectDir) {
                 line = line.replaceAll("#URL#", conf.mysql.general.url)
                 line = line.replaceAll("#USER#", conf.mysql.general.user)
                 line = line.replaceAll("#PASSWORD#", conf.mysql.general.password)
+                line = line.replaceAll("#RDB#", "MYSQL") // 全部大文字なので注意
                 line = line.replaceAll("#DIALECT#", "org.hibernate.dialect.MySQLDialect")
                 writer.println(line)
             }
@@ -463,10 +464,11 @@ def setUpSpringWithDerby(projectDir) {
             FileType.FILES) { file ->
         new File(projectDir + "/src/main/resources/" + file.name).withWriter { writer ->
             file.eachLine { line ->
-                line = line.replaceAll("#DRIVER#", conf.mysql.driverClass)
-                line = line.replaceAll("#URL#", conf.mysql.general.url)
-                line = line.replaceAll("#USER#", conf.mysql.general.user)
-                line = line.replaceAll("#PASSWORD#", conf.mysql.general.password)
+                line = line.replaceAll("#DRIVER#", conf.derby.driverClass)
+                line = line.replaceAll("#URL#", conf.derby.general.url)
+                line = line.replaceAll("#USER#", conf.derby.general.user)
+                line = line.replaceAll("#PASSWORD#", conf.derby.general.password)
+                line = line.replaceAll("#RDB#", "DERBY") // 全部大文字なので注意
                 line = line.replaceAll("#DIALECT#", "org.hibernate.dialect.DerbyDialect")
                 writer.println(line)
             }

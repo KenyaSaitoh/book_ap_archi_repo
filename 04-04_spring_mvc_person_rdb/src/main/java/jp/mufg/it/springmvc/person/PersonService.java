@@ -2,34 +2,40 @@ package jp.mufg.it.springmvc.person;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service
+@Component
 @Transactional
 public class PersonService {
-    @Autowired
-    private PersonRepository repository;
+    @PersistenceContext
+    private EntityManager entityManager;
 
     public Person getPerson(Integer personId) {
-        return repository.getOne(personId);
+        return entityManager.find(Person.class, personId);
     }
 
+    @SuppressWarnings("unchecked")
     public List<Person> getPersonList() {
-        return repository.findAll();
+        Query query = entityManager.createQuery(
+                "SELECT p FROM Person AS p");
+        return query.getResultList();
     }
 
     public void addPerson(Person person) {
-        repository.save(person);
+        entityManager.persist(person);
     }
 
     public void removePerson(Integer personId) {
-        Person person = repository.getOne(personId);
-        repository.delete(person);
+        Person person = entityManager.find(Person.class, personId);
+        entityManager.remove(person);
     }
 
     public void updatePerson(Person person) {
-        repository.save(person);
+        entityManager.merge(person);
     }
 }
