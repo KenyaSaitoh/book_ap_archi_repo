@@ -6,18 +6,10 @@
              version="2.0">
 
   <!-- EclipseLink -->
-  <persistence-unit name="MyPersistenceUnit" transaction-type="RESOURCE_LOCAL">
+  <persistence-unit name="MyPersistenceUnit" transaction-type="JTA">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>jp.mufg.it.springmvc.person.Person</class>
+    <jta-data-source>jdbc/MySQLDS</jta-data-source>
     <properties>
-      <property name="javax.persistence.jdbc.driver"
-                value="#DRIVER#" />
-      <property name="javax.persistence.jdbc.url"
-                value="#URL#" />
-      <property name="javax.persistence.jdbc.user"
-                value="#USER#" />
-      <property name="javax.persistence.jdbc.password"
-                value="#PASSWORD#" />
       <property name="eclipselink.target-database" value="#TARGET#" />
       <property name="eclipselink.logging.level"   value="FINE" />
     </properties>

@@ -1,3 +1,4 @@
+import groovy.io.FileType
 import groovy.sql.Sql
 
 configurations {
@@ -409,7 +410,7 @@ def setUpJpaWithDerby(projectDir, provider) {
         }
 }
 
-//
+// MyBatis設定ファイルをセットアップする（MySQL）
 def setUpMyBatisWithMySQL(projectDir) {
     new File(projectDir + "/src/main/resources/mybatis-config.xml")
         .withWriter { writer ->
@@ -424,7 +425,7 @@ def setUpMyBatisWithMySQL(projectDir) {
         }
 }
 
-//
+// MyBatis設定ファイルをセットアップする（Derby）
 def setUpMyBatisWithDerby(projectDir) {
     new File(projectDir + "/src/main/resources/mybatis-config.xml")
         .withWriter { writer ->
@@ -437,6 +438,40 @@ def setUpMyBatisWithDerby(projectDir) {
                     writer.println(line)
                 }
         }
+}
+
+// Spring JDBC設定ファイルをセットアップする（MySQL）
+def setUpSpringWithMySQL(projectDir) {
+    new File(projectDir + "/config/spring").eachFileRecurse(
+            FileType.FILES) { file ->
+        new File(projectDir + "/src/main/resources/" + file.name).withWriter { writer ->
+            file.eachLine { line ->
+                line = line.replaceAll("#DRIVER#", conf.mysql.driverClass)
+                line = line.replaceAll("#URL#", conf.mysql.general.url)
+                line = line.replaceAll("#USER#", conf.mysql.general.user)
+                line = line.replaceAll("#PASSWORD#", conf.mysql.general.password)
+                line = line.replaceAll("#DIALECT#", "org.hibernate.dialect.MySQLDialect")
+                writer.println(line)
+            }
+        }
+    }
+}
+
+// Spring JDBC設定ファイルをセットアップする（Derby）
+def setUpSpringWithDerby(projectDir) {
+    new File(projectDir + "/config/spring").eachFileRecurse(
+            FileType.FILES) { file ->
+        new File(projectDir + "/src/main/resources/" + file.name).withWriter { writer ->
+            file.eachLine { line ->
+                line = line.replaceAll("#DRIVER#", conf.mysql.driverClass)
+                line = line.replaceAll("#URL#", conf.mysql.general.url)
+                line = line.replaceAll("#USER#", conf.mysql.general.user)
+                line = line.replaceAll("#PASSWORD#", conf.mysql.general.password)
+                line = line.replaceAll("#DIALECT#", "org.hibernate.dialect.DerbyDialect")
+                writer.println(line)
+            }
+        }
+    }
 }
 
 // WSGEN
@@ -453,6 +488,7 @@ def wsgen(serviceClass, classesDir, srcDir, wsdlDir) {
     }
 }
 
+// WSDLファイルにエンドポイントを埋め込む
 def replaceWsdl(wsdlFile, warName, serviceName) {
     File tmpFile = new File(wsdlFile.getParent() + "/tmp.wsdl")
     tmpFile.withWriter { writer ->

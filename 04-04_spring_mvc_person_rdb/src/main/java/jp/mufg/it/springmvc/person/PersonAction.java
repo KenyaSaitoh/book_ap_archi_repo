@@ -2,11 +2,12 @@ package jp.mufg.it.springmvc.person;
 
 import java.util.List;
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,6 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
+@ComponentScan
+
+// @EnableJpaRepositories(basePackages = {"jp.mufg.it.springmvc.person"},
+//        entityManagerFactoryRef = "emf")
 public class PersonAction {
     @Autowired
     private PersonService personService;

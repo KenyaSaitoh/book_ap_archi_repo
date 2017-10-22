@@ -2,10 +2,11 @@
 dependencies {
     compile "org.springframework:spring-webmvc:4.2.9.RELEASE"
     compile "org.hibernate:hibernate-validator:4.2.0.Final"
+    compile "org.springframework.data:spring-data-jpa:2.0.0.RELEASE"
     runtime "mysql:mysql-connector-java:5.1.29"
     runtime "org.apache.derby:derbyclient:10.12.1.1"
     runtime "org.eclipse.persistence:eclipselink:2.6.5"
-    runtime "org.hibernate:hibernate-core:5.1.10.Final"
+    compile "org.hibernate:hibernate-core:5.1.10.Final"
     testCompile "junit:junit:4.12"
     testRuntime "org.eclipse.persistence:eclipselink:2.6.5"
     testRuntime "org.hibernate:hibernate-core:5.1.10.Final"
@@ -36,6 +37,17 @@ task setUpJpaWithDerbyHibernate << {
     setUpJpaWithDerby(projectDir.path, "hibernate")
 }
 
+// Spring JDBCの設定ファイルをセットアップ（MySQL）
+task setUpSpringWithMySQL << {
+    setUpSpringWithMySQL(projectDir.path)
+}
+
+// Spring JDBCの設定ファイルをセットアップ（Derby）
+task setUpSpringWithDerby << {
+    setUpSpringWithDerby(projectDir.path)
+}
+
 // タスクをグループ化する
 [setUpJpaWithMySQLEclipseLink, setUpJpaWithMySQLHibernate,
     setUpJpaWithDerbyEclipseLink, setUpJpaWithDerbyHibernate,]*.group = "jpa"
+[setUpSpringWithMySQL, setUpSpringWithDerby]*.group = "spring"
