@@ -537,7 +537,7 @@ def wsimport(wsdlFile, proxyDir) {
 // タスクをグループ化する
 [startGlassFish, stopGlassFish]*.group = "glassfish"
 [initMySQL, copyMySQLJDBCDriver]*.group = "mysql"
-[createMySQLDS, deleteMySQLDS]*.group = "mysql-datasource"
+[createMySQLDS, deleteMySQLDS, createMySQLSalesDS, deleteMySQLSalesDS]*.group = "mysql-datasource"
 [startDerby, stopDerby, copyDerbyJDBCDriver]*.group = "derby"
 [createDerbyDS, deleteDerbyDS]*.group = "derby-datasource"
 [createManagedExecutorService, deleteManagedExecutorService]*.group = "managed-executor-service"
