@@ -319,16 +319,16 @@ def execSql(file, url, user, password, driverClass) {
 // MySQLを初期化する
 task initMySQL << {
     execSql("$projectDir/sql/mysql/DROP_MYSQL_USER.sql",
-            conf.mysql.general.url, "root", conf.mysql.rootPassword,
+            conf.mysql.general.baseUrl, "root", conf.mysql.rootPassword,
             conf.mysql.driverClass)
     execSql("$projectDir/sql/mysql/DROP_MYSQL_DATABASE.sql",
-            conf.mysql.general.url, "root", conf.mysql.rootPassword,
+            conf.mysql.general.baseUrl, "root", conf.mysql.rootPassword,
             conf.mysql.driverClass)
     execSql("$projectDir/sql/mysql/CREATE_MYSQL_USER.sql",
-            conf.mysql.general.url, "root", conf.mysql.rootPassword,
+            conf.mysql.general.baseUrl, "root", conf.mysql.rootPassword,
             conf.mysql.driverClass)
     execSql("$projectDir/sql/mysql/CREATE_MYSQL_DATABASE.sql",
-            conf.mysql.general.url, "root", conf.mysql.rootPassword,
+            conf.mysql.general.baseUrl, "root", conf.mysql.rootPassword,
             conf.mysql.driverClass)
 }
 
@@ -537,7 +537,7 @@ def wsimport(wsdlFile, proxyDir) {
 // タスクをグループ化する
 [startGlassFish, stopGlassFish]*.group = "glassfish"
 [initMySQL, copyMySQLJDBCDriver]*.group = "mysql"
-[createMySQLDS, deleteMySQLDS, createMySQLSalesDS, deleteMySQLSalesDS]*.group = "mysql-datasource"
+[createMySQLDS, deleteMySQLDS]*.group = "mysql-datasource"
 [startDerby, stopDerby, copyDerbyJDBCDriver]*.group = "derby"
 [createDerbyDS, deleteDerbyDS]*.group = "derby-datasource"
 [createManagedExecutorService, deleteManagedExecutorService]*.group = "managed-executor-service"
