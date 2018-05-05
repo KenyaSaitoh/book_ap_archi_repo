@@ -17,7 +17,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "SoapFaultExceptionService", targetNamespace = "http://hello.ws.ee.it.mufg.jp/", wsdlLocation = "file:/D:/GitHubRepos/book_ap_archi_repo/20-06_ws_fault_service_requestor/wsdl/SoapFaultExceptionService.wsdl")
+@WebServiceClient(name = "SoapFaultExceptionService", targetNamespace = "http://hello.ws.ee.it.mufg.jp/", wsdlLocation = "file:/C:/GitHubRepos/book_ap_archi_repo/20-06_ws_fault_service_requestor/wsdl/SoapFaultExceptionService.wsdl")
 public class SoapFaultExceptionService
     extends Service
 {
@@ -30,7 +30,7 @@ public class SoapFaultExceptionService
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("file:/D:/GitHubRepos/book_ap_archi_repo/20-06_ws_fault_service_requestor/wsdl/SoapFaultExceptionService.wsdl");
+            url = new URL("file:/C:/GitHubRepos/book_ap_archi_repo/20-06_ws_fault_service_requestor/wsdl/SoapFaultExceptionService.wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }

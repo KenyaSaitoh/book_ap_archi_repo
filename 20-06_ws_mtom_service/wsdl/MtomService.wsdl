@@ -6,31 +6,31 @@
       <xsd:import namespace="http://mtom.ws.ee.it.mufg.jp/" schemaLocation="MtomService_schema1.xsd"/>
     </xsd:schema>
   </types>
-  <message name="byteTransfer">
-    <part name="parameters" element="tns:byteTransfer"/>
-  </message>
-  <message name="byteTransferResponse">
-    <part name="parameters" element="tns:byteTransferResponse"/>
-  </message>
   <message name="dataTransfer">
     <part name="parameters" element="tns:dataTransfer"/>
   </message>
   <message name="dataTransferResponse">
     <part name="parameters" element="tns:dataTransferResponse"/>
   </message>
+  <message name="byteTransfer">
+    <part name="parameters" element="tns:byteTransfer"/>
+  </message>
+  <message name="byteTransferResponse">
+    <part name="parameters" element="tns:byteTransferResponse"/>
+  </message>
   <portType name="MtomServicePortType">
-    <operation name="byteTransfer">
-      <input wsam:Action="http://mtom.ws.ee.it.mufg.jp/MtomServicePortType/byteTransferRequest" message="tns:byteTransfer"/>
-      <output wsam:Action="http://mtom.ws.ee.it.mufg.jp/MtomServicePortType/byteTransferResponse" message="tns:byteTransferResponse"/>
-    </operation>
     <operation name="dataTransfer">
       <input wsam:Action="http://mtom.ws.ee.it.mufg.jp/MtomServicePortType/dataTransferRequest" message="tns:dataTransfer"/>
       <output wsam:Action="http://mtom.ws.ee.it.mufg.jp/MtomServicePortType/dataTransferResponse" message="tns:dataTransferResponse"/>
     </operation>
+    <operation name="byteTransfer">
+      <input wsam:Action="http://mtom.ws.ee.it.mufg.jp/MtomServicePortType/byteTransferRequest" message="tns:byteTransfer"/>
+      <output wsam:Action="http://mtom.ws.ee.it.mufg.jp/MtomServicePortType/byteTransferResponse" message="tns:byteTransferResponse"/>
+    </operation>
   </portType>
   <binding name="MtomServicePortTypePortBinding" type="tns:MtomServicePortType">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
-    <operation name="byteTransfer">
+    <operation name="dataTransfer">
       <soap:operation soapAction=""/>
       <input>
         <soap:body use="literal"/>
@@ -39,7 +39,7 @@
         <soap:body use="literal"/>
       </output>
     </operation>
-    <operation name="dataTransfer">
+    <operation name="byteTransfer">
       <soap:operation soapAction=""/>
       <input>
         <soap:body use="literal"/>
