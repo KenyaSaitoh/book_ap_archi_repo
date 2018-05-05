@@ -23,6 +23,7 @@ task generateWSDL(dependsOn: classes) << {
     wsdlDir.deleteDir(); wsdlDir.mkdir()
 
     services.each { service ->
+        println(service)
         // サービス名を取得する
         def serviceName = service.substring(service.lastIndexOf(".") + 1)
         // WSDLを生成する
