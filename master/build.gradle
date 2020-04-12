@@ -114,11 +114,13 @@ subprojects {
 def conf = {
     def slurper = new ConfigSlurper()
     slurper.binding = project.properties
-    def files = files(
-            "${System.properties["user.home"]}/ap-archi-conf.gradle")
-    files.inject(new ConfigObject()) { conf, file ->
-        file.exists() ? conf.merge(slurper.parse(file.toURL())) : conf
+    def confLocation = System.properties["user.home"]
+    def file = new File(confLocation + "/ap-archi-conf.gradle")
+    if (!file.exists()) {
+        file = new File("$projectDir/ap-archi-conf.gradle")
+        if (!file.exists()) return null
     }
+    return new ConfigSlurper().parse(file.toURL())
 }()
 
 // 設定情報を拡張プロパティにセット
