@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project-modules id="moduleCoreId" project-version="2.0">
-	<wb-module deploy-name="war_project/04-01_servlet_jsp">
-		<property name="context-root" value="war_project/04-01_servlet_jsp"/>
-	</wb-module>
-</project-modules>

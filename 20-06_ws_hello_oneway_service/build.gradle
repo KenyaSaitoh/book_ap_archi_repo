@@ -14,7 +14,7 @@ sourceSets {
 
 def services = ["jp.mufg.it.ee.ws.hello.HelloOnewayService"]
 
-task generateWSDL(dependsOn: classes) << {
+task generateWSDL(dependsOn: classes) doLast {
     def proxyDir = new File("$projectDir/src/main/proxy")
     proxyDir.deleteDir(); proxyDir.mkdir()
     def wsdlDir = new File("$projectDir/wsdl")

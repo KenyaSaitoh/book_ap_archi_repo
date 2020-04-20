@@ -14,7 +14,7 @@ sourceSets {
 
 def serviceName = "HelloOnewayService"
 
-task generateProxy << {
+task generateProxy doLast {
     def proxyDir = new File("$projectDir/src/main/proxy")
     proxyDir.deleteDir(); proxyDir.mkdir()
     def wsdlDir = new File("$projectDir/wsdl")

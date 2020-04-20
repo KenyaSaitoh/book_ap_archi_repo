@@ -23,7 +23,7 @@ allprojects {
             jcenter()
         }
         dependencies {
-            classpath "mysql:mysql-connector-java:5.1.29"
+            classpath "mysql:mysql-connector-java:5.1.47"
             classpath "org.apache.derby:derbyclient:10.12.1.1"
             classpath "org.apache.activemq:activemq-all:5.12.0"
         }
@@ -39,7 +39,6 @@ subprojects {
     apply plugin: "war"
     apply plugin: "eclipse"
     apply plugin: "jacoco"
-    apply plugin: "findbugs"
 
     // 文字コード設定
     def defaultEncoding = "UTF-8"
@@ -86,24 +85,24 @@ subprojects {
     }
 
     // デプロイする（GlassFish）
-    task deployGlassFish(dependsOn: [clean, war]) << {
+    task deployGlassFish(dependsOn: [clean, war]) doLast {
         deploy(war.getArchivePath().path)
     }
 
     // アンデプロイする（GlassFish）
-    task undeployGlassFish << {
+    task undeployGlassFish doLast {
         undeploy(war.archiveName.replaceAll(/\.war/, ""))
     }
 
     // 初期データをセットアップする（MySQL）
-    task setupMySQL << {
+    task setupMySQL doLast {
         execSqlDir("$projectDir/sql/mysql", conf.mysql.general.url,
                 conf.mysql.general.user, conf.mysql.general.password,
                 conf.mysql.driverClass)
     }
 
     // 初期データをセットアップする（Derby）
-    task setupDerby << {
+    task setupDerby doLast {
         execSqlDir("$projectDir/sql/derby", conf.derby.general.url,
                 conf.derby.general.user, conf.derby.general.password,
                 conf.derby.driverClass)
@@ -131,7 +130,7 @@ def conf = {
 ext.conf = conf
 
 // GlassFishを起動する
-task startGlassFish << {
+task startGlassFish doLast {
     exec {
         executable conf.glassfish.asadmin
         args "start-domain", conf.glassfish.domainName
@@ -139,7 +138,7 @@ task startGlassFish << {
 }
 
 // GlassFishを停止する
-task stopGlassFish << {
+task stopGlassFish doLast {
     exec {
         executable conf.glassfish.asadmin
         args "stop-domain", conf.glassfish.domainName
@@ -194,7 +193,7 @@ def deleteDataSource(connPoolName, datasourceJndiName) {
 }
 
 // MySQL用データソースを作成する
-task createMySQLDS << {
+task createMySQLDS doLast {
     createDataSource(conf.mysql.datasourceClass,
             "portNumber=${conf.mysql.port}:" +
             "serverName=${conf.mysql.hostName}:" +
@@ -206,13 +205,13 @@ task createMySQLDS << {
 }
 
 // MySQL用データソースを削除する
-task deleteMySQLDS << {
+task deleteMySQLDS doLast {
     deleteDataSource(conf.mysql.general.connPoolName,
             conf.mysql.general.datasourceJndiName)
 }
 
 // MySQL用データソースを作成する
-task createMySQLSalesDS << {
+task createMySQLSalesDS doLast {
     createDataSource(conf.mysql.datasourceClass,
             "portNumber=${conf.mysql.port}:" +
             "serverName=${conf.mysql.hostName}:" +
@@ -224,13 +223,13 @@ task createMySQLSalesDS << {
 }
 
 // MySQL用データソースを削除する
-task deleteMySQLSalesDS << {
+task deleteMySQLSalesDS doLast {
     deleteDataSource(conf.mysql.sales.connPoolName,
             conf.mysql.sales.datasourceJndiName)
 }
 
 // Derbyを起動する
-task startDerby << {
+task startDerby doLast {
     exec {
         executable conf.glassfish.asadmin
         args "start-database"
@@ -241,7 +240,7 @@ task startDerby << {
 }
 
 // Derbyを停止する
-task stopDerby << {
+task stopDerby doLast {
     exec {
         executable conf.glassfish.asadmin
         args "stop-database"
@@ -251,7 +250,7 @@ task stopDerby << {
 }
 
 // Derby用データソースを作成する
-task createDerbyDS << {
+task createDerbyDS doLast {
     createDataSource(conf.derby.datasourceClass,
             "portNumber=${conf.derby.port}:" +
             "serverName=${conf.derby.hostName}:" +
@@ -263,7 +262,7 @@ task createDerbyDS << {
 }
 
 // Derby用データソースを削除する
-task deleteDerbyDS << {
+task deleteDerbyDS doLast {
     deleteDataSource(conf.derby.general.connPoolName,
             conf.derby.general.datasourceJndiName)
 }
@@ -323,7 +322,7 @@ def execSql(file, url, user, password, driverClass) {
 }
 
 // MySQLを初期化する
-task initMySQL << {
+task initMySQL doLast {
     execSql("$projectDir/sql/mysql/DROP_MYSQL_USER.sql",
             conf.mysql.general.baseUrl, "root", conf.mysql.rootPassword,
             conf.mysql.driverClass)
@@ -339,7 +338,7 @@ task initMySQL << {
 }
 
 // MySQLのJDBCドライバをコピーする
-task copyMySQLJDBCDriver << {
+task copyMySQLJDBCDriver doLast {
     copy {
         from conf.mysql.driverDir + "/" + conf.mysql.driverJar
         into conf.glassfish.glassfishDir + "/domains/" +
@@ -348,7 +347,7 @@ task copyMySQLJDBCDriver << {
 }
 
 // DerbyのJDBCドライバをコピーする
-task copyDerbyJDBCDriver << {
+task copyDerbyJDBCDriver doLast {
     copy {
         from conf.derby.driverDir + "/" + conf.derby.driverJar
         into conf.glassfish.glassfishDir + "/domains/" +
@@ -357,7 +356,7 @@ task copyDerbyJDBCDriver << {
 }
 
 // Classpathファイル（マスター）を各プロジェクトに配布する
-task copyClasspathFile << {
+task copyClasspathFile doLast {
     subprojects.project.projectDir.each { File dir ->
         copy {
             from "master.classpath"
@@ -370,7 +369,7 @@ task copyClasspathFile << {
 }
 
 // ManagedExecutorServiceを作成する
-task createManagedExecutorService << {
+task createManagedExecutorService doLast {
     exec {
         executable conf.glassfish.asadmin
         args "--user", conf.glassfish.adminUsername
@@ -382,7 +381,7 @@ task createManagedExecutorService << {
 }
 
 // ManagedExecutorServiceを削除する
-task deleteManagedExecutorService << {
+task deleteManagedExecutorService doLast {
     exec {
         executable conf.glassfish.asadmin
         args "--user", conf.glassfish.adminUsername
@@ -394,7 +393,7 @@ task deleteManagedExecutorService << {
 }
 
 // ActiveMQを起動する
-task startActiveMQ << {
+task startActiveMQ doLast {
     exec {
         executable conf.activemq.startCommand
     }

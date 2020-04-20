@@ -13,12 +13,12 @@ jar {
 }
 
 // MyBatis(MySQL)の設定ファイルをセットアップ
-task setUpMyBatisWithMySQL << {
+task setUpMyBatisWithMySQL doLast {
     setUpMyBatisWithMySQL(projectDir.path)
 }
 
 // MyBatis(Derby)の設定ファイルをセットアップ
-task setUpMyBatisWithDerby << {
+task setUpMyBatisWithDerby doLast {
     setUpMyBatisWithDerby(projectDir.path)
 }
 

@@ -4,12 +4,12 @@ jar {
 }
 
 // デプロイする（GlassFish）
-task deployJarGlassFish(dependsOn: [clean, jar]) << {
+task deployJarGlassFish(dependsOn: [clean, jar]) doLast {
     deploy(jar.getArchivePath().path)
 }
 
 // アンデプロイする（GlassFish）
-task undeployJarGlassFish << {
+task undeployJarGlassFish doLast {
     undeploy(jar.archiveName.replaceAll(/\.jar/, ""))
 }
 

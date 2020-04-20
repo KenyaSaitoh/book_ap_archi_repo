@@ -15,22 +15,22 @@ war {
 }
 
 // MySQL+EclipseLinkの設定ファイルをセットアップ
-task setUpJpaWithMySQLEclipseLink << {
+task setUpJpaWithMySQLEclipseLink doLast {
     setUpJpaWithMySQL(projectDir.path, "eclipselink")
 }
 
 // MySQL+Hibernateの設定ファイルをセットアップ
-task setUpJpaWithMySQLHibernate << {
+task setUpJpaWithMySQLHibernate doLast {
     setUpJpaWithMySQL(projectDir.path, "hibernate")
 }
 
 // Derby+EclipseLinkの設定ファイルをセットアップ
-task setUpJpaWithDerbyEclipseLink << {
+task setUpJpaWithDerbyEclipseLink doLast {
     setUpJpaWithDerby(projectDir.path, "eclipselink")
 }
 
 // Derby+Hibernateの設定ファイルをセットアップ
-task setUpJpaWithDerbyHibernate << {
+task setUpJpaWithDerbyHibernate doLast {
     setUpJpaWithDerby(projectDir.path, "hibernate")
 }
 
