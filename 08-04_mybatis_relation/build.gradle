@@ -2,9 +2,9 @@
 dependencies {
     runtime "mysql:mysql-connector-java:5.1.29"
     runtime "org.apache.derby:derbyclient:10.12.1.1"
-    runtime "org.mybatis:mybatis:3.2.2"
+    runtime "org.mybatis:mybatis:3.4.6"
     testCompile "junit:junit:4.12"
-    testRuntime "org.mybatis:mybatis:3.2.2"
+    testRuntime "org.mybatis:mybatis:3.4.6"
 }
 
 // Javaプラグイン設定

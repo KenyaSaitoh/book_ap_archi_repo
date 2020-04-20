@@ -25,7 +25,7 @@ task generateWSDL(dependsOn: classes) doLast {
         // サービス名を取得する
         def serviceName = service.substring(service.lastIndexOf(".") + 1)
         // WSDLを生成する
-        wsgen(service, sourceSets.main.output.classesDir, proxyDir, wsdlDir)
+        wsgen(service, "$projectDir/classes", proxyDir, wsdlDir)
         // WSDL内のエンドポイントを書き換える
         def wsdlFile = new File(wsdlDir.path + "/" + serviceName + ".wsdl")
         replaceWsdl(wsdlFile, war.archiveName, serviceName)

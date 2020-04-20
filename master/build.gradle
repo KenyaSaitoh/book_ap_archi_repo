@@ -46,7 +46,7 @@ subprojects {
 
     // Java EE7依存関係設定
     dependencies {
-        providedCompile "javax:javaee-api:7.0"
+        providedCompile "javax:javaee-api:8.0"
         providedCompile "jstl:jstl:1.2"
         compile "junit:junit:4.12"
         testCompile "junit:junit:4.12"
