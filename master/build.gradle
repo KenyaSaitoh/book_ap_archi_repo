@@ -368,6 +368,19 @@ task copyClasspathFile doLast {
     }
 }
 
+// .gitignoreファイル（マスター）を各プロジェクトに配布する
+task copyGitIgnoreFile doLast {
+    subprojects.project.projectDir.each { File dir ->
+        copy {
+            from ".gitignore"
+            into dir.getPath()
+            rename { String fileName ->
+                fileName.replace(".gitignore", ".gitignore")
+            }
+        }
+    }
+}
+
 // ManagedExecutorServiceを作成する
 task createManagedExecutorService doLast {
     exec {
@@ -547,3 +560,4 @@ def wsimport(wsdlFile, proxyDir) {
 [createDerbyDS, deleteDerbyDS]*.group = "derby-datasource"
 [createManagedExecutorService, deleteManagedExecutorService]*.group = "managed-executor-service"
 [startActiveMQ]*.group = "activemq"
+[copyGitIgnoreFile]*.group = "etc"

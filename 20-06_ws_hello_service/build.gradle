@@ -15,17 +15,17 @@ sourceSets {
 def services = ["jp.mufg.it.ee.ws.hello.HelloService"]
 
 task generateWSDL(dependsOn: classes) doLast {
+    def classesDir = new File("$projectDir/classes")
     def proxyDir = new File("$projectDir/src/main/proxy")
     proxyDir.deleteDir(); proxyDir.mkdir()
     def wsdlDir = new File("$projectDir/wsdl")
     wsdlDir.deleteDir(); wsdlDir.mkdir()
 
     services.each { service ->
-        println(service)
         // サービス名を取得する
         def serviceName = service.substring(service.lastIndexOf(".") + 1)
         // WSDLを生成する
-        wsgen(service, "$projectDir/classes")
+        wsgen(service, classesDir, proxyDir, wsdlDir)
         // WSDL内のエンドポイントを書き換える
         def wsdlFile = new File(wsdlDir.path + "/" + serviceName + ".wsdl")
         replaceWsdl(wsdlFile, war.archiveName, serviceName)

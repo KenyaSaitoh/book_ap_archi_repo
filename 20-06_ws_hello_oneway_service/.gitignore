@@ -1,5 +1,5 @@
 /classes
+/bin
 /build
 /target
 /.gradle
-/src/main/proxy

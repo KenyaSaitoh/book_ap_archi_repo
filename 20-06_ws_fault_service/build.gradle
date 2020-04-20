@@ -16,6 +16,7 @@ def services = ["jp.mufg.it.ee.ws.hello.HelloFaultService",
     "jp.mufg.it.ee.ws.hello.SoapFaultExceptionService"]
 
 task generateWSDL(dependsOn: classes) doLast {
+    def classesDir = new File("$projectDir/classes")
     def proxyDir = new File("$projectDir/src/main/proxy")
     proxyDir.deleteDir(); proxyDir.mkdir()
     def wsdlDir = new File("$projectDir/wsdl")
@@ -25,7 +26,7 @@ task generateWSDL(dependsOn: classes) doLast {
         // サービス名を取得する
         def serviceName = service.substring(service.lastIndexOf(".") + 1)
         // WSDLを生成する
-        wsgen(service, "$projectDir/classes", proxyDir, wsdlDir)
+        wsgen(service, classesDir, proxyDir, wsdlDir)
         // WSDL内のエンドポイントを書き換える
         def wsdlFile = new File(wsdlDir.path + "/" + serviceName + ".wsdl")
         replaceWsdl(wsdlFile, war.archiveName, serviceName)
