@@ -15,7 +15,7 @@ sourceSets {
 def services = ["jp.mufg.it.ee.ws.hello.HelloAsyncService"]
 
 task generateWSDL(dependsOn: classes) doLast {
-    def classesDir = new File("$projectDir/classes")
+    def classesDir = new File("${project.buildDir}/classes/java/main")
     def proxyDir = new File("$projectDir/src/main/proxy")
     proxyDir.deleteDir(); proxyDir.mkdir()
     def wsdlDir = new File("$projectDir/wsdl")
