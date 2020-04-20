@@ -1,6 +1,10 @@
 import groovy.io.FileType
 import groovy.sql.Sql
 
+wrapper {
+    gradleVersion = "6.2"
+}
+
 configurations {
     jaxws
 }
