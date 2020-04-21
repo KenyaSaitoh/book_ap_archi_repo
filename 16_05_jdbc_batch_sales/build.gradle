@@ -1,6 +1,6 @@
 // JDBC依存関係設定
 dependencies {
-    runtime "mysql:mysql-connector-java:5.1.29"
+    runtime "mysql:mysql-connector-java:5.1.47"
     runtime "org.apache.derby:derbyclient:10.12.1.1"
 }
 

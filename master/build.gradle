@@ -94,23 +94,16 @@ subprojects {
         undeploy(war.archiveName.replaceAll(/\.war/, ""))
     }
 
-    // 初期データをセットアップする（MySQL）
+    // 初期データをセットアップする
     task setupMySQL doLast {
         execSqlDir("$projectDir/sql/mysql", conf.mysql.general.url,
                 conf.mysql.general.user, conf.mysql.general.password,
                 conf.mysql.driverClass)
     }
 
-    // 初期データをセットアップする（Derby）
-    task setupDerby doLast {
-        execSqlDir("$projectDir/sql/derby", conf.derby.general.url,
-                conf.derby.general.user, conf.derby.general.password,
-                conf.derby.driverClass)
-    }
-
     // タスクをグループ化する
     [deployGlassFish, undeployGlassFish]*.group = "deploy"
-    [setupMySQL, setupDerby]*.group = "setup-init-data"
+    [setupMySQL]*.group = "setup-init-data"
 }
 
 // 設定情報の読み込み
@@ -228,45 +221,6 @@ task deleteMySQLSalesDS doLast {
             conf.mysql.sales.datasourceJndiName)
 }
 
-// Derbyを起動する
-task startDerby doLast {
-    exec {
-        executable conf.glassfish.asadmin
-        args "start-database"
-        args "--dbhost=${conf.derby.hostName}"
-        args "--dbhome=${conf.derby.homeDir}"
-        args "--dbport=${conf.derby.port}"
-    }
-}
-
-// Derbyを停止する
-task stopDerby doLast {
-    exec {
-        executable conf.glassfish.asadmin
-        args "stop-database"
-        args "--dbhost=${conf.derby.hostName}"
-        args "--dbport=${conf.derby.port}"
-    }
-}
-
-// Derby用データソースを作成する
-task createDerbyDS doLast {
-    createDataSource(conf.derby.datasourceClass,
-            "portNumber=${conf.derby.port}:" +
-            "serverName=${conf.derby.hostName}:" +
-            "User=${conf.derby.general.user}:" +
-            "Password=${conf.derby.general.password}:" +
-            "databaseName=${conf.derby.general.db}",
-            conf.derby.general.connPoolName,
-            conf.derby.general.datasourceJndiName)
-}
-
-// Derby用データソースを削除する
-task deleteDerbyDS doLast {
-    deleteDataSource(conf.derby.general.connPoolName,
-            conf.derby.general.datasourceJndiName)
-}
-
 // デプロイメソッド（GlassFish）
 def deploy(warFile) {
     exec {
@@ -346,15 +300,6 @@ task copyMySQLJDBCDriver doLast {
     }
 }
 
-// DerbyのJDBCドライバをコピーする
-task copyDerbyJDBCDriver doLast {
-    copy {
-        from conf.derby.driverDir + "/" + conf.derby.driverJar
-        into conf.glassfish.glassfishDir + "/domains/" +
-             conf.glassfish.domainName + "/lib/ext"
-    }
-}
-
 // Classpathファイル（マスター）を各プロジェクトに配布する
 task copyClasspathFile doLast {
     subprojects.project.projectDir.each { File dir ->
@@ -412,106 +357,6 @@ task startActiveMQ doLast {
     }
 }
 
-// 永続化設定ファイルをセットアップする（MySQL）
-def setUpJpaWithMySQL(projectDir, provider) {
-    new File(projectDir + "/src/main/resources/META-INF/persistence.xml")
-        .withWriter { writer ->
-            new File(projectDir + "/config/jpa/" + provider + "/persistence.xml")
-                .newReader().eachLine { line ->
-                    line = line.replaceAll("#DRIVER#", conf.mysql.driverClass)
-                    line = line.replaceAll("#URL#", conf.mysql.general.url)
-                    line = line.replaceAll("#USER#", conf.mysql.general.user)
-                    line = line.replaceAll("#PASSWORD#", conf.mysql.general.password)
-                    line = line.replaceAll("#RDB#", "MySQL")
-                    line = line.replaceAll("#DIALECT#", "org.hibernate.dialect.MySQLDialect")
-                    writer.println(line)
-                }
-        }
-}
-
-// 永続化設定ファイルをセットアップする（Derby）
-def setUpJpaWithDerby(projectDir, provider) {
-    new File(projectDir + "/src/main/resources/META-INF/persistence.xml")
-        .withWriter { writer ->
-            new File(projectDir + "/config/jpa/" + provider + "/persistence.xml")
-                .newReader().eachLine { line ->
-                    line = line.replaceAll("#DRIVER#", conf.derby.driverClass)
-                    line = line.replaceAll("#URL#", conf.derby.general.url)
-                    line = line.replaceAll("#USER#", conf.derby.general.user)
-                    line = line.replaceAll("#PASSWORD#", conf.derby.general.password)
-                    line = line.replaceAll("#RDB#", "Derby")
-                    line = line.replaceAll("#DIALECT#", "org.hibernate.dialect.DerbyDialect")
-                    writer.println(line)
-                }
-        }
-}
-
-// MyBatis設定ファイルをセットアップする（MySQL）
-def setUpMyBatisWithMySQL(projectDir) {
-    new File(projectDir + "/src/main/resources/mybatis-config.xml")
-        .withWriter { writer ->
-            new File(projectDir + "/config/mybatis/mybatis-config.xml")
-                .newReader().eachLine { line ->
-                    line = line.replaceAll("#DRIVER#", conf.mysql.driverClass)
-                    line = line.replaceAll("#URL#", conf.mysql.general.url)
-                    line = line.replaceAll("#USER#", conf.mysql.general.user)
-                    line = line.replaceAll("#PASSWORD#", conf.mysql.general.password)
-                    writer.println(line)
-                }
-        }
-}
-
-// MyBatis設定ファイルをセットアップする（Derby）
-def setUpMyBatisWithDerby(projectDir) {
-    new File(projectDir + "/src/main/resources/mybatis-config.xml")
-        .withWriter { writer ->
-            new File(projectDir + "/config/mybatis/mybatis-config.xml")
-                .newReader().eachLine { line ->
-                    line = line.replaceAll("#DRIVER#", conf.derby.driverClass)
-                    line = line.replaceAll("#URL#", conf.derby.general.url)
-                    line = line.replaceAll("#USER#", conf.derby.general.user)
-                    line = line.replaceAll("#PASSWORD#", conf.derby.general.password)
-                    writer.println(line)
-                }
-        }
-}
-
-// Spring JDBC設定ファイルをセットアップする（MySQL）
-def setUpSpringWithMySQL(projectDir) {
-    new File(projectDir + "/config/spring").eachFileRecurse(
-            FileType.FILES) { file ->
-        new File(projectDir + "/src/main/resources/" + file.name).withWriter { writer ->
-            file.eachLine { line ->
-                line = line.replaceAll("#DRIVER#", conf.mysql.driverClass)
-                line = line.replaceAll("#URL#", conf.mysql.general.url)
-                line = line.replaceAll("#USER#", conf.mysql.general.user)
-                line = line.replaceAll("#PASSWORD#", conf.mysql.general.password)
-                line = line.replaceAll("#RDB#", "MYSQL") // 全部大文字なので注意
-                line = line.replaceAll("#DIALECT#", "org.hibernate.dialect.MySQLDialect")
-                writer.println(line)
-            }
-        }
-    }
-}
-
-// Spring JDBC設定ファイルをセットアップする（Derby）
-def setUpSpringWithDerby(projectDir) {
-    new File(projectDir + "/config/spring").eachFileRecurse(
-            FileType.FILES) { file ->
-        new File(projectDir + "/src/main/resources/" + file.name).withWriter { writer ->
-            file.eachLine { line ->
-                line = line.replaceAll("#DRIVER#", conf.derby.driverClass)
-                line = line.replaceAll("#URL#", conf.derby.general.url)
-                line = line.replaceAll("#USER#", conf.derby.general.user)
-                line = line.replaceAll("#PASSWORD#", conf.derby.general.password)
-                line = line.replaceAll("#RDB#", "DERBY") // 全部大文字なので注意
-                line = line.replaceAll("#DIALECT#", "org.hibernate.dialect.DerbyDialect")
-                writer.println(line)
-            }
-        }
-    }
-}
-
 // WSGEN
 def wsgen(serviceClass, classesDir, srcDir, wsdlDir) {
     exec {
@@ -556,8 +401,6 @@ def wsimport(wsdlFile, proxyDir) {
 [startGlassFish, stopGlassFish]*.group = "glassfish"
 [initMySQL, copyMySQLJDBCDriver]*.group = "mysql"
 [createMySQLDS, deleteMySQLDS, createMySQLSalesDS, deleteMySQLSalesDS]*.group = "mysql-datasource"
-[startDerby, stopDerby, copyDerbyJDBCDriver]*.group = "derby"
-[createDerbyDS, deleteDerbyDS]*.group = "derby-datasource"
 [createManagedExecutorService, deleteManagedExecutorService]*.group = "managed-executor-service"
 [startActiveMQ]*.group = "activemq"
 [copyGitIgnoreFile]*.group = "etc"
