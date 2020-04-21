@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jp.mufg.it.mybatis.company.mapper.EmployeeMapper">
+
+  <!--=== SELECT ===-->
+  <select id="selectEmployee"
+    resultMap="EmployeeResultMap">
+    SELECT * FROM EMPLOYEE
+    WHERE EMPLOYEE_ID = #{employeeId}
+  </select>
+
+  <select id="selectVariousDepartment"
+    resultMap="EmployeeResultMap">
+    SELECT * FROM EMPLOYEE
+    <where>
+      DEPARTMENT_NAME IN
+      <foreach item="item" index="index" collection="list"
+               open="(" close=")" separator=",">
+        #{item}
+      </foreach>
+    </where>
+  </select>
+
+  <!--=== INSERT ===-->
+  <insert id="insertEmployee" parameterType="Employee">
+    INSERT INTO EMPLOYEE
+    VALUES (#{employeeId}, #{employeeName}, #{departmentName}, #{entranceDate},
+    #{jobType}, #{salary}, #{version})
+  </insert>
+
+  <insert id="insertEmployeeWithKeyGen" parameterType="Employee">
+    <selectKey keyProperty="employeeId" resultType="int" order="AFTER">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    INSERT INTO EMPLOYEE(EMPLOYEE_NAME, DEPARTMENT_NAME, ENTRANCE_DATE,
+    JOB_NAME, SALARY, VERSION)
+    VALUES (#{employeeName}, #{departmentName}, #{entranceDate},
+    #{jobType}, #{salary}, #{version})
+  </insert>
+
+  <!--=== resultMap ===-->
+  <resultMap id="EmployeeResultMap" type="Employee">
+    <result property="employeeId" column="EMPLOYEE_ID" />
+    <result property="employeeName" column="EMPLOYEE_NAME" />
+    <result property="departmentName" column="DEPARTMENT_NAME" />
+    <result property="entranceDate" column="ENTRANCE_DATE" />
+    <result property="jobType" column="JOB_NAME" />
+    <result property="salary" column="SALARY" />
+    <result property="version" column="VERSION" />
+  </resultMap>
+</mapper>

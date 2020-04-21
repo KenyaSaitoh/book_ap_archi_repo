@@ -2,55 +2,55 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="org.study.mybatis.company.dao.EmployeeMapper">
+<mapper namespace="jp.mufg.it.mybatis.company.mapper.EmployeeMapper">
 
+  <!--=== SELECT ===-->
   <select id="selectEmployee"
-    parameterType="int"
     resultMap="EmployeeResultMap">
     SELECT * FROM EMPLOYEE
     WHERE EMPLOYEE_ID = #{employeeId}
   </select>
 
   <select id="selectEmployeeWithPessimisticLock"
-    parameterType="int"
     resultMap="EmployeeResultMap">
     SELECT * FROM EMPLOYEE
     WHERE EMPLOYEE_ID = #{employeeId}
     FOR UPDATE
   </select>
 
-  <insert id="insertEmployee"
-    parameterType="org.study.mybatis.company.dto.Employee">
-    INSERT INTO EMPLOYEE
-    VALUES (#{employeeId},
-    #{employeeName:VARCHAR},
-    #{departmentName:VARCHAR},
-    #{entranceDate:DATE},
-    #{jobType:VARCHAR},
-    #{salary:NUMERIC},
-    #{photo:BLOB},
-    #{createTime:TIMESTAMP},
-    #{version:NUMERIC})
-  </insert>
-
+  <!--=== UPDATE ===-->
   <update id="updateEmployee"
-    parameterType="org.study.mybatis.company.dto.Employee">
+    parameterType="jp.mufg.it.mybatis.company.dto.Employee">
     UPDATE EMPLOYEE
-    SET EMPLOYEE_NAME = #{employeeName:VARCHAR},
-    DEPARTMENT_NAME = #{departmentName:VARCHAR},
-    ENTRANCE_DATE = #{entranceDate:DATE},
-    JOB_NAME = #{jobType:VARCHAR},
-    SALARY = #{salary:NUMERIC},
-    PHOTO = #{photo:BLOB},
-    CREATE_TIME = #{createTime:TIMESTAMP},
+    SET EMPLOYEE_NAME = #{employeeName},
+    DEPARTMENT_NAME = #{departmentName},
+    ENTRANCE_DATE = #{entranceDate},
+    JOB_NAME = #{jobType},
+    SALARY = #{salary}
+    WHERE EMPLOYEE_ID = #{employeeId}
+  </update>
+
+  <update id="updateEmployeeWithOptimisticLock"
+    parameterType="jp.mufg.it.mybatis.company.dto.Employee">
+    UPDATE EMPLOYEE
+    SET EMPLOYEE_NAME = #{employeeName},
+    DEPARTMENT_NAME = #{departmentName},
+    ENTRANCE_DATE = #{entranceDate},
+    JOB_NAME = #{jobType},
+    SALARY = #{salary},
     VERSION = VERSION + 1
     WHERE EMPLOYEE_ID = #{employeeId}
     AND VERSION = #{version}
   </update>
 
-  <resultMap id="EmployeeResultMap"
-    type="org.study.mybatis.company.dto.Employee">
+  <!--=== resultMap ===-->
+  <resultMap id="EmployeeResultMap" type="Employee">
+    <result property="employeeId" column="EMPLOYEE_ID" />
+    <result property="employeeName" column="EMPLOYEE_NAME" />
+    <result property="departmentName" column="DEPARTMENT_NAME" />
+    <result property="entranceDate" column="ENTRANCE_DATE" />
     <result property="jobType" column="JOB_NAME" />
+    <result property="salary" column="SALARY" />
+    <result property="version" column="VERSION" />
   </resultMap>
-
 </mapper>

@@ -11,7 +11,7 @@ public class Employee {
     private Date entranceDate;
     private JobType jobType;
     private Integer salary;
-    private byte[] photo;
+    private Long version;
 
     // 引数なしのコンストラクタ
     public Employee() {
@@ -20,13 +20,24 @@ public class Employee {
     // コンストラクタ
     public Employee(Integer employeeId, String employeeName,
             String departmentName, Date entranceDate, JobType jobType,
-            Integer salary) {
+            Integer salary, Long version) {
         this.employeeId = employeeId;
         this.employeeName = employeeName;
         this.departmentName = departmentName;
         this.entranceDate = entranceDate;
         this.jobType = jobType;
         this.salary = salary;
+        this.version = version;
+    }
+
+    public Employee(String employeeName, String departmentName,
+            Date entranceDate, JobType jobType, Integer salary, Long version) {
+        this.employeeName = employeeName;
+        this.departmentName = departmentName;
+        this.entranceDate = entranceDate;
+        this.jobType = jobType;
+        this.salary = salary;
+        this.version = version;
     }
 
     // 社員IDへのアクセサメソッド
@@ -83,12 +94,12 @@ public class Employee {
         this.jobType = jobType;
     }
 
-    // 写真へのアクセサメソッド
-    public byte[] getPhoto() {
-        return photo;
+    // バージョンへのアクセサメソッド
+    public Long getVersion() {
+        return version;
     }
 
-    public void setPhoto(byte[] photo) {
-        this.photo = photo;
+    public void setVersion(Long version) {
+        this.version = version;
     }
 }

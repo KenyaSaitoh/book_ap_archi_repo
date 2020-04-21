@@ -7,7 +7,7 @@ import jp.mufg.it.mybatis.company.type.JobType;
 public class Employee {
     private Integer employeeId;
     private String employeeName;
-    private Department department;
+    private String departmentName;
     private Date entranceDate;
     private JobType jobType;
     private Integer salary;
@@ -19,11 +19,21 @@ public class Employee {
 
     // コンストラクタ
     public Employee(Integer employeeId, String employeeName,
-            Department department, Date entranceDate, JobType jobType,
+            String departmentName, Date entranceDate, JobType jobType,
             Integer salary, Long version) {
         this.employeeId = employeeId;
         this.employeeName = employeeName;
-        this.department = department;
+        this.departmentName = departmentName;
+        this.entranceDate = entranceDate;
+        this.jobType = jobType;
+        this.salary = salary;
+        this.version = version;
+    }
+
+    public Employee(String employeeName, String departmentName,
+            Date entranceDate, JobType jobType, Integer salary, Long version) {
+        this.employeeName = employeeName;
+        this.departmentName = departmentName;
         this.entranceDate = entranceDate;
         this.jobType = jobType;
         this.salary = salary;
@@ -48,13 +58,22 @@ public class Employee {
         this.employeeName = employeeName;
     }
 
-    // 部署へのアクセサメソッド
-    public Department getDepartment() {
-        return department;
+    // 部署名へのアクセサメソッド
+    public String getDepartmentName() {
+        return departmentName;
     }
 
-    public void setDepartment(Department department) {
-        this.department = department;
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
+    }
+
+    // 月給へのアクセサメソッド
+    public Integer getSalary() {
+        return salary;
+    }
+
+    public void setSalary(Integer salary) {
+        this.salary = salary;
     }
 
     // 入社年月日へのアクセサメソッド
@@ -75,16 +94,7 @@ public class Employee {
         this.jobType = jobType;
     }
 
-    // 月給へのアクセサメソッド
-    public Integer getSalary() {
-        return salary;
-    }
-
-    public void setSalary(Integer salary) {
-        this.salary = salary;
-    }
-
-    // バージョン（楽観的ロックで使用）へのアクセサメソッド
+    // バージョンへのアクセサメソッド
     public Long getVersion() {
         return version;
     }
