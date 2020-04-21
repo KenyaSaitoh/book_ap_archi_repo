@@ -11,27 +11,3 @@ dependencies {
 jar {
     archiveName "mybatis_lock.jar"
 }
-
-// MySQL+EclipseLinkの設定ファイルをセットアップ
-task setUpJpaWithMySQLEclipseLink doLast {
-    setUpJpaWithMySQL(projectDir.path, "eclipselink")
-}
-
-// MySQL+Hibernateの設定ファイルをセットアップ
-task setUpJpaWithMySQLHibernate doLast {
-    setUpJpaWithMySQL(projectDir.path, "hibernate")
-}
-
-// Derby+EclipseLinkの設定ファイルをセットアップ
-task setUpJpaWithDerbyEclipseLink doLast {
-    setUpJpaWithDerby(projectDir.path, "eclipselink")
-}
-
-// Derby+Hibernateの設定ファイルをセットアップ
-task setUpJpaWithDerbyHibernate doLast {
-    setUpJpaWithDerby(projectDir.path, "hibernate")
-}
-
-// タスクをグループ化する
-[setUpJpaWithMySQLEclipseLink, setUpJpaWithMySQLHibernate,
-    setUpJpaWithDerbyEclipseLink, setUpJpaWithDerbyHibernate,]*.group = "jpa"

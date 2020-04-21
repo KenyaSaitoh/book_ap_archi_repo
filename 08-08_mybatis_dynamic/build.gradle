@@ -1,7 +1,6 @@
 // JPA依存関係設定
 dependencies {
     runtime "mysql:mysql-connector-java:5.1.47"
-    runtime "org.apache.derby:derbyclient:10.12.1.1"
     runtime "org.mybatis:mybatis:3.4.6"
     testCompile "junit:junit:4.12"
     testRuntime "org.mybatis:mybatis:3.4.6"
@@ -11,27 +10,3 @@ dependencies {
 jar {
     archiveName "mybatis_dynamic.jar"
 }
-
-// MySQL+EclipseLinkの設定ファイルをセットアップ
-task setUpJpaWithMySQLEclipseLink doLast {
-    setUpJpaWithMySQL(projectDir.path, "eclipselink")
-}
-
-// MySQL+Hibernateの設定ファイルをセットアップ
-task setUpJpaWithMySQLHibernate doLast {
-    setUpJpaWithMySQL(projectDir.path, "hibernate")
-}
-
-// Derby+EclipseLinkの設定ファイルをセットアップ
-task setUpJpaWithDerbyEclipseLink doLast {
-    setUpJpaWithDerby(projectDir.path, "eclipselink")
-}
-
-// Derby+Hibernateの設定ファイルをセットアップ
-task setUpJpaWithDerbyHibernate doLast {
-    setUpJpaWithDerby(projectDir.path, "hibernate")
-}
-
-// タスクをグループ化する
-[setUpJpaWithMySQLEclipseLink, setUpJpaWithMySQLHibernate,
-    setUpJpaWithDerbyEclipseLink, setUpJpaWithDerbyHibernate,]*.group = "jpa"
