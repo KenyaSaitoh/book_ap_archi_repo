@@ -402,4 +402,4 @@ def wsimport(wsdlFile, proxyDir) {
 [createMySQLDS, deleteMySQLDS, createMySQLSalesDS, deleteMySQLSalesDS]*.group = "mysql-datasource"
 [createManagedExecutorService, deleteManagedExecutorService]*.group = "managed-executor-service"
 [startActiveMQ]*.group = "activemq"
-[copyGitIgnoreFile]*.group = "etc"
+[copyClasspathFile, copyGitIgnoreFile]*.group = "etc"
