@@ -1,9 +1,0 @@
-// AspectJ依存関係設定
-dependencies {
-    compile "org.aspectj:aspectjrt:1.8.8"
-}
-
-// Javaプラグイン設定
-jar {
-    archiveName "aop_aspectj.jar"
-}

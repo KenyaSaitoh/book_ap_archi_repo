@@ -1,0 +1,30 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+<title>UpdatePage</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</h:head>
+<h:body>
+  <h2>UpdatePage</h2>
+  <hr />
+  <h:form id="form1">
+    <h:outputText value="ID : #{personUpdate.person.personId}"
+      rendered="#{personUpdate.person.personId != null}" />
+    <h:panelGrid columns="2">
+      <h:outputText value="名前" />
+      <h:outputText value="#{personUpdate.person.personName}" />
+      <h:outputText value="年齢" />
+      <h:outputText value="#{personUpdate.person.age}" />
+      <h:outputText value="性別" />
+      <h:outputText value="#{personUpdate.person.gender == null ? '' :
+        personUpdate.person.gender == 'male' ? '男性' : '女性'}" />
+    </h:panelGrid>
+    <div>
+      <h:commandButton value="戻る" action="#{personUpdate.back}" />
+      <h:commandButton value="更新実行" action="#{personUpdate.updatePerson}" />
+    </div>
+  </h:form>
+</h:body>
+</html>

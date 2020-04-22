@@ -1,0 +1,48 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+<title>PersonTablePage</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+</h:head>
+<h:body>
+  <h2>PersonTablePage</h2>
+  <hr />
+  <h:form>
+    <h:dataTable id="dataTable" value="#{personTable.personList}"
+      var="person" border="1">
+      <h:column>
+        <f:facet name="header">ID</f:facet>
+        <h:outputText id="personId" value="#{person.personId}" />
+      </h:column>
+      <h:column>
+        <f:facet name="header">名前</f:facet>
+        <h:outputText id="personName" value="#{person.personName}" />
+      </h:column>
+      <h:column>
+        <f:facet name="header">年齢</f:facet>
+        <h:outputText id="age" value="#{person.age}" />
+      </h:column>
+      <h:column>
+        <f:facet name="header">性別</f:facet>
+        <h:outputText id="gender" value="#{person.gender == null ? '' :
+          person.gender == 'male' ? '男性' : '女性'}" />
+      </h:column>
+      <h:column>
+        <f:facet name="header">編集</f:facet>
+        <h:commandButton value="編集"
+          action="#{personTable.editPerson(person.personId)}" />
+      </h:column>
+      <h:column>
+        <f:facet name="header">削除</f:facet>
+        <h:commandButton value="削除"
+          action="#{personTable.removePerson(person.personId)}" />
+      </h:column>
+    </h:dataTable>
+    <div>
+      <h:commandButton value="作成" action="PersonInputPage" />
+    </div>
+  </h:form>
+</h:body>
+</html>

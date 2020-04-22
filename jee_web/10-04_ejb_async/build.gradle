@@ -1,0 +1,4 @@
+// WARプラグイン設定
+war {
+    archiveName "ejb_async.war"
+}

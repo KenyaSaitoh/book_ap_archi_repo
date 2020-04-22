@@ -1,0 +1,40 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+<title>PersonInputPage</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</h:head>
+<h:body>
+  <h2>PersonInputPage</h2>
+  <hr />
+  <h:form id="form1">
+    <h:outputText value="ID : #{personConversation.person.personId}"
+      rendered="#{personConversation.person.personId != null}" />
+    <h:panelGrid border="0" columns="3">
+      <h:outputText value="名前" />
+      <h:inputText id="personName" value="#{personConversation.person.personName}"
+        required="true">
+        <f:validateLength minimum="1" maximum="15" />
+      </h:inputText>
+      <h:message for="personName" errorStyle="color: red" />
+      <h:outputText value="年齢" />
+      <h:inputText id="age" value="#{personConversation.person.age}" required="true">
+        <f:validateLongRange minimum="20" maximum="100" />
+      </h:inputText>
+      <h:message for="age" errorStyle="color: red" />
+      <h:outputText value="性別" />
+      <h:selectOneRadio id="gender" value="#{personConversation.person.gender}"
+        required="true">
+        <f:selectItem itemValue="male" itemLabel="男性" />
+        <f:selectItem itemValue="female" itemLabel="女性" />
+      </h:selectOneRadio>
+      <h:message for="gender" errorStyle="color: red" />
+    </h:panelGrid>
+    <div>
+      <h:commandButton value="確認画面へ" action="#{personConversation.confirm}" />
+    </div>
+  </h:form>
+</h:body>
+</html>

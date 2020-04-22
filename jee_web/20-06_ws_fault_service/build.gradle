@@ -1,0 +1,37 @@
+// WARプラグイン設定
+war {
+    archiveName "ws_fault_service.war"
+}
+
+// ソースフォルダの設定
+sourceSets {
+    main {
+        java {
+            srcDir "src/main/proxy"
+        }
+    }
+}
+
+def services = ["jp.mufg.it.ee.ws.hello.HelloFaultService",
+    "jp.mufg.it.ee.ws.hello.SoapFaultExceptionService"]
+
+task generateWSDL(dependsOn: classes) doLast {
+    def classesDir = new File("${project.buildDir}/classes/java/main")
+    def proxyDir = new File("$projectDir/src/main/proxy")
+    proxyDir.deleteDir(); proxyDir.mkdir()
+    def wsdlDir = new File("$projectDir/wsdl")
+    wsdlDir.deleteDir(); wsdlDir.mkdir()
+
+    services.each { service ->
+        // サービス名を取得する
+        def serviceName = service.substring(service.lastIndexOf(".") + 1)
+        // WSDLを生成する
+        wsgen(service, classesDir, proxyDir, wsdlDir)
+        // WSDL内のエンドポイントを書き換える
+        def wsdlFile = new File(wsdlDir.path + "/" + serviceName + ".wsdl")
+        replaceWsdl(wsdlFile, war.archiveName, serviceName)
+    }
+}
+
+// タスクをグループ化する
+[generateWSDL]*.group = "jaxws"

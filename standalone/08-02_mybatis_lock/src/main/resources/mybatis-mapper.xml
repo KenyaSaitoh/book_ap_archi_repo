@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jp.mufg.it.mybatis.company.mapper.EmployeeMapper">
+
+  <!--=== SELECT ===-->
+  <select id="selectEmployee"
+    resultMap="EmployeeResultMap">
+    SELECT * FROM EMPLOYEE
+    WHERE EMPLOYEE_ID = #{employeeId}
+  </select>
+
+  <select id="selectEmployeeWithPessimisticLock"
+    resultMap="EmployeeResultMap">
+    SELECT * FROM EMPLOYEE
+    WHERE EMPLOYEE_ID = #{employeeId}
+    FOR UPDATE
+  </select>
+
+  <!--=== UPDATE ===-->
+  <update id="updateEmployee"
+    parameterType="jp.mufg.it.mybatis.company.dto.Employee">
+    UPDATE EMPLOYEE
+    SET EMPLOYEE_NAME = #{employeeName},
+    DEPARTMENT_NAME = #{departmentName},
+    ENTRANCE_DATE = #{entranceDate},
+    JOB_NAME = #{jobType},
+    SALARY = #{salary}
+    WHERE EMPLOYEE_ID = #{employeeId}
+  </update>
+
+  <update id="updateEmployeeWithOptimisticLock"
+    parameterType="jp.mufg.it.mybatis.company.dto.Employee">
+    UPDATE EMPLOYEE
+    SET EMPLOYEE_NAME = #{employeeName},
+    DEPARTMENT_NAME = #{departmentName},
+    ENTRANCE_DATE = #{entranceDate},
+    JOB_NAME = #{jobType},
+    SALARY = #{salary},
+    VERSION = VERSION + 1
+    WHERE EMPLOYEE_ID = #{employeeId}
+    AND VERSION = #{version}
+  </update>
+
+  <!--=== resultMap ===-->
+  <resultMap id="EmployeeResultMap" type="Employee">
+    <result property="employeeId" column="EMPLOYEE_ID" />
+    <result property="employeeName" column="EMPLOYEE_NAME" />
+    <result property="departmentName" column="DEPARTMENT_NAME" />
+    <result property="entranceDate" column="ENTRANCE_DATE" />
+    <result property="jobType" column="JOB_NAME" />
+    <result property="salary" column="SALARY" />
+    <result property="version" column="VERSION" />
+  </resultMap>
+</mapper>

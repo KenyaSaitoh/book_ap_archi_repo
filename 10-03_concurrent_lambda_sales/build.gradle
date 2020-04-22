@@ -1,4 +1,0 @@
-// Javaプラグイン設定
-jar {
-    archiveName "concurrent_lambda_sales.jar"
-}

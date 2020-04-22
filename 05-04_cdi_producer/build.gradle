@@ -1,9 +1,0 @@
-// Log4J依存関係設定
-dependencies {
-    compile "log4j:log4j:1.2.17"
-}
-
-// WARプラグイン設定
-war {
-    archiveName "cdi_producer.war"
-}

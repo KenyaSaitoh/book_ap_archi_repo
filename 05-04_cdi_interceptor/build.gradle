@@ -1,4 +1,0 @@
-// WARプラグイン設定
-war {
-    archiveName "cdi_interceptor.war"
-}

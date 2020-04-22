@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+<title>ColorSelectPage</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+  <h2>ColorSelectPage</h2>
+  <hr />
+  <div>
+    <a href="/servlet_session/ColorSessionServlet?selectedColor=Red">Red</a>
+  </div>
+  <div>
+    <a href="/servlet_session/ColorSessionServlet?selectedColor=Blue">Blue</a>
+  </div>
+  <div>
+    <a href="/servlet_session/ColorSessionServlet?selectedColor=Yellow">Yellow</a>
+  </div>
+  <div>
+    <a href="/servlet_session/ColorSessionServlet?selectedColor=Green">Green</a>
+  </div>
+  <hr />
+  <div>上記以外の色</div>
+  <form action="/servlet_session/ColorSessionServlet" method="POST">
+    <div>
+      <input type="text" name="selectedColor">
+    </div>
+    <div>
+      <input type="submit" value="リクエスト送信">
+    </div>
+  </form>
+</body>
+</html>

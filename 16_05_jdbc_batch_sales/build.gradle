@@ -1,9 +1,0 @@
-// JDBC依存関係設定
-dependencies {
-    runtime "mysql:mysql-connector-java:5.1.47"
-}
-
-// Javaプラグイン設定
-jar {
-    archiveName "jdbc_batch_sales.jar"
-}
