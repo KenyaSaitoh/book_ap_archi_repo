@@ -11,7 +11,6 @@ public class Employee {
     private Date entranceDate;
     private JobType jobType;
     private Integer salary;
-    private Long version;
 
     // 引数なしのコンストラクタ
     public Employee() {
@@ -20,14 +19,13 @@ public class Employee {
     // コンストラクタ
     public Employee(Integer employeeId, String employeeName,
             Department department, Date entranceDate, JobType jobType,
-            Integer salary, Long version) {
+            Integer salary) {
         this.employeeId = employeeId;
         this.employeeName = employeeName;
         this.department = department;
         this.entranceDate = entranceDate;
         this.jobType = jobType;
         this.salary = salary;
-        this.version = version;
     }
 
     // 社員IDへのアクセサメソッド
@@ -82,14 +80,5 @@ public class Employee {
 
     public void setSalary(Integer salary) {
         this.salary = salary;
-    }
-
-    // バージョン（楽観的ロックで使用）へのアクセサメソッド
-    public Long getVersion() {
-        return version;
-    }
-
-    public void setVersion(Long version) {
-        this.version = version;
     }
 }

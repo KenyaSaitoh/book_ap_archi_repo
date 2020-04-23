@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jp.mufg.it.mybatis.company.mapper.EmpDeptFlatMapper">
+
+  <!--=== ジョインしてフラットオブジェクトを取得する ===-->
+  <select id="selectEmpDept"
+    parameterType="int"
+    resultType="jp.mufg.it.mybatis.company.dto.EmpDept">
+    SELECT
+    e.EMPLOYEE_ID     AS employeeId,
+    e.EMPLOYEE_NAME   AS employeeName,
+    e.ENTRANCE_DATE   AS entranceDate,
+    e.JOB_ID          AS jobType,
+    e.SALARY          AS salary,
+    d.DEPARTMENT_ID   AS departmentId,
+    d.DEPARTMENT_NAME AS departmentName,
+    d.LOCATION        AS location
+    FROM EMPLOYEE e INNER JOIN DEPARTMENT d
+    ON e.DEPARTMENT_ID = d.DEPARTMENT_ID
+    WHERE e.EMPLOYEE_ID = #{employeeId}
+  </select>
+
+  <!--=== ジョインしてフラットオブジェクトを取得する ===-->
+  <select id="selectEmpDeptByDepartmentId"
+    parameterType="int"
+    resultType="jp.mufg.it.mybatis.company.dto.EmpDept">
+    SELECT
+    e.EMPLOYEE_ID     AS employeeId,
+    e.EMPLOYEE_NAME   AS employeeName,
+    e.ENTRANCE_DATE   AS entranceDate,
+    e.JOB_ID          AS jobType,
+    e.SALARY          AS salary,
+    d.DEPARTMENT_ID   AS departmentId,
+    d.DEPARTMENT_NAME AS departmentName,
+    d.LOCATION        AS location
+    FROM EMPLOYEE e INNER JOIN DEPARTMENT d
+    ON e.DEPARTMENT_ID = d.DEPARTMENT_ID
+    WHERE e.DEPARTMENT_ID = #{departmentId}
+  </select>
+
+</mapper>

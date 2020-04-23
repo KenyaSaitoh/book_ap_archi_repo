@@ -3,7 +3,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- NEST SELECT＋構造化オブジェクト -->
-<mapper namespace="jp.mufg.it.mybatis.company.nest">
+<mapper namespace="jp.mufg.it.mybatis.company.mapper.EmpDeptNestMapper">
 
   <select id="selectDepartment"
     parameterType="int"

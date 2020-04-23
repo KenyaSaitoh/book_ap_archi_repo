@@ -2,37 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="jp.mufg.it.mybatis.company">
+<mapper namespace="jp.mufg.it.mybatis.company.mapper.EmployeeMapper">
 
-  <!-- JOIN SELECT＋フラットオブジェクト -->
-  <select id="selectEmployeeTO"
-    parameterType="int"
-    resultType="jp.mufg.it.mybatis.company.dto.EmployeeDepartment">
-    SELECT
-    e.EMPLOYEE_ID     AS employeeId,
-    e.EMPLOYEE_NAME   AS employeeName,
-    e.SALARY  AS salary,
-    d.DEPARTMENT_NAME AS departmentName,
-    d.BUILDING_NAME   AS buildingName,
-    d.FLOOR           AS floor
-    FROM EMPLOYEE e INNER JOIN DEPARTMENT d
-    ON e.DEPARTMENT_ID = d.DEPARTMENT_ID
-    WHERE e.EMPLOYEE_ID = #{employeeId}
-  </select>
-
-  <select id="selectEmployeesByDepartmentName"
-    parameterType="string"
-    resultMap="EmployeeResult">
-    SELECT e.* FROM EMPLOYEE e INNER JOIN DEPARTMENT d
-    ON e.DEPARTMENT_ID = d.DEPARTMENT_ID
-    WHERE d.DEPARTMENT_NAME = #{departmentName}
-  </select>
-
-  <resultMap id="EmployeeResult"
-    type="jp.mufg.it.mybatis.company.dto.Employee">
-    <result property="jobType" column="JOB_ID" />
-  </resultMap>
-
+  <!--=== INSERT ===-->
   <insert id="insertEmployee"
     parameterType="jp.mufg.it.mybatis.company.dto.Employee">
     INSERT INTO EMPLOYEE
@@ -41,10 +13,10 @@
     #{department.departmentId:NUMERIC},
     #{entranceDate:DATE},
     #{jobType:NUMERIC},
-    #{salary:NUMERIC},
-    #{version:NUMERIC})
+    #{salary:NUMERIC})
   </insert>
 
+  <!--=== UPDATE ===-->
   <update id="updateEmployee"
     parameterType="jp.mufg.it.mybatis.company.dto.Employee">
     UPDATE EMPLOYEE
@@ -52,21 +24,8 @@
     DEPARTMENT_ID = #{department.departmentId:NUMERIC},
     ENTRANCE_DATE = #{entranceDate:DATE},
     JOB_ID = #{jobType:NUMERIC},
-    SALARY = #{salary:NUMERIC},
-    VERSION = VERSION + 1
+    SALARY = #{salary:NUMERIC}
     WHERE EMPLOYEE_ID = #{employeeId}
-    AND VERSION = #{version}
-  </update>
-
-  <update id="updateDepartment"
-    parameterType="jp.mufg.it.mybatis.company.dto.Department">
-    UPDATE DEPARTMENT
-    SET DEPARTMENT_NAME = #{departmentName:VARCHAR},
-    BUILDING_NAME = #{buildingName:VARCHAR},
-    FLOOR = #{floor:NUMERIC},
-    VERSION = VERSION + 1
-    WHERE DEPARTMENT_ID = #{departmentId}
-    AND VERSION = #{version}
   </update>
 
 </mapper>

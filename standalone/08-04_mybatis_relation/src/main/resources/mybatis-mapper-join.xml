@@ -3,7 +3,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- JOIN SELECT＋構造化オブジェクト -->
-<mapper namespace="jp.mufg.it.mybatis.company.join">
+<mapper namespace="jp.mufg.it.mybatis.company.mapper.EmpDeptJoinMapper">
 
   <select id="selectDepartment"
     parameterType="int"
@@ -34,17 +34,10 @@
     type="jp.mufg.it.mybatis.company.dto.Department">
     <id property="departmentId" column="DEPARTMENT_ID" />
     <result property="departmentName" column="DEPARTMENT_NAME" />
-    <result property="buildingName" column="BUILDING_NAME" />
-    <result property="floor" column="FLOOR" />
-    <result property="version" column="VERSION" />
+    <result property="location" column="LOCATION" />
     <collection property="employees" resultMap="EmployeeResult" />
   </resultMap>
 
-  <!--
-  以下では、associationのresultMapにDepartmentResultを指定したらNGだった
-  employeesプロパティでエラーになってしまう
-  よってわざわざDepartmentResult2を作る
-  -->
   <resultMap id="EmployeeResult"
     type="jp.mufg.it.mybatis.company.dto.Employee">
     <id property="employeeId" column="EMPLOYEE_ID" />
@@ -52,17 +45,7 @@
     <result property="entranceDate" column="ENTRANCE_DATE" />
     <result property="jobType" column="JOB_ID" />
     <result property="salary" column="SALARY" />
-    <result property="version" column="VERSION" />
-    <association property="department" resultMap="DepartmentResult2" />
-  </resultMap>
-
-  <resultMap id="DepartmentResult2"
-    type="jp.mufg.it.mybatis.company.dto.Department">
-    <id property="departmentId" column="DEPARTMENT_ID" />
-    <result property="departmentName" column="DEPARTMENT_NAME" />
-    <result property="buildingName" column="BUILDING_NAME" />
-    <result property="floor" column="FLOOR" />
-    <result property="version" column="VERSION" />
+    <association property="department" resultMap="DepartmentResult" />
   </resultMap>
 
 </mapper>

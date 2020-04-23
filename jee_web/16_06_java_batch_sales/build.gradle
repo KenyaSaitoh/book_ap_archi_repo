@@ -1,0 +1,4 @@
+// WARプラグイン設定
+war {
+    archiveName "java_batch_sales.war"
+}
