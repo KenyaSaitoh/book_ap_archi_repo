@@ -353,6 +353,15 @@ task deleteManagedExecutorService doLast {
 task startActiveMQ doLast {
     exec {
         executable conf.activemq.startCommand
+        args "start"
+    }
+}
+
+// ActiveMQを停止する
+task stopActiveMQ doLast {
+    exec {
+        executable conf.activemq.startCommand
+        args "stop"
     }
 }
 
@@ -401,5 +410,5 @@ def wsimport(wsdlFile, proxyDir) {
 [initMySQL, copyMySQLJDBCDriver]*.group = "mysql"
 [createMySQLDS, deleteMySQLDS, createMySQLSalesDS, deleteMySQLSalesDS]*.group = "mysql-datasource"
 [createManagedExecutorService, deleteManagedExecutorService]*.group = "managed-executor-service"
-[startActiveMQ]*.group = "activemq"
+[startActiveMQ, stopActiveMQ]*.group = "activemq"
 [copyClasspathFile, copyGitIgnoreFile]*.group = "etc"
