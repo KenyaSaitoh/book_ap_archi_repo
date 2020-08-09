@@ -5,6 +5,4 @@ EMPLOYEE_NAME   VARCHAR(30) NOT NULL, -- 社員名
 DEPARTMENT_NAME VARCHAR(30),          -- 部署名
 SALARY          INT NOT NULL,         -- 月給
 PRIMARY KEY(EMPLOYEE_ID)
-
-
 );
