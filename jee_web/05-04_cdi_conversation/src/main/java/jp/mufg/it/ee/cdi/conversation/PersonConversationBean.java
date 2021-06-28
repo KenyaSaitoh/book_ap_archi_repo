@@ -45,7 +45,9 @@ public class PersonConversationBean implements Serializable {
 
     // アクションメソッド（確認画面に遷移する）
     public String confirm() {
-        conversation.begin();
+        if (conversation.isTransient()) {
+            conversation.begin();
+        }
         return "PersonUpdatePage?faces-redirect=true";
     }
 
@@ -62,7 +64,6 @@ public class PersonConversationBean implements Serializable {
 
     // アクションメソッド（「入力画面」に戻る）
     public String back() {
-        conversation.end();
         return "PersonInputPage?faces-redirect=true";
     }
 
@@ -70,6 +71,13 @@ public class PersonConversationBean implements Serializable {
     public String removePerson(Integer personId) {
         personService.removePerson(personId);
         return "PersonTablePage?faces-redirect=true";
+    }
+
+    // アクションメソッド（人員を編集する）
+    public String editPerson(Integer personId) {
+        conversation.begin();
+        person = personService.getPerson(personId);
+        return "PersonInputPage?faces-redirect=true";
     }
 
     // ヴューアクションメソッド（人員を表示する）
