@@ -19,55 +19,55 @@ TRUNCATE TABLE PRODUCT_NEW_PRICE;
 TRUNCATE TABLE PRODUCT_TYPE;
 
 -- PRODUCT_TYPE
-LOAD DATA LOCAL INFILE 'D:\\GitHubRepos\\book_ap_archi_repo\\16_06_java_batch_sales\\sql\\csv\\PRODUCT_TYPE.csv'
+LOAD DATA LOCAL INFILE 'D:\\GitHubRepos\\book_ap_archi_repo\\jee_web\\16_06_java_batch_sales\\sql\\csv\\PRODUCT_TYPE.csv'
 INTO TABLE PRODUCT_TYPE
 FIELDS TERMINATED BY ','
 (PRODUCT_TYPE_ID,PRODUCT_TYPE_NAME);
 
 -- PRODUCT
-LOAD DATA LOCAL INFILE 'D:\\GitHubRepos\\book_ap_archi_repo\\16_06_java_batch_sales\\sql\\csv\\PRODUCT.csv'
+LOAD DATA LOCAL INFILE 'D:\\GitHubRepos\\book_ap_archi_repo\\jee_web\\16_06_java_batch_sales\\sql\\csv\\PRODUCT.csv'
 INTO TABLE PRODUCT
 FIELDS TERMINATED BY ','
 (PRODUCT_ID,PRODUCT_TYPE_ID,PRODUCT_NAME,PRICE);
 
 -- PRODUCT_NEW_PRICE
-LOAD DATA LOCAL INFILE 'D:\\GitHubRepos\\book_ap_archi_repo\\16_06_java_batch_sales\\sql\\csv\\PRODUCT_NEW_PRICE.csv'
+LOAD DATA LOCAL INFILE 'D:\\GitHubRepos\\book_ap_archi_repo\\jee_web\\16_06_java_batch_sales\\sql\\csv\\PRODUCT_NEW_PRICE.csv'
 INTO TABLE PRODUCT_NEW_PRICE
 FIELDS TERMINATED BY ','
 (PRODUCT_ID,NEW_PRICE);
 
 -- STOCK_PRODUCT
-LOAD DATA LOCAL INFILE 'D:\\GitHubRepos\\book_ap_archi_repo\\16_06_java_batch_sales\\sql\\csv\\STOCK_PRODUCT.csv'
+LOAD DATA LOCAL INFILE 'D:\\GitHubRepos\\book_ap_archi_repo\\jee_web\\16_06_java_batch_sales\\sql\\csv\\STOCK_PRODUCT.csv'
 INTO TABLE STOCK_PRODUCT
 FIELDS TERMINATED BY ','
 (PRODUCT_ID,QUANTITY);
 
 -- BRANCH
-LOAD DATA LOCAL INFILE 'D:\\GitHubRepos\\book_ap_archi_repo\\16_06_java_batch_sales\\sql\\csv\\BRANCH.csv'
+LOAD DATA LOCAL INFILE 'D:\\GitHubRepos\\book_ap_archi_repo\\jee_web\\16_06_java_batch_sales\\sql\\csv\\BRANCH.csv'
 INTO TABLE BRANCH
 FIELDS TERMINATED BY ','
 (BRANCH_ID,BRANCH_NAME);
 
 -- STAFF
-LOAD DATA LOCAL INFILE 'D:\\GitHubRepos\\book_ap_archi_repo\\16_06_java_batch_sales\\sql\\csv\\STAFF.csv'
+LOAD DATA LOCAL INFILE 'D:\\GitHubRepos\\book_ap_archi_repo\\jee_web\\16_06_java_batch_sales\\sql\\csv\\STAFF.csv'
 INTO TABLE STAFF
 FIELDS TERMINATED BY ','
 (STAFF_ID,STAFF_NAME,BRANCH_ID);
 
 -- CUSTOMER
-LOAD DATA LOCAL INFILE 'D:\\GitHubRepos\\book_ap_archi_repo\\16_06_java_batch_sales\\sql\\csv\\CUSTOMER.csv'
+LOAD DATA LOCAL INFILE 'D:\\GitHubRepos\\book_ap_archi_repo\\jee_web\\16_06_java_batch_sales\\sql\\csv\\CUSTOMER.csv'
 INTO TABLE CUSTOMER
 FIELDS TERMINATED BY ','
 (BRANCH_ID,CUSTOMER_ID,CUSTOMER_NAME,EMAIL_ADDRESS,POSTAL_CODE,ADDRESS1,ADDRESS2);
 
 -- SALES_TRAN
-LOAD DATA LOCAL INFILE 'D:\\GitHubRepos\\book_ap_archi_repo\\16_06_java_batch_sales\\sql\\csv\\SALES_TRAN.csv'
+LOAD DATA LOCAL INFILE 'D:\\GitHubRepos\\book_ap_archi_repo\\jee_web\\16_06_java_batch_sales\\sql\\csv\\SALES_TRAN.csv'
 INTO TABLE SALES_TRAN
 FIELDS TERMINATED BY ','
 (SALES_ID,SALES_DATE,DUE_DATE,BRANCH_ID,CUSTOMER_ID,STAFF_IN_CHARGE,UPDATE_STOCK_FLAG);
 
 -- SALES_DETAIL
-LOAD DATA LOCAL INFILE 'D:\\GitHubRepos\\book_ap_archi_repo\\16_06_java_batch_sales\\sql\\csv\\SALES_DETAIL.csv'
+LOAD DATA LOCAL INFILE 'D:\\GitHubRepos\\book_ap_archi_repo\\jee_web\\16_06_java_batch_sales\\sql\\csv\\SALES_DETAIL.csv'
 INTO TABLE SALES_DETAIL
 FIELDS TERMINATED BY ','
 (SALES_ID,SALES_DETAIL_ID,PRODUCT_ID,PRODUCT_PRICE,SALES_COUNT);

@@ -1,0 +1,400 @@
+import groovy.io.FileType
+import groovy.sql.Sql
+
+configurations {
+    jaxws
+}
+
+dependencies {
+    jaxws "com.sun.xml.ws:jaxws-tools:2.1.4"
+}
+
+// プラグイン読み込み
+apply plugin: "java"
+
+allprojects {
+    // 初期化処理
+    buildscript {
+        repositories {
+            jcenter()
+        }
+        dependencies {
+            classpath "mysql:mysql-connector-java:5.1.47"
+            classpath "org.apache.activemq:activemq-all:5.12.0"
+        }
+    }
+    // リポジトリ設定
+    repositories {
+        jcenter()
+    }
+}
+
+subprojects {
+    // プラグイン読み込み
+    apply plugin: "war"
+    apply plugin: "eclipse"
+    apply plugin: "jacoco"
+
+    // 文字コード設定
+    def defaultEncoding = "UTF-8"
+    tasks.withType(AbstractCompile).each { it.options.encoding = defaultEncoding }
+
+    // Java EE7依存関係設定
+    dependencies {
+        providedCompile "javax:javaee-api:7.0"
+        providedCompile "jstl:jstl:1.2"
+        compile "junit:junit:4.12"
+        testCompile "junit:junit:4.12"
+    }
+
+    // Javaプラグイン設定
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    // ソースフォルダの設定
+    sourceSets {
+        main {
+            java {
+                srcDir "src/main/java"
+                srcDir "src/main/webapp"
+            }
+            resources {
+                srcDir "src/main/resources"
+            }
+        }
+        test {
+            java {
+                srcDir "src/test/java"
+            }
+            resources {
+                srcDir "src/test/resources"
+            }
+        }
+    }
+
+    // Eclipseプラグイン設定
+    eclipse {
+        classpath {
+            defaultOutputDir = file("bin")
+        }
+    }
+
+    // デプロイする（GlassFish）
+    task deployGlassFish(dependsOn: [clean, war]) doLast {
+        deploy(war.getArchivePath().path)
+    }
+
+    // アンデプロイする（GlassFish）
+    task undeployGlassFish doLast {
+        undeploy(war.archiveName.replaceAll(/\.war/, ""))
+    }
+
+    // 初期データをセットアップする
+    task setupMySQL doLast {
+        execSqlDir("$projectDir/sql/mysql", conf.mysql.general.url,
+                conf.mysql.general.user, conf.mysql.general.password,
+                conf.mysql.driverClass)
+    }
+
+    // タスクをグループ化する
+    [deployGlassFish, undeployGlassFish]*.group = "deploy"
+    [setupMySQL]*.group = "setup-init-data"
+}
+
+// 設定情報の読み込み
+def conf = {
+    def slurper = new ConfigSlurper()
+    slurper.binding = project.properties
+    def confLocation = System.properties["user.home"]
+    def file = new File(confLocation + "/ap-archi-conf.gradle")
+    if (!file.exists()) {
+        file = new File("$projectDir/ap-archi-conf.gradle")
+        if (!file.exists()) return null
+    }
+    return new ConfigSlurper().parse(file.toURL())
+}()
+
+// 設定情報を拡張プロパティにセット
+ext.conf = conf
+
+// GlassFishを起動する
+task startGlassFish doLast {
+    exec {
+        executable conf.glassfish.asadmin
+        args "start-domain", conf.glassfish.domainName
+    }
+}
+
+// GlassFishを停止する
+task stopGlassFish doLast {
+    exec {
+        executable conf.glassfish.asadmin
+        args "stop-domain", conf.glassfish.domainName
+    }
+}
+
+// データソースを作成するメソッド
+def createDataSource(datasourceClassName, property, connPoolName,
+        datasourceJndiName) {
+    exec {
+        executable conf.glassfish.asadmin
+        args "--user", conf.glassfish.adminUsername
+        args "--host", conf.glassfish.hostName
+        args "--port", conf.glassfish.adminPort
+        args "create-jdbc-connection-pool"
+        args "--datasourceclassname", datasourceClassName
+        args "--restype", "javax.sql.DataSource"
+        args "--property", property
+        args connPoolName
+    }
+    exec {
+        executable conf.glassfish.asadmin
+        args "--user", conf.glassfish.adminUsername
+        args "--host", conf.glassfish.hostName
+        args "--port", conf.glassfish.adminPort
+        args "create-jdbc-resource"
+        args "--connectionpoolid", connPoolName
+        args "--enabled=true"
+        args datasourceJndiName
+    }
+}
+
+// データソースを削除するメソッド
+def deleteDataSource(connPoolName, datasourceJndiName) {
+    exec {
+        executable conf.glassfish.asadmin
+        args "--user", conf.glassfish.adminUsername
+        args "--host", conf.glassfish.hostName
+        args "--port", conf.glassfish.adminPort
+        args "delete-jdbc-resource"
+        args datasourceJndiName
+    }
+    exec {
+        executable conf.glassfish.asadmin
+        args "--user", conf.glassfish.adminUsername
+        args "--host", conf.glassfish.hostName
+        args "--port", conf.glassfish.adminPort
+        args "delete-jdbc-connection-pool"
+        args "--cascade"
+        args connPoolName
+    }
+}
+
+// MySQL用データソースを作成する
+task createMySQLDS doLast {
+    createDataSource(conf.mysql.datasourceClass,
+            "portNumber=${conf.mysql.port}:" +
+            "serverName=${conf.mysql.hostName}:" +
+            "User=${conf.mysql.general.user}:" +
+            "Password=${conf.mysql.general.password}:" +
+            "databaseName=${conf.mysql.general.db}",
+            conf.mysql.general.connPoolName,
+            conf.mysql.general.datasourceJndiName)
+}
+
+// MySQL用データソースを削除する
+task deleteMySQLDS doLast {
+    deleteDataSource(conf.mysql.general.connPoolName,
+            conf.mysql.general.datasourceJndiName)
+}
+
+// MySQL用データソースを作成する
+task createMySQLSalesDS doLast {
+    createDataSource(conf.mysql.datasourceClass,
+            "portNumber=${conf.mysql.port}:" +
+            "serverName=${conf.mysql.hostName}:" +
+            "User=${conf.mysql.sales.user}:" +
+            "Password=${conf.mysql.sales.password}:" +
+            "databaseName=${conf.mysql.sales.db}",
+            conf.mysql.sales.connPoolName,
+            conf.mysql.sales.datasourceJndiName)
+}
+
+// MySQL用データソースを削除する
+task deleteMySQLSalesDS doLast {
+    deleteDataSource(conf.mysql.sales.connPoolName,
+            conf.mysql.sales.datasourceJndiName)
+}
+
+// デプロイメソッド（GlassFish）
+def deploy(warFile) {
+    exec {
+        executable conf.glassfish.asadmin
+        args "--user", conf.glassfish.adminUsername
+        args "--host", conf.glassfish.hostName
+        args "--port", conf.glassfish.adminPort
+        args "deploy"
+        args "--force", true
+        args warFile
+    }
+}
+
+// アンデプロイメソッド（GlassFish）
+def undeploy(warName) {
+    exec {
+        executable conf.glassfish.asadmin
+        args "--user", conf.glassfish.adminUsername
+        args "--host", conf.glassfish.hostName
+        args "--port", conf.glassfish.adminPort
+        args "undeploy"
+        args warName
+    }
+}
+
+// SQLを発行するメソッド（ディレクトリ指定）
+def execSqlDir(dir, url, user, password, driverClass) {
+    new File(dir).listFiles().sort{a, b -> a.name <=> b.name}.each{ File f ->
+        ant.sql(url: url,
+            userid: user,
+            password: password,
+            driver: driverClass,
+            classpath: buildscript.configurations.classpath.asPath,
+            encoding: "UTF-8",
+            onerror: "continue") {
+                fileset(file: f)
+            }
+    }
+}
+
+// SQLを発行するメソッド（ファイル指定）
+def execSql(file, url, user, password, driverClass) {
+    ant.sql(
+        driver: driverClass,
+        url: url,
+        userid: user,
+        password: password,
+        classpath: buildscript.configurations.classpath.asPath,
+        encoding: "UTF-8",
+        onerror: "continue") {
+            fileset(file: file)
+        }
+}
+
+// MySQLを初期化する
+task initMySQL doLast {
+    execSql("$projectDir/sql/mysql/DROP_MYSQL_USER.sql",
+            conf.mysql.general.baseUrl, "root", conf.mysql.rootPassword,
+            conf.mysql.driverClass)
+    execSql("$projectDir/sql/mysql/DROP_MYSQL_DATABASE.sql",
+            conf.mysql.general.baseUrl, "root", conf.mysql.rootPassword,
+            conf.mysql.driverClass)
+    execSql("$projectDir/sql/mysql/CREATE_MYSQL_USER.sql",
+            conf.mysql.general.baseUrl, "root", conf.mysql.rootPassword,
+            conf.mysql.driverClass)
+    execSql("$projectDir/sql/mysql/CREATE_MYSQL_DATABASE.sql",
+            conf.mysql.general.baseUrl, "root", conf.mysql.rootPassword,
+            conf.mysql.driverClass)
+}
+
+// GlassFishにMySQLのJDBCドライバを登録する
+task registerMySQLJDBCDriver doLast {
+    exec {
+        executable conf.glassfish.asadmin
+        args "--user", conf.glassfish.adminUsername
+        args "--host", conf.glassfish.hostName
+        args "--port", conf.glassfish.adminPort
+        args "add-library"
+        args conf.mysql.driverJarPath
+    }
+}
+
+// .gitignoreファイル（マスター）を各プロジェクトに配布する
+task copyGitIgnoreFile doLast {
+    subprojects.project.projectDir.each { File dir ->
+        copy {
+            from ".gitignore"
+            into dir.getPath()
+            rename { String fileName ->
+                fileName.replace(".gitignore", ".gitignore")
+            }
+        }
+    }
+}
+
+// ManagedExecutorServiceを作成する
+task createManagedExecutorService doLast {
+    exec {
+        executable conf.glassfish.asadmin
+        args "--user", conf.glassfish.adminUsername
+        args "--host", conf.glassfish.hostName
+        args "--port", conf.glassfish.adminPort
+        args "create-managed-executor-service"
+        args "concurrent/MyExecutorService"
+    }
+}
+
+// ManagedExecutorServiceを削除する
+task deleteManagedExecutorService doLast {
+    exec {
+        executable conf.glassfish.asadmin
+        args "--user", conf.glassfish.adminUsername
+        args "--host", conf.glassfish.hostName
+        args "--port", conf.glassfish.adminPort
+        args "delete-managed-executor-service"
+        args "concurrent/MyExecutorService"
+    }
+}
+
+// ActiveMQを起動する
+task startActiveMQ doLast {
+    exec {
+        executable conf.activemq.startCommand
+        args "start"
+    }
+}
+
+// ActiveMQを停止する
+task stopActiveMQ doLast {
+    exec {
+        executable conf.activemq.startCommand
+        args "stop"
+    }
+}
+
+// WSGEN
+def wsgen(serviceClass, classesDir, srcDir, wsdlDir) {
+    exec {
+        executable conf.wsgen
+        args "-cp", classesDir
+        args "-d", classesDir
+        args "-s", srcDir
+        args "-r", wsdlDir
+        args "-keep"
+        args "-wsdl"
+        args serviceClass
+    }
+}
+
+// WSDLファイルにエンドポイントを埋め込む
+def replaceWsdl(wsdlFile, warName, serviceName) {
+    File tmpFile = new File(wsdlFile.getParent() + "/tmp.wsdl")
+    tmpFile.withWriter { writer ->
+        wsdlFile.newReader().eachLine { line ->
+            line = line.replaceAll("REPLACE_WITH_ACTUAL_URL",
+            "http://" + conf.glassfish.hostName + ":" +
+            conf.glassfish.httpPort + "/" +
+            warName.replaceAll(/\.war/, "") + "/" + serviceName)
+            writer.println(line)
+        }
+    }
+    wsdlFile.delete()
+    tmpFile.renameTo(wsdlFile.path)
+}
+
+// WSIMPORT
+def wsimport(wsdlFile, proxyDir) {
+    exec {
+        executable conf.wsimport
+        args "-d", proxyDir
+        args "-keep"
+        args wsdlFile
+    }
+}
+
+// タスクをグループ化する
+[startGlassFish, stopGlassFish]*.group = "glassfish"
+[initMySQL, registerMySQLJDBCDriver]*.group = "mysql"
+[createMySQLDS, deleteMySQLDS, createMySQLSalesDS, deleteMySQLSalesDS]*.group = "mysql-datasource"
+[createManagedExecutorService, deleteManagedExecutorService]*.group = "managed-executor-service"
+[startActiveMQ, stopActiveMQ]*.group = "activemq"
+[copyGitIgnoreFile]*.group = "etc"

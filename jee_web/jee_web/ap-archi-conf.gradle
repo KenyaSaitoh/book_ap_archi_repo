@@ -1,0 +1,48 @@
+// GlassFish
+glassfish {
+    glassfishDir = "/opt/payara5/glassfish"
+    moduleDir = "${glassfishDir}/modules"
+    asadmin = "${glassfishDir}/bin/asadmin"
+    domainName = "domain1"
+    hostName = "localhost"
+    httpPort = "8080"
+    adminPort = "4848"
+    adminUsername = "admin"
+}
+
+// MySQL
+mysql {
+    driverJarPath = "/opt/mysql-connector-java-5.1.47/mysql-connector-java-5.1.47-bin.jar"
+    driverClass = "com.mysql.jdbc.Driver"
+    datasourceClass = "com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource"
+    hostName = "localhost"
+    port = "3306"
+    general {
+        user = "TESTUSER"
+        password = "PASSWORD"
+        db = "TESTDB"
+        baseUrl = "jdbc:mysql://localhost:${port}"
+        url = "${baseUrl}/${general.db}"
+        connPoolName = "MySQLPool"
+        datasourceJndiName = "jdbc/MySQLDS"
+    }
+    sales {
+        user = "USER_S"
+        password = "PASSWORD"
+        db = "DB_S"
+        baseUrl = "jdbc:mysql://localhost:${port}"
+        url = "${baseUrl}/${general.db}"
+        connPoolName = "MySQLSalesPool"
+        datasourceJndiName = "jdbc/MySQLSalesDS"
+    }
+}
+
+// ActiveMQ
+activemq {
+    activemqDir = "/opt/apache-activemq-5.15.12"
+    startCommand = "${activemqDir}/bin/activemq"
+}
+
+// JAX-WS
+wsgen = "${glassfish.glassfishDir}/bin/wsgen"
+wsimport = "${glassfish.glassfishDir}/bin/wsimport"

@@ -1,0 +1,207 @@
+import groovy.io.FileType
+import groovy.sql.Sql
+
+configurations {
+    jaxws
+}
+
+dependencies {
+    jaxws "com.sun.xml.ws:jaxws-tools:2.1.4"
+}
+
+// プラグイン読み込み
+apply plugin: "java"
+
+allprojects {
+    // 初期化処理
+    buildscript {
+        repositories {
+            jcenter()
+        }
+        dependencies {
+            classpath "mysql:mysql-connector-java:5.1.47"
+            classpath "org.apache.activemq:activemq-all:5.12.0"
+        }
+    }
+    // リポジトリ設定
+    repositories {
+        jcenter()
+    }
+}
+
+subprojects {
+    // プラグイン読み込み
+    apply plugin: "java"
+    apply plugin: "eclipse"
+    apply plugin: "jacoco"
+
+    // 文字コード設定
+    def defaultEncoding = "UTF-8"
+    tasks.withType(AbstractCompile).each { it.options.encoding = defaultEncoding }
+
+    // Java依存関係設定
+    dependencies {
+        compile "javax:javaee-api:7.0"
+        compile "junit:junit:4.12"
+        testCompile "junit:junit:4.12"
+    }
+
+    // Javaプラグイン設定
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    // ソースフォルダの設定
+    sourceSets {
+        main {
+            java {
+                srcDir "src/main/java"
+            }
+            resources {
+                srcDir "src/main/resources"
+            }
+        }
+        test {
+            java {
+                srcDir "src/test/java"
+            }
+            resources {
+                srcDir "src/test/resources"
+            }
+        }
+    }
+
+    // Eclipseプラグイン設定
+    eclipse {
+        classpath {
+            defaultOutputDir = file("bin")
+        }
+    }
+
+    // 初期データをセットアップする
+    task setupMySQL doLast {
+        execSqlDir("$projectDir/sql/mysql", conf.mysql.general.url,
+                conf.mysql.general.user, conf.mysql.general.password,
+                conf.mysql.driverClass)
+    }
+
+    // タスクをグループ化する
+    [setupMySQL]*.group = "setup-init-data"
+}
+
+// 設定情報の読み込み
+def conf = {
+    def slurper = new ConfigSlurper()
+    slurper.binding = project.properties
+    def confLocation = System.properties["user.home"]
+    def file = new File(confLocation + "/ap-archi-conf.gradle")
+    if (!file.exists()) {
+        file = new File("$projectDir/ap-archi-conf.gradle")
+        if (!file.exists()) return null
+    }
+    return new ConfigSlurper().parse(file.toURL())
+}()
+
+// SQLを発行するメソッド（ディレクトリ指定）
+def execSqlDir(dir, url, user, password, driverClass) {
+    new File(dir).listFiles().sort{a, b -> a.name <=> b.name}.each{ File f ->
+        ant.sql(url: url,
+            userid: user,
+            password: password,
+            driver: driverClass,
+            classpath: buildscript.configurations.classpath.asPath,
+            encoding: "UTF-8",
+            onerror: "continue") {
+                fileset(file: f)
+            }
+    }
+}
+
+// SQLを発行するメソッド（ファイル指定）
+def execSql(file, url, user, password, driverClass) {
+    ant.sql(
+        driver: driverClass,
+        url: url,
+        userid: user,
+        password: password,
+        classpath: buildscript.configurations.classpath.asPath,
+        encoding: "UTF-8",
+        onerror: "continue") {
+            fileset(file: file)
+        }
+}
+
+// MySQLを初期化する
+task initMySQL doLast {
+    execSql("$projectDir/sql/mysql/DROP_MYSQL_USER.sql",
+            conf.mysql.general.baseUrl, "root", conf.mysql.rootPassword,
+            conf.mysql.driverClass)
+    execSql("$projectDir/sql/mysql/DROP_MYSQL_DATABASE.sql",
+            conf.mysql.general.baseUrl, "root", conf.mysql.rootPassword,
+            conf.mysql.driverClass)
+    execSql("$projectDir/sql/mysql/CREATE_MYSQL_USER.sql",
+            conf.mysql.general.baseUrl, "root", conf.mysql.rootPassword,
+            conf.mysql.driverClass)
+    execSql("$projectDir/sql/mysql/CREATE_MYSQL_DATABASE.sql",
+            conf.mysql.general.baseUrl, "root", conf.mysql.rootPassword,
+            conf.mysql.driverClass)
+}
+
+// .gitignoreファイル（マスター）を各プロジェクトに配布する
+task copyGitIgnoreFile doLast {
+    subprojects.project.projectDir.each { File dir ->
+        copy {
+            from ".gitignore"
+            into dir.getPath()
+            rename { String fileName ->
+                fileName.replace(".gitignore", ".gitignore")
+            }
+        }
+    }
+}
+
+// ActiveMQを起動する
+task startActiveMQ doLast {
+    exec {
+        executable conf.activemq.startCommand
+        args "start"
+    }
+}
+
+// ActiveMQを停止する
+task stopActiveMQ doLast {
+    exec {
+        executable conf.activemq.startCommand
+        args "stop"
+    }
+}
+
+// WSDLファイルにエンドポイントを埋め込む
+def replaceWsdl(wsdlFile, warName, serviceName) {
+    File tmpFile = new File(wsdlFile.getParent() + "/tmp.wsdl")
+    tmpFile.withWriter { writer ->
+        wsdlFile.newReader().eachLine { line ->
+            line = line.replaceAll("REPLACE_WITH_ACTUAL_URL",
+            "http://" + conf.glassfish.hostName + ":" +
+            conf.glassfish.httpPort + "/" +
+            warName.replaceAll(/\.war/, "") + "/" + serviceName)
+            writer.println(line)
+        }
+    }
+    wsdlFile.delete()
+    tmpFile.renameTo(wsdlFile.path)
+}
+
+// WSIMPORT
+def wsimport(wsdlFile, proxyDir) {
+    exec {
+        executable conf.wsimport
+        args "-d", proxyDir
+        args "-keep"
+        args wsdlFile
+    }
+}
+
+// タスクをグループ化する
+[initMySQL,]*.group = "mysql"
+[startActiveMQ, stopActiveMQ]*.group = "activemq"
+[copyGitIgnoreFile]*.group = "etc"

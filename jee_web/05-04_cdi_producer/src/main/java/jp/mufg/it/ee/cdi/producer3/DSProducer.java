@@ -8,7 +8,6 @@ import javax.sql.DataSource;
 @Dependent
 public class DSProducer {
     @Produces
-    // @Resource(lookup = "jdbc/MySQLDS")
-    @Resource(lookup = "jdbc/DerbyDS")
+    @Resource(lookup = "jdbc/MySQLDS")
     private DataSource ds;
 }

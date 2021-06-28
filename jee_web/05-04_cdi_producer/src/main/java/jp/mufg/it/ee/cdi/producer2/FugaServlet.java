@@ -1,6 +1,7 @@
 package jp.mufg.it.ee.cdi.producer2;
 
 import java.io.IOException;
+
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,6 +19,6 @@ public class FugaServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
-        logger.error("Error!!!");
+        logger.info("[ FugaServlet#doGet ]");
     }
 }
