@@ -101,6 +101,9 @@ def conf = {
     return new ConfigSlurper().parse(file.toURL())
 }()
 
+// 設定情報を拡張プロパティにセット
+ext.conf = conf
+
 // SQLを発行するメソッド（ディレクトリ指定）
 def execSqlDir(dir, url, user, password, driverClass) {
     new File(dir).listFiles().sort{a, b -> a.name <=> b.name}.each{ File f ->
