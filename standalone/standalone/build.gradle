@@ -149,31 +149,6 @@ task initMySQL doLast {
             conf.mysql.driverClass)
 }
 
-// GlassFishにMySQLのJDBCドライバを登録する
-task registerMySQLJDBCDriver doLast {
-    exec {
-        executable conf.glassfish.asadmin
-        args "--user", conf.glassfish.adminUsername
-        args "--host", conf.glassfish.hostName
-        args "--port", conf.glassfish.adminPort
-        args "add-library"
-        args conf.mysql.driverJarPath
-    }
-}
-
-// .gitignoreファイル（マスター）を各プロジェクトに配布する
-task copyGitIgnoreFile doLast {
-    subprojects.project.projectDir.each { File dir ->
-        copy {
-            from ".gitignore"
-            into dir.getPath()
-            rename { String fileName ->
-                fileName.replace(".gitignore", ".gitignore")
-            }
-        }
-    }
-}
-
 // ActiveMQを起動する
 task startActiveMQ doLast {
     exec {

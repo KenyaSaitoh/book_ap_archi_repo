@@ -298,19 +298,6 @@ task registerMySQLJDBCDriver doLast {
     }
 }
 
-// .gitignoreファイル（マスター）を各プロジェクトに配布する
-task copyGitIgnoreFile doLast {
-    subprojects.project.projectDir.each { File dir ->
-        copy {
-            from ".gitignore"
-            into dir.getPath()
-            rename { String fileName ->
-                fileName.replace(".gitignore", ".gitignore")
-            }
-        }
-    }
-}
-
 // ManagedExecutorServiceを作成する
 task createManagedExecutorService doLast {
     exec {
