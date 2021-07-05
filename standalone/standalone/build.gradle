@@ -16,7 +16,7 @@ allprojects {
     // 初期化処理
     buildscript {
         repositories {
-            jcenter()
+            mavenCentral()
         }
         dependencies {
             classpath "mysql:mysql-connector-java:5.1.47"
@@ -25,7 +25,7 @@ allprojects {
     }
     // リポジトリ設定
     repositories {
-        jcenter()
+        mavenCentral()
     }
 }
 
@@ -149,6 +149,18 @@ task initMySQL doLast {
             conf.mysql.driverClass)
 }
 
+// GlassFishにMySQLのJDBCドライバを登録する
+task registerMySQLJDBCDriver doLast {
+    exec {
+        executable conf.glassfish.asadmin
+        args "--user", conf.glassfish.adminUsername
+        args "--host", conf.glassfish.hostName
+        args "--port", conf.glassfish.adminPort
+        args "add-library"
+        args conf.mysql.driverJarPath
+    }
+}
+
 // .gitignoreファイル（マスター）を各プロジェクトに配布する
 task copyGitIgnoreFile doLast {
     subprojects.project.projectDir.each { File dir ->
@@ -205,6 +217,6 @@ def wsimport(wsdlFile, proxyDir) {
 }
 
 // タスクをグループ化する
-[initMySQL,]*.group = "mysql"
+[initMySQL, registerMySQLJDBCDriver]*.group = "mysql"
 [startActiveMQ, stopActiveMQ]*.group = "activemq"
 [copyGitIgnoreFile]*.group = "etc"
