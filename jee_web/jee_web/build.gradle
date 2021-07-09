@@ -9,31 +9,17 @@ dependencies {
     jaxws "com.sun.xml.ws:jaxws-tools:2.1.4"
 }
 
-// プラグイン読み込み
-apply plugin: "java"
+subprojects {
+    // プラグイン読み込み
+    apply plugin: "java"
+    apply plugin: "war"
+    apply plugin: "eclipse"
+    apply plugin: "jacoco"
 
-allprojects {
-    // 初期化処理
-    buildscript {
-        repositories {
-            mavenCentral()
-        }
-        dependencies {
-            classpath "mysql:mysql-connector-java:5.1.47"
-            classpath "org.apache.activemq:activemq-all:5.12.0"
-        }
-    }
     // リポジトリ設定
     repositories {
         mavenCentral()
     }
-}
-
-subprojects {
-    // プラグイン読み込み
-    apply plugin: "war"
-    apply plugin: "eclipse"
-    apply plugin: "jacoco"
 
     // 文字コード設定
     def defaultEncoding = "UTF-8"
@@ -384,4 +370,3 @@ def wsimport(wsdlFile, proxyDir) {
 [createMySQLDS, deleteMySQLDS, createMySQLSalesDS, deleteMySQLSalesDS]*.group = "mysql-datasource"
 [createManagedExecutorService, deleteManagedExecutorService]*.group = "managed-executor-service"
 [startActiveMQ, stopActiveMQ]*.group = "activemq"
-[copyGitIgnoreFile]*.group = "etc"
