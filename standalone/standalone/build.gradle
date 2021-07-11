@@ -28,6 +28,7 @@ subprojects {
     dependencies {
         compile "javax:javaee-api:7.0"
         compile "junit:junit:4.12"
+        runtime "mysql:mysql-connector-java:5.1.47"
         testCompile "junit:junit:4.12"
     }
 
