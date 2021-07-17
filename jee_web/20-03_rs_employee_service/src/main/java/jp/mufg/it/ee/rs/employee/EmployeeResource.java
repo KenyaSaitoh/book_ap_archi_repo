@@ -35,27 +35,17 @@ public class EmployeeResource {
         return employee;
     }
 
-    // リソース（社員1名）の取得
-    @GET
-    @Path("/xml/{employeeId}")
-    @Produces("text/xml")
-    public Employee getEmployeeAsXml(@PathParam("employeeId") int employeeId) {
-        Employee employee = entityManager.find(Employee.class, employeeId);
-        return employee;
-    }
-
     // リソース（社員全員）の取得
-    /*
     @SuppressWarnings("unchecked")
     @GET
+    @Path("/all")
     @Produces("application/json")
     public List<Employee> getEmployees() {
-        Query query = em.createQuery("SELECT e FROM Employee AS e");
+        Query query = entityManager.createQuery("SELECT e FROM Employee AS e");
 
         List<Employee> resultList = query.getResultList();
         return resultList;
     }
-    */
 
     // リソース（指定された部署に所属する全員）の取得
     @SuppressWarnings("unchecked")
@@ -71,13 +61,38 @@ public class EmployeeResource {
         return resultList;
     }
 
+    // リソース（指定された月給以上の社員）の取得
+    @SuppressWarnings("unchecked")
+    @Path("/query_by_salary")
+    @GET
+    @Produces("application/json")
+    public List<Employee> getEmployeesBySalary(
+            @QueryParam("lowerSalary") int lowerSalary,
+            @QueryParam("upperSalary") int upperSalary) {
+        Query query = entityManager.createQuery(
+                "SELECT e FROM Employee AS e " +
+                "WHERE :lowerSalary <= e.salary AND e.salary <= :upperSalary")
+                .setParameter("lowerSalary", lowerSalary)
+                .setParameter("upperSalary", upperSalary);
+        List<Employee> resultList = query.getResultList();
+        return resultList;
+    }
+
     // リソース（社員1名）の挿入
     // 冪等性なし
     @POST
     public Response createEmployee(Employee employee) {
         entityManager.persist(employee);
-        // return employee;
         return Response.status(201).entity(employee).build();
+    }
+
+    // リソース（社員1名）の削除
+    // 冪等性あり
+    @DELETE
+    @Path("/{employeeId}")
+    public void removeEmployee(@PathParam("employeeId") int employeeId) {
+        Employee employee = entityManager.find(Employee.class, employeeId);
+        entityManager.remove(employee);
     }
 
     // リソース（社員1名）の置換
@@ -97,15 +112,6 @@ public class EmployeeResource {
             entityManager.persist(employee);
             return Response.status(201).build();
         }
-    }
-
-    // リソース（社員1名）の削除
-    // 冪等性あり
-    @DELETE
-    @Path("/{employeeId}")
-    public void removeEmployee(@PathParam("employeeId") int employeeId) {
-        Employee employee = entityManager.find(Employee.class, employeeId);
-        entityManager.remove(employee);
     }
 
     // リソース（社員の月給）の更新処理

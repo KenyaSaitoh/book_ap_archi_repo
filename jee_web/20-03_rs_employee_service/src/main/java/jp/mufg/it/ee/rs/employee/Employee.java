@@ -1,20 +1,19 @@
 package jp.mufg.it.ee.rs.employee;
 
 import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.ws.rs.PathParam;
 
 @Entity
 @Table(name = "EMPLOYEE")
 // @XmlRootElement(name = "employee") // JSON形式で返すときはこのアノテーションは不要
 public class Employee implements Serializable {
 
-    @PathParam("employeeId")
     private Integer employeeId;
     private String employeeName;
     private String departmentName;

@@ -1,27 +1,47 @@
 package jp.mufg.it.ee.rs.person;
 
-import javax.ws.rs.PathParam;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-
-@XmlRootElement(name = "person")
 public class Person {
-    private int personId;
+    // ID
+    private Integer personId;
+
+    // 名前
     private String personName;
-    private int age;
+
+    // 年齢
+    private Integer age;
+
+    // 性別
     private String gender;
 
-    // @XmlElement(name = "personId")
-    @PathParam("personId")
-    public int getPersonId() {
+    // 引数なしのコンストラクタ
+    public Person() {}
+
+    // コンストラクタ
+    public Person(Integer personId, String personName, Integer age,
+            String gender) {
+        this.personId = personId;
+        this.personName = personName;
+        this.age = age;
+        this.gender = gender;
+    }
+
+    // コンストラクタ
+    public Person(String personName, Integer age, String gender) {
+        this.personName = personName;
+        this.age = age;
+        this.gender = gender;
+    }
+
+    // IDへのアクセサメソッド
+    public Integer getPersonId() {
         return personId;
     }
 
-    public void setPersonId(int personId) {
+    public void setPersonId(Integer personId) {
         this.personId = personId;
     }
 
-    @XmlElement(name = "personName")
+    // 名前へのアクセサメソッド
     public String getPersonName() {
         return personName;
     }
@@ -30,22 +50,22 @@ public class Person {
         this.personName = personName;
     }
 
-    @XmlElement(name = "age")
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    @XmlElement(name = "gender")
+    // 性別へのアクセサメソッド
     public String getGender() {
         return gender;
     }
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    // 年齢へのアクセサメソッド
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
     }
 
     @Override

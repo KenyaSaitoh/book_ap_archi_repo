@@ -1,0 +1,17 @@
+### getPerson
+curl -i localhost:8080/person_service/persons/1
+
+### getPersons
+curl -i localhost:8080/person_service/persons
+
+### replacePerson
+curl -i -X PUT localhost:8080/person_service/persons/2 -H "Content-Type: application/json" -d {\"personId\":2,\"personName\":\"Bob\",\"age\":36,\"gender\":\"male\"}
+curl -i localhost:8080/person_service/persons/2
+
+### createPerson
+curl -i -X POST localhost:8080/person_service/persons -H "Content-Type: application/json" -d {\"personName\":\"Frank\",\"age\":45,\"gender\":\"male\"}
+curl -i localhost:8080/person_service/persons
+
+### removePerson
+curl -i -X DELETE localhost:8080/person_service/persons/2
+curl -i localhost:8080/person_service/persons/2

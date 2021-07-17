@@ -1,0 +1,28 @@
+GitBashのcurlだとJSONメッセージが上手く送信できない模様！
+JSONへのバインディングでエラーが出る。
+Windowsの場合は、コマンドプロンプトからcurlコマンドを使うこと。
+
+### getEmployee
+curl -i localhost:8080/rs_employee_service/employees/10001
+
+### getEmployees
+curl -i localhost:8080/rs_employee_service/employees/all
+
+### getEmployeesByDepartmentName
+curl -i localhost:8080/rs_employee_service/employees?departmentName=SALES
+
+### getEmployeesBySalary
+curl -i "localhost:8080/rs_employee_service/employees/query_by_salary?lowerSalary=300000&upperSalary=450000"
+※クエリ文字列で"&"を使う場合は、URLをダブルクォーテーションで囲まないとエラーになる
+
+### replacePerson
+curl -i -X PUT localhost:8080/rs_employee_service/employees/10001 -H "Content-Type: application/json" -d {\"employeeId\":10001,\"employeeName\":\"Alice\",\"departmentName\":\"SALES\",\"salary\":510000}
+curl -i localhost:8080/rs_employee_service/employees/10001
+
+### createPerson
+curl -i -X POST localhost:8080/rs_employee_service/employees -H "Content-Type: application/json" -d {\"employeeName\":\"Steve\",\"departmentName\":\"PLANNING\",\"salary\":380000}
+curl -i localhost:8080/rs_employee_service/employees/10015
+
+### removePerson
+curl -i -X DELETE localhost:8080/rs_employee_service/employees/10015
+curl -i localhost:8080/rs_employee_service/employees/10015
