@@ -40,9 +40,8 @@ public class EmployeeResource {
     @GET
     @Path("/all")
     @Produces("application/json")
-    public List<Employee> getEmployees() {
+    public List<Employee> getEmployeesAll() {
         Query query = entityManager.createQuery("SELECT e FROM Employee AS e");
-
         List<Employee> resultList = query.getResultList();
         return resultList;
     }
@@ -86,15 +85,6 @@ public class EmployeeResource {
         return Response.status(201).entity(employee).build();
     }
 
-    // リソース（社員1名）の削除
-    // 冪等性あり
-    @DELETE
-    @Path("/{employeeId}")
-    public void removeEmployee(@PathParam("employeeId") int employeeId) {
-        Employee employee = entityManager.find(Employee.class, employeeId);
-        entityManager.remove(employee);
-    }
-
     // リソース（社員1名）の置換
     // 冪等性あり
     @PUT
@@ -112,6 +102,15 @@ public class EmployeeResource {
             entityManager.persist(employee);
             return Response.status(201).build();
         }
+    }
+
+    // リソース（社員1名）の削除
+    // 冪等性あり
+    @DELETE
+    @Path("/{employeeId}")
+    public void removeEmployee(@PathParam("employeeId") int employeeId) {
+        Employee employee = entityManager.find(Employee.class, employeeId);
+        entityManager.remove(employee);
     }
 
     // リソース（社員の月給）の更新処理

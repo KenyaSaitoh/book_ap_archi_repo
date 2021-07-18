@@ -1,11 +1,26 @@
 import groovy.io.FileType
 import groovy.sql.Sql
 
+buildscript {
+    // リポジトリ設定
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "mysql:mysql-connector-java:5.1.47"
+    }
+}
+
+// プラグイン読み込み
+apply plugin: "java"
+
 configurations {
     jaxws
 }
 
+// 依存関係設定
 dependencies {
+    compile "mysql:mysql-connector-java:5.1.47"
     jaxws "com.sun.xml.ws:jaxws-tools:2.1.4"
 }
 

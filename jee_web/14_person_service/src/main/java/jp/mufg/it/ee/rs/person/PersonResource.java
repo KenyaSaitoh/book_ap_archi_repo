@@ -21,57 +21,71 @@ public class PersonResource {
 
     // インジェクションポイント
     @Inject
-    private PersonRepository personRepository;
+    private PersonMapper personMapper;
 
-    @GET
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<Person> getPersons() {
-        System.out.println("[ PersonResources#getPersons ]");
-        return personRepository.selectAll();
-    }
-
+    // リソースの取得（主キー検索によるPerson取得）
     @GET
     @Path("/{personId}")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces(MediaType.APPLICATION_JSON)
     public Person getPerson(@PathParam("personId") int personId) {
-        System.out.println("[ PersonResources#getPerson ]");
-        return personRepository.select(personId);
+        System.out.println("[ PersonResource#getPerson ]");
+        return personMapper.select(personId);
     }
 
+    // リソースの取得（全Personリスト取得）
+    @GET
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Person> getPersonsAll() {
+        System.out.println("[ PersonResource#getPersonsAll ]");
+        return personMapper.selectAll();
+    }
+
+    // リソースの取得（年齢でソートして全Personリスト取得）
     @GET
     @Path("/sort_by_age")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces(MediaType.APPLICATION_JSON)
     public List<Person> getPersonsSortByAge(@QueryParam("isAsc")
             boolean isAsc) {
-        System.out.println("[ PersonResources#getPersonsSortByAge ]");
-        return personRepository.selectSortByAge(isAsc);
+        System.out.println("[ PersonResource#getPersonsSortByAge ]");
+        return personMapper.selectSortByAge(isAsc);
     }
 
+    // リソースの作成（Personの挿入）
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Person createPerson(Person person) {
-        System.out.println("[ PersonResources#createPerson ]");
-        Person person2 = personRepository.insert(person);
+        System.out.println("[ PersonResource#createPerson ]");
+        Person person2 = personMapper.insert(person);
         return person2;
     }
 
-    @DELETE
-    @Path("/{personId}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void removePerson(@PathParam("personId") int personId) {
-        System.out.println("[ PersonResources#removePerson ]");
-        personRepository.delete(personId);
-    }
-
+    // リソースの置換（Personの更新または挿入）
     @PUT
     @Path("/{personId}")
     @Consumes(MediaType.APPLICATION_JSON)
     public void replacePerson(Person person) {
-        System.out.println("[ PersonResources#replacePerson ]");
-        personRepository.update(person);
+        System.out.println("[ PersonResource#replacePerson ]");
+        personMapper.update(person);
+    }
+
+    // リソースの削除（Personの削除）
+    @DELETE
+    @Path("/{personId}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void removePerson(@PathParam("personId") int personId) {
+        System.out.println("[ PersonResource#removePerson ]");
+        personMapper.delete(personId);
+    }
+
+    // リソースの更新（年齢）
+    public int updatePersonAge(Person person) {
+        System.out.println("[ PersonResource#updatePersonAge ]");
+        int result = personMapper.updateAge(person.getPersonId(),
+                person.getAge());
+        return result;
     }
 }

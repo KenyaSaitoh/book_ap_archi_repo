@@ -9,7 +9,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import javax.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
-public class PersonRepository {
+public class PersonMapper {
+    // 主キー検索
     public Person select(Integer personId) {
         for (Person person : personList) {
             if (person.getPersonId().equals(personId)) {
@@ -19,22 +20,14 @@ public class PersonRepository {
         return null;
     }
 
+    // 全件検索
     public List<Person> selectAll() {
         Collections.sort(personList, new PersonPersonIdComparator());
         dumpPersonList();
         return personList;
     }
 
-    public List<Person> selectByLowerAge(Integer lowerAge) {
-        List<Person> pList = new ArrayList<Person>();
-        for (Person person : personList) {
-            if (lowerAge <= person.getAge()) {
-                pList.add(person);
-            }
-        }
-        return pList;
-    }
-
+    // 全件検索（ソート）
     public List<Person> selectSortByAge(boolean isAsc) {
         List<Person> pList = new ArrayList<Person>(personList);
         if (isAsc) {
@@ -45,6 +38,18 @@ public class PersonRepository {
         return pList;
     }
 
+    // 条件検索（指定された年齢以上）
+    public List<Person> selectByLowerAge(Integer lowerAge) {
+        List<Person> pList = new ArrayList<Person>();
+        for (Person person : personList) {
+            if (lowerAge <= person.getAge()) {
+                pList.add(person);
+            }
+        }
+        return pList;
+    }
+
+    // 最大値取得
     public int selectMaxPersonId() {
         int maxPersonId = 0;
         for (Person person : personList) {
@@ -55,6 +60,7 @@ public class PersonRepository {
         return maxPersonId;
     }
 
+    // 挿入
     public Person insert(Person person) {
         int maxPersonId = selectMaxPersonId();
         person.setPersonId(maxPersonId + 1);
@@ -63,6 +69,7 @@ public class PersonRepository {
         return person;
     }
 
+    // 一件削除
     public int delete(Integer personId) {
         for (Person person : personList) {
             if (person.getPersonId().equals(personId)) {
@@ -75,6 +82,7 @@ public class PersonRepository {
         return 0;
     }
 
+    // 一件更新
     public int update(Person person) {
         for (Person p : personList) {
             if (p.getPersonId().equals(person.getPersonId())) {
@@ -88,6 +96,7 @@ public class PersonRepository {
         return 0;
     }
 
+    // 一括更新
     public int updateAge(Integer personId, Integer age) {
         for (Person p : personList) {
             if (p.getPersonId().equals(personId)) {
@@ -104,11 +113,11 @@ public class PersonRepository {
 
     private static void dumpPersonList() {
         for (Person person : personList) {
-            System.out.print(person + "###");
-            System.out.println();
+            System.out.println(person);
         }
     }
 
+    // 簡易データベース
     static {
         // Alice
         Person person1 = new Person(1, "Alice", 25, "female");
@@ -124,8 +133,10 @@ public class PersonRepository {
     static class PersonPersonIdComparator implements Comparator<Person> {
         @Override
         public int compare(Person p1, Person p2) {
-            if (p1.getPersonId() < p2.getPersonId()) return -1;
-            if (p1.getPersonId() > p2.getPersonId()) return 1;
+            if (p1.getPersonId() < p2.getPersonId())
+                return -1;
+            if (p1.getPersonId() > p2.getPersonId())
+                return 1;
             return 0;
         }
     }
@@ -133,8 +144,10 @@ public class PersonRepository {
     static class PersonAgeAscComparator implements Comparator<Person> {
         @Override
         public int compare(Person p1, Person p2) {
-            if (p1.getAge() < p2.getAge()) return 1;
-            if (p1.getAge() > p2.getAge()) return -1;
+            if (p1.getAge() < p2.getAge())
+                return 1;
+            if (p1.getAge() > p2.getAge())
+                return -1;
             return 0;
         }
     }
@@ -142,8 +155,10 @@ public class PersonRepository {
     static class PersonAgeDescComparator implements Comparator<Person> {
         @Override
         public int compare(Person p1, Person p2) {
-            if (p1.getAge() < p2.getAge()) return -1;
-            if (p1.getAge() > p2.getAge()) return 1;
+            if (p1.getAge() < p2.getAge())
+                return -1;
+            if (p1.getAge() > p2.getAge())
+                return 1;
             return 0;
         }
     }

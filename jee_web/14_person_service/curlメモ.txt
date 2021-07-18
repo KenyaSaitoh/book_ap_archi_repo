@@ -1,7 +1,7 @@
 ### getPerson
 curl -i localhost:8080/person_service/persons/1
 
-### getPersons
+### getPersonsAll
 curl -i localhost:8080/person_service/persons
 
 ### replacePerson
