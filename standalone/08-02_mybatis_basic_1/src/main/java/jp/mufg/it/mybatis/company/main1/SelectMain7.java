@@ -8,7 +8,6 @@ import org.apache.ibatis.session.SqlSession;
 
 import jp.mufg.it.mybatis.company.common.SqlSessionHolder;
 import jp.mufg.it.mybatis.company.dto.Employee;
-import jp.mufg.it.mybatis.company.util.ResultUtil;
 
 /*
  * SELECT文、条件検索（Mapパラメータ使用）、複数件ヒット
@@ -25,8 +24,14 @@ public class SelectMain7 {
         param.put("upperSalary", 400000);
 
         // SELECT文を発行し結果を表示する
-        List<Employee> result = sqlSession.selectList("selectEmployeesWithMap",
+        List<Employee> resultList = sqlSession.selectList("selectEmployeesWithMap",
                 param);
-        ResultUtil.showEmployeeList(result);
+        showEmployeeList(resultList);
+    }
+
+    private static void showEmployeeList(List<Employee> resultList) {
+        for (Employee employee : resultList) {
+            System.out.println(employee);
+        }
     }
 }

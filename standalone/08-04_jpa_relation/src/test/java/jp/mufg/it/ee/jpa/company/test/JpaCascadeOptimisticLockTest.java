@@ -16,13 +16,13 @@ public class JpaCascadeOptimisticLockTest extends JpaTestBase {
     public void test1() {
         System.out.println("[ test1 ] Start");
 
-        Department department = em.find(Department.class, 1);
+        Department department = entityManager.find(Department.class, 1);
         List<Employee> employees = department.getEmployees();
         Employee employee = employees.get(0);
         employee.setSalary(510000);
 
-        em.clear();
-        em.merge(department);
+        entityManager.clear();
+        entityManager.merge(department);
 
         try {
             Thread.sleep(20000);
@@ -32,12 +32,12 @@ public class JpaCascadeOptimisticLockTest extends JpaTestBase {
         try {
             // 親をマージした場合、カスケードされて子が更新されると、
             // 子の楽観ロックは有効に作用する
-            em.flush();
+            entityManager.flush();
         } catch(OptimisticLockException ole) {
             throw ole;
             // リカバリ
         }
         commit();
-        System.out.println("[ test1 ] End\n");
+        System.out.println("[ test1 ]");
     }
 }

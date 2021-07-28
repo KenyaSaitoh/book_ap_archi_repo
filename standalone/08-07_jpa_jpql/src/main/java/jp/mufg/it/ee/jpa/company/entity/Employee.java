@@ -1,6 +1,7 @@
 package jp.mufg.it.ee.jpa.company.entity;
 
 import java.util.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -126,5 +127,13 @@ public class Employee {
 
     public void setVersion(Long version) {
         this.version = version;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee [employeeId=" + employeeId + ", employeeName="
+                + employeeName + ", department=" + department
+                + ", entranceDate=" + entranceDate + ", jobType=" + jobType
+                + ", salary=" + salary + ", version=" + version + "]";
     }
 }

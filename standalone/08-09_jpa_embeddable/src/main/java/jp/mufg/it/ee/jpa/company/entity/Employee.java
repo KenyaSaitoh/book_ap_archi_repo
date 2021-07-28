@@ -108,4 +108,11 @@ public class Employee {
     public void setAddress(Address address) {
         this.address = address;
     }
+
+    @Override
+    public String toString() {
+        return "Employee [employeeId=" + employeeId + ", employeeName="
+                + employeeName + ", department=" + department + ", jobType="
+                + jobType + ", salary=" + salary + ", address=" + address + "]";
+    }
 }

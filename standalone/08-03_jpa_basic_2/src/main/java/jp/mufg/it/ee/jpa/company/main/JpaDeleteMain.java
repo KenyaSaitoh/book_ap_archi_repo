@@ -15,22 +15,22 @@ public class JpaDeleteMain {
                 Persistence.createEntityManagerFactory("MyPersistenceUnit");
 
         // エンティティマネージャを取得する
-        EntityManager em = emf.createEntityManager();
+        EntityManager entityManager= emf.createEntityManager();
 
         // エンティティトランザクションを開始する
-        EntityTransaction et = em.getTransaction();
-        et.begin();
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+        entityTransaction.begin();
 
         // findメソッドにより削除対象のEmployeeインスタンスを取得する
-        Employee employee = em.find(Employee.class, 10001);
+        Employee employee = entityManager.find(Employee.class, 10002);
 
         // removeメソッドに、取得したEmployeeインスタンスを渡す
-        em.remove(employee);
+        entityManager.remove(employee);
 
         // エンティティトランザクションをコミットする
-        et.commit();
+        entityTransaction.commit();
 
         // エンティティマネージャをクローズする
-        em.close();
+        entityManager.close();
     }
 }

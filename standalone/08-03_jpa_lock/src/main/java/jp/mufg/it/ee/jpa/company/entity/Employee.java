@@ -1,16 +1,9 @@
 package jp.mufg.it.ee.jpa.company.entity;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
 @Entity
@@ -89,5 +82,12 @@ public class Employee {
 
     public void setVersion(Long version) {
         this.version = version;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee [employeeId=" + employeeId + ", employeeName="
+                + employeeName + ", departmentName=" + departmentName
+                + ", salary=" + salary + ", version=" + version + "]";
     }
 }

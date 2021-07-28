@@ -14,10 +14,10 @@ public class JpaSelectMain {
                 Persistence.createEntityManagerFactory("MyPersistenceUnit");
 
         // エンティティマネージャを取得する
-        EntityManager em = emf.createEntityManager();
+        EntityManager entityManager= emf.createEntityManager();
 
         // findメソッドによりEmployeeインスタンスを取得する
-        Employee employee = em.find(Employee.class, 10001);
+        Employee employee = entityManager.find(Employee.class, 10001);
 
         // Employeeインスタンスのゲッタにより、カラム値を取得する
         String employeeName = employee.getEmployeeName();
@@ -26,6 +26,6 @@ public class JpaSelectMain {
         System.out.println("employeeName ---> " + employeeName);
 
         // エンティティマネージャをクローズする
-        em.close();
+        entityManager.close();
     }
 }

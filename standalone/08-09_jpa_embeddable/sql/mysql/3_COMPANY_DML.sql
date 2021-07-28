@@ -5,8 +5,9 @@ DELETE FROM DEPARTMENT;
 -- 部署テーブル
 INSERT INTO DEPARTMENT VALUES(1, '企画部', '東京本社', '100-0000', '東京都千代田区', '1-2-3');
 INSERT INTO DEPARTMENT VALUES(2, '人事部', '東京本社', '100-0000', '東京都千代田区', '1-2-3');
-INSERT INTO DEPARTMENT VALUES(3, '営業部', '新宿支社', '160-0001', '東京都新宿区', '1-2-3');
-INSERT INTO DEPARTMENT VALUES(4, '商品開発部', '新宿支社', '160-0001', '東京都新宿区', '1-2-3');
+INSERT INTO DEPARTMENT VALUES(3, '営業部', '新宿新都心支社', '160-0001', '東京都新宿区', '1-2-3');
+INSERT INTO DEPARTMENT VALUES(4, '商品開発部', '新宿東口支社', '160-0001', '東京都新宿区', '4-5-6');
+INSERT INTO DEPARTMENT VALUES(5, '総務部', '東京本社', '100-0000', '東京都千代田区', '1-2-3');
 
 -- 社員テーブル
 INSERT INTO EMPLOYEE VALUES(10001, 'Alice', 3, 0, 500000, '132-0000', '東京都江戸川区', '1-2-3');

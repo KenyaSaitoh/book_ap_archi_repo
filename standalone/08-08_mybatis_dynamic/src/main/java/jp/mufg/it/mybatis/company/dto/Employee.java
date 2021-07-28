@@ -102,4 +102,12 @@ public class Employee {
     public void setVersion(Long version) {
         this.version = version;
     }
+
+    @Override
+    public String toString() {
+        return "Employee [employeeId=" + employeeId + ", employeeName="
+                + employeeName + ", departmentName=" + departmentName
+                + ", entranceDate=" + entranceDate + ", jobType=" + jobType
+                + ", salary=" + salary + ", version=" + version + "]";
+    }
 }

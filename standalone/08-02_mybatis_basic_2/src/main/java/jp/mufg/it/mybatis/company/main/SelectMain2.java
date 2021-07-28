@@ -8,7 +8,6 @@ import org.apache.ibatis.session.SqlSession;
 import jp.mufg.it.mybatis.company.common.SqlSessionHolder;
 import jp.mufg.it.mybatis.company.dto.Employee;
 import jp.mufg.it.mybatis.company.mapper.EmployeeMapper;
-import jp.mufg.it.mybatis.company.util.ResultUtil;
 
 /*
  * SELECT文、複数条件検索（IN句展開）
@@ -30,6 +29,12 @@ public class SelectMain2 {
         // SELECT文を発行し結果を表示する
         List<Employee> resultList = mapper
                 .selectVariousDepartment(departmentNameList);
-        ResultUtil.showEmployeeList(resultList);
+        showEmployeeList(resultList);
+    }
+
+    private static void showEmployeeList(List<Employee> resultList) {
+        for (Employee employee : resultList) {
+            System.out.println(employee);
+        }
     }
 }

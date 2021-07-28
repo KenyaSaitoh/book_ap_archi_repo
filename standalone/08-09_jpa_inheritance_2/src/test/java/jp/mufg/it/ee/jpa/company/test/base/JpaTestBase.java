@@ -17,7 +17,7 @@ public class JpaTestBase {
     public void beforeTest() {
         emf = Persistence.createEntityManagerFactory("MyPersistenceUnit");
         em = emf.createEntityManager();
-        et = em.getTransaction();
+        et = entityManager.getTransaction();
         et.begin();
     }
 
@@ -26,7 +26,7 @@ public class JpaTestBase {
     public void afterTest() {
         try {
             if (em != null) {
-                em.close();
+                entityManager.close();
             }
             if (emf != null) {
                 emf.close();

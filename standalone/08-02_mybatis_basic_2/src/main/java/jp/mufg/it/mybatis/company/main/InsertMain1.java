@@ -22,7 +22,7 @@ public class InsertMain1 {
         // 挿入対象のEmployeeインスタンスを生成する
         Calendar cal = Calendar.getInstance();
         cal.set(2017, 11, 1);
-        Employee param = new Employee(10021, "Steve", null,
+        Employee param = new Employee(10015, "Steve", null,
                 new Date(cal.getTimeInMillis()), JobType.LEADER, 380000, 0L);
 
         // INSERT文を発行しコミットする

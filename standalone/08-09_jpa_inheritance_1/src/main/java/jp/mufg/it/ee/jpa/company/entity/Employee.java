@@ -1,6 +1,7 @@
 package jp.mufg.it.ee.jpa.company.entity;
 
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
@@ -80,5 +81,12 @@ public abstract class Employee {
 
     public void setEntranceDate(Date entranceDate) {
         this.entranceDate = entranceDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee [employeeId=" + employeeId + ", employeeName="
+                + employeeName + ", department=" + department
+                + ", entranceDate=" + entranceDate + "]";
     }
 }

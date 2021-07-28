@@ -15,22 +15,22 @@ public class JpaUpdateMain {
                 Persistence.createEntityManagerFactory("MyPersistenceUnit");
 
         // エンティティマネージャを取得する
-        EntityManager em = emf.createEntityManager();
+        EntityManager entityManager= emf.createEntityManager();
 
         // エンティティトランザクションを開始する
-        EntityTransaction et = em.getTransaction();
-        et.begin();
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+        entityTransaction.begin();
 
         // findメソッドにより更新対象のEmployeeインスタンスを取得する
-        Employee employee = em.find(Employee.class, 10001);
+        Employee employee = entityManager.find(Employee.class, 10001);
 
         // Employeeインスタンスの永続フィールドの値を書き換える
         employee.setSalary(employee.getSalary() + 10000);
 
         // エンティティトランザクションをコミットする
-        et.commit();
+        entityTransaction.commit();
 
         // エンティティマネージャをクローズする
-        em.close();
+        entityManager.close();
     }
 }

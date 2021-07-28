@@ -5,7 +5,6 @@ import org.apache.ibatis.session.SqlSession;
 import jp.mufg.it.mybatis.company.common.SqlSessionHolder;
 import jp.mufg.it.mybatis.company.dto.Employee;
 import jp.mufg.it.mybatis.company.mapper.EmpDeptJoinMapper;
-import jp.mufg.it.mybatis.company.util.ResultUtil;
 
 /*
  * ジョインセレクトによって構造化オブジェクトを取得する
@@ -23,7 +22,7 @@ public class JoinSelectMain1 {
         // SELECT文を発行し、単一のMany側（Employeeオブジェクト）を取得する
         Employee employee = mapper.selectEmployee(10001);
 
-        // 結果を表示する
-        ResultUtil.showEmployee(employee);
+        // 検索結果を表示する
+        System.out.println(employee);
     }
 }

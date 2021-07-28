@@ -17,12 +17,12 @@ public class JpaFetchStrategyTest extends JpaTestBase {
     public void test1() {
         System.out.println("[ test1 ] Start");
         System.out.println("===== findメソッド呼び出し開始 =====");
-        Employee employee = em.find(Employee.class, 10011);
+        Employee employee = entityManager.find(Employee.class, 10011);
         System.out.println("===== 関連するエンティティオブジェクトの" +
                 "永続フィールドにアクセス開始 =====");
         String employeeName = employee.getEmployeeName();
         System.out.println("employee.getEmployeeName() ---> " + employeeName);
-        System.out.println("[ test1 ] End\n");
+        System.out.println("[ test1 ]");
     }
 
     // Department → Employee（レイジーフェッチ）
@@ -30,13 +30,13 @@ public class JpaFetchStrategyTest extends JpaTestBase {
     public void test2() {
         System.out.println("[ test2 ] Start");
         System.out.println("===== findメソッド呼び出し開始 =====");
-        Department department = em.find(Department.class, 1);
+        Department department = entityManager.find(Department.class, 1);
         System.out.println("===== 関連するエンティティオブジェクトの" +
                 "永続フィールドにアクセス開始 =====");
         Employee employee = department.getEmployees().get(0);
         System.out.println("department.getEmployees().get(0) ---> "
                 + employee);
-        System.out.println("[ test2 ] End\n");
+        System.out.println("[ test2 ]");
     }
 
     // レイジーフェッチにおける「N+1 SELECT」問題
@@ -44,7 +44,7 @@ public class JpaFetchStrategyTest extends JpaTestBase {
     @Test
     public void test3() {
         System.out.println("[ test3 ] Start");
-        Query query = em.createQuery("SELECT d FROM Department AS d");
+        Query query = entityManager.createQuery("SELECT d FROM Department AS d");
         List<Department> departmentList = (List<Department>)query.getResultList();
         System.out.println("##### ループ開始 #####");
         for (Department department: departmentList) {
@@ -53,7 +53,7 @@ public class JpaFetchStrategyTest extends JpaTestBase {
                 System.out.println(employee.getEmployeeName());
             }
         }
-        System.out.println("[ test3 ] End\n");
+        System.out.println("[ test3 ]");
     }
 
     // test3における「N+1 SELECT」をフェッチジョインによって解決する
@@ -61,7 +61,7 @@ public class JpaFetchStrategyTest extends JpaTestBase {
     @Test
     public void test4() {
         System.out.println("[ test4 ] Start");
-        Query query = em.createQuery(
+        Query query = entityManager.createQuery(
                 "SELECT DISTINCT d FROM Department AS d JOIN FETCH d.employees");
         List<Department> departmentList = (List<Department>)query.getResultList();
         // DICTINCTをつけない場合、結果が重複するので、
@@ -74,6 +74,6 @@ public class JpaFetchStrategyTest extends JpaTestBase {
                 System.out.println(employee.getEmployeeName());
             }
         }
-        System.out.println("[ test4 ] End\n");
+        System.out.println("[ test4 ]");
     }
 }

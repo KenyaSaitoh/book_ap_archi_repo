@@ -7,7 +7,6 @@ import org.apache.ibatis.session.SqlSession;
 import jp.mufg.it.mybatis.company.common.SqlSessionHolder;
 import jp.mufg.it.mybatis.company.dto.Employee;
 import jp.mufg.it.mybatis.company.mapper.EmployeeMapper;
-import jp.mufg.it.mybatis.company.util.ResultUtil;
 
 /*
  * SELECT文、条件検索（Mapパラメータ使用）、複数件ヒット
@@ -22,7 +21,13 @@ public class MapperSelectMain2 {
         EmployeeMapper mapper = sqlSession.getMapper(EmployeeMapper.class);
 
         // SELECT文を発行し結果を表示する
-        List<Employee> result = mapper.selectEmployees("営業部", 300000);
-        ResultUtil.showEmployeeList(result);
+        List<Employee> resultList = mapper.selectEmployees("営業部", 300000);
+        showEmployeeList(resultList);
+    }
+
+    private static void showEmployeeList(List<Employee> resultList) {
+        for (Employee employee : resultList) {
+            System.out.println(employee);
+        }
     }
 }

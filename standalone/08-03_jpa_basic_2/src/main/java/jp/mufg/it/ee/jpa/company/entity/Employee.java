@@ -1,6 +1,8 @@
 package jp.mufg.it.ee.jpa.company.entity;
 
+import java.util.Arrays;
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -48,13 +50,14 @@ public class Employee {
     // コンストラクタ
     public Employee(Integer employeeId, String employeeName,
             String departmentName, Date entranceDate, JobType jobType,
-            Integer salary) {
+            Integer salary, byte[] photo) {
         this.employeeId = employeeId;
         this.employeeName = employeeName;
         this.departmentName = departmentName;
         this.entranceDate = entranceDate;
         this.jobType = jobType;
         this.salary = salary;
+        this.photo = photo;
     }
 
     // 社員IDへのアクセサメソッド
@@ -118,5 +121,14 @@ public class Employee {
 
     public void setPhoto(byte[] photo) {
         this.photo = photo;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee [employeeId=" + employeeId + ", employeeName="
+                + employeeName + ", departmentName=" + departmentName
+                + ", entranceDate=" + entranceDate + ", jobType=" + jobType
+                + ", salary=" + salary + ", photo=" + Arrays.toString(photo)
+                + "]";
     }
 }

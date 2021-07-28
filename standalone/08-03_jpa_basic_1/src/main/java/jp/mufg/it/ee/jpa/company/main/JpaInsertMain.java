@@ -16,22 +16,22 @@ public class JpaInsertMain {
                 Persistence.createEntityManagerFactory("MyPersistenceUnit");
 
         // エンティティマネージャを取得する
-        EntityManager em = emf.createEntityManager();
+        EntityManager entityManager= emf.createEntityManager();
 
         // エンティティトランザクションを開始する
-        EntityTransaction et = em.getTransaction();
-        et.begin();
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+        entityTransaction.begin();
 
         // 挿入対象のEmployeeクラスのインスタンスを生成する
-        Employee employee = new Employee(10021, "Steve", "総務部", 380000);
+        Employee employee = new Employee(10015, "Steve", "総務部", 380000);
 
         // persistメソッドに、生成したEmployeeインスタンスを渡す
-        em.persist(employee);
+        entityManager.persist(employee);
 
         // エンティティトランザクションをコミットする
-        et.commit();
+        entityTransaction.commit();
 
         // エンティティマネージャをクローズする
-        em.close();
+        entityManager.close();
     }
 }

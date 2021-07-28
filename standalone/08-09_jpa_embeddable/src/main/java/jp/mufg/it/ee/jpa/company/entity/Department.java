@@ -100,4 +100,11 @@ public class Department {
     public void setEmployees(List<Employee> employees) {
         this.employees = employees;
     }
+
+    @Override
+    public String toString() {
+        return "Department [departmentId=" + departmentId + ", departmentName="
+                + departmentName + ", location=" + location + ", address="
+                + address + ", employees=" + employees + "]";
+    }
 }

@@ -19,7 +19,7 @@ public class MapperInsertMain1 {
         EmployeeMapper mapper = sqlSession.getMapper(EmployeeMapper.class);
 
         // 挿入対象のEmployeeインスタンスを生成する
-        Employee param = new Employee(10021, "Steve", "企画部", 380000);
+        Employee param = new Employee(10015, "Steve", "企画部", 380000);
 
         // INSERT文を発行しコミットする
         mapper.insertEmployee(param);

@@ -17,36 +17,36 @@ public class JpaInheritanceSingleTableTest extends JpaTestBase {
     @Test
     public void test1() {
         System.out.println("[ test1 ] Start");
-        Fulltimer fulltimer = em.find(Fulltimer.class, 10015);
+        Fulltimer fulltimer = entityManager.find(Fulltimer.class, 10015);
         fulltimer.setsalary(fulltimer.getsalary() + 5000);
         commit();
         ResultUtil.showStaff(fulltimer);
-        System.out.println("[ test1 ] End\n");
+        System.out.println("[ test1 ]");
     }
 
     // パートタイマーを検索 → 更新
     @Test
     public void test2() {
         System.out.println("[ test2 ] Start");
-        Parttimer parttimer = em.find(Parttimer.class, 20004);
+        Parttimer parttimer = entityManager.find(Parttimer.class, 20004);
         parttimer.setParttimerPayment(parttimer.getParttimerPayment() + 200);
         commit();
         ResultUtil.showParttimer(parttimer);
-        System.out.println("[ test2 ] End\n");
+        System.out.println("[ test2 ]");
     }
 
     // パートタイマーを挿入
     @Test
     public void test3() {
         System.out.println("[ test3 ] Start");
-        Department department = em.find(Department.class, 5);
+        Department department = entityManager.find(Department.class, 5);
         Calendar cal = Calendar.getInstance();
         cal.set(2009, 3, 1);
         Parttimer parttimer = new Parttimer(20011, "まつだ あゆみ", department,
                 new Date(cal.getTimeInMillis()), 1500);
-        em.persist(parttimer);
+        entityManager.persist(parttimer);
         commit();
         ResultUtil.showParttimer(parttimer);
-        System.out.println("[ test3 ] End\n");
+        System.out.println("[ test3 ]");
     }
 }

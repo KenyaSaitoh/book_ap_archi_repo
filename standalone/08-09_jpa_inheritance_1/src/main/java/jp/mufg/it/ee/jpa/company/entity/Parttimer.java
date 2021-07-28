@@ -1,6 +1,7 @@
 package jp.mufg.it.ee.jpa.company.entity;
 
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -30,5 +31,10 @@ public class Parttimer extends Employee {
 
     public void setParttimerPayment(Integer parttimerPayment) {
         this.parttimerPayment = parttimerPayment;
+    }
+
+    @Override
+    public String toString() {
+        return "Parttimer [parttimerPayment=" + parttimerPayment + "]";
     }
 }

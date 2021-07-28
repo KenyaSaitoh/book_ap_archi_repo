@@ -2,6 +2,7 @@ package jp.mufg.it.ee.jpa.company.entity;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -81,5 +82,12 @@ public class Department {
 
     public void setEmployees(List<Employee> employees) {
         this.employees = employees;
+    }
+
+    @Override
+    public String toString() {
+        return "Department [departmentId=" + departmentId + ", departmentName="
+                + departmentName + ", buildingName=" + buildingName + ", floor="
+                + floor + ", employees=" + employees + "]";
     }
 }

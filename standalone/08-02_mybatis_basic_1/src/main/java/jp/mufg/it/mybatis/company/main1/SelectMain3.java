@@ -4,7 +4,6 @@ import org.apache.ibatis.session.SqlSession;
 
 import jp.mufg.it.mybatis.company.common.SqlSessionHolder;
 import jp.mufg.it.mybatis.company.dto.Employee;
-import jp.mufg.it.mybatis.company.util.ResultUtil;
 
 /*
  * SELECT文、主キー検索、ネーミングルールによる自動結果マッピング
@@ -17,6 +16,6 @@ public class SelectMain3 {
 
         // SELECT文を発行し結果を表示する
         Employee result = sqlSession.selectOne("selectEmployee3", 10005);
-        ResultUtil.showEmployee(result);
+        System.out.println(result);
     }
 }

@@ -117,7 +117,7 @@ public class EmployeeResource {
     // 冪等性なし
     @POST
     @Path("/{employeeId}")
-    public void updateMonthlySalary(@PathParam("employeeId") int employeeId,
+    public void updatesalary(@PathParam("employeeId") int employeeId,
             @FormParam("amount") int amount) {
         Employee employee = entityManager.find(Employee.class, employeeId);
         employee.setSalary(employee.getSalary() + amount);
