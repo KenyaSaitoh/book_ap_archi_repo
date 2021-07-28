@@ -105,6 +105,6 @@ public class Department {
     public String toString() {
         return "Department [departmentId=" + departmentId + ", departmentName="
                 + departmentName + ", location=" + location + ", address="
-                + address + ", employees=" + employees + "]";
+                + address + "]";
     }
 }
