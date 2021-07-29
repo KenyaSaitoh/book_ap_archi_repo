@@ -1,4 +1,4 @@
-package jp.mufg.it.ee.jpa.company.main1;
+package jp.mufg.it.ee.jpa.company.main2;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

@@ -18,12 +18,12 @@ public class JpaNamedQueryMain extends JpaTestBase {
     // 名前付きクエリ
     @Test
     public void test1() {
-        System.out.println("[ test1 ] Start");
+        System.out.println("===== TEST1 START =====");
         Query query = entityManager.createNamedQuery("findEmployeesBysalary")
                 .setParameter("salary", 400000);
         List<Employee> resultList = query.getResultList();
         showEmployeeList(resultList);
-        System.out.println("[ test1 End ]");
+        System.out.println("===== TEST1 END =====\n");
     }
 
     private static void showEmployeeList(List<Employee> resultList) {

@@ -1,4 +1,4 @@
-package jp.mufg.it.ee.jpa.company.main;
+package jp.mufg.it.ee.jpa.company.main1;
 
 import java.util.List;
 
@@ -10,10 +10,10 @@ import javax.persistence.Query;
 import jp.mufg.it.ee.jpa.company.entity.Department;
 import jp.mufg.it.ee.jpa.company.entity.Employee;
 
-// 機能関数のテスト
-@SuppressWarnings("unchecked")
-public class JpaGeneralFunctionMain {
+// リレーションのテスト
+public class JpaRelationMain {
 
+    @SuppressWarnings("unchecked")
     public static void main(String[] args) {
         // エンティティマネージャファクトリを取得する
         EntityManagerFactory emf =
@@ -22,37 +22,25 @@ public class JpaGeneralFunctionMain {
         // エンティティマネージャを取得する
         EntityManager entityManager = emf.createEntityManager();
 
-        // LENGTH
+        // 主キー検索
         {
         System.out.println("===== TEST1 START =====");
-        Query query = entityManager.createQuery(
-                "SELECT e FROM Employee AS e " +
-                "WHERE 8 < LENGTH(e.employeeName)");
-        List<Employee> resultList = query.getResultList();
-        showEmployeeList(resultList);
-        System.out.println("===== TEST1 END =====\n");
+        Employee employee = entityManager.find(Employee.class, 10007);
+        System.out.println(employee);
+        System.out.println("===== TEST1#END =====\n");
         }
 
-        // SIZE
+        // 条件検索
         {
         System.out.println("===== TEST2 START =====");
         Query query = entityManager.createQuery(
-                "SELECT d FROM Department AS d " +
-                "WHERE SIZE(d.employees) = 3");
-        List<Department> resultList = query.getResultList();
-        showDepartmentList(resultList);
-        System.out.println("===== TEST2 END =====\n");
-        }
-
-        // SUBSTRING
-        {
-        System.out.println("===== TEST3 START =====");
-        Query query = entityManager.createQuery(
-                "SELECT e FROM Employee AS e " +
-                "WHERE SUBSTRING(e.employeeName, 2, 1) = 'か'");
+                "SELECT e FROM Employee e " +
+                "WHERE :lower <= e.salary AND e.salary <= :upper")
+                .setParameter("lower", 300000)
+                .setParameter("upper", 450000);
         List<Employee> resultList = query.getResultList();
         showEmployeeList(resultList);
-        System.out.println("===== TEST3 END =====\n");
+        System.out.println("===== TEST2#END =====\n");
         }
     }
 

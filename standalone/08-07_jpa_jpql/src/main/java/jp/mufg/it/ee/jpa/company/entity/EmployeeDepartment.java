@@ -80,9 +80,8 @@ public class EmployeeDepartment {
 
     @Override
     public String toString() {
-        return "EmployeeDepartment [employeeId=" + employeeId
-                + ", employeeName=" + employeeName + ", salary=" + salary
-                + ", departmentId=" + departmentId + ", departmentName="
-                + departmentName + ", location=" + location + "]";
+        return "EmployeeDepartment [" + employeeId + ", " + employeeName + ", "
+                + salary + ", " + departmentId + ", " + departmentName + ", "
+                + location + "]";
     }
 }

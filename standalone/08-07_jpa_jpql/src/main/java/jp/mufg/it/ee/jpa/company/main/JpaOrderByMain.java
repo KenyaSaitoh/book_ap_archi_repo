@@ -18,31 +18,31 @@ public class JpaOrderByMain extends JpaTestBase {
     // ソート（ORDER BY） 1
     @Test
     public void test1() {
-        System.out.println("[ test1 ] Start");
+        System.out.println("===== TEST1 START =====");
         Query query = entityManager.createQuery(
                 "SELECT e FROM Employee AS e " +
                 "ORDER BY e.department.departmentId");
         List<Employee> resultList = query.getResultList();
         showEmployeeList2(resultList);
-        System.out.println("[ test1 End ]");
+        System.out.println("===== TEST1 END =====\n");
     }
 
     // ソート（ORDER BY） 2
     @Test
     public void test2() {
-        System.out.println("[ test2 ] Start");
+        System.out.println("===== TEST2 START =====");
         Query query = entityManager.createQuery(
                 "SELECT e FROM Employee AS e " +
                 "ORDER BY e.department.departmentId, e.salary");
         List<Employee> resultList = query.getResultList();
         showEmployeeList2(resultList);
-        System.out.println("[ test2 End ]");
+        System.out.println("===== TEST2 END =====\n");
     }
 
     // ソート（ORDER BY） 3
     @Test
     public void test3() {
-        System.out.println("[ test3 ] Start");
+        System.out.println("===== TEST3 START =====");
         Query query = entityManager.createQuery(
                 "SELECT e FROM Employee AS e " +
                 "ORDER BY e.salary DESC")
@@ -50,7 +50,7 @@ public class JpaOrderByMain extends JpaTestBase {
                 .setMaxResults(3);
         List<Employee> resultList = query.getResultList();
         showEmployeeList2(resultList);
-        System.out.println("[ test3 End ]");
+        System.out.println("===== TEST3 END =====\n");
     }
 
     private static void showEmployeeList(List<Employee> resultList) {

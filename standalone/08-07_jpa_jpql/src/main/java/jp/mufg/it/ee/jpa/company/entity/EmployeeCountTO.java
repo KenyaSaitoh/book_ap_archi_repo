@@ -31,4 +31,9 @@ public class EmployeeCountTO {
     public void setEmployeeCount(Long employeeCount) {
         this.employeeCount = employeeCount;
     }
+
+    @Override
+    public String toString() {
+        return "EmployeeCountTO [" + departmentId + ", " + employeeCount + "]";
+    }
 }

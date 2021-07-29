@@ -1,14 +1,14 @@
-package jp.mufg.it.ee.jpa.company.main1;
+package jp.mufg.it.ee.jpa.company.main3;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
+import jp.mufg.it.ee.jpa.company.entity.Department;
 import jp.mufg.it.ee.jpa.company.entity.Employee;
 
-//カスケードのテスト
-public class JpaCascadeStrategyMain4 {
+// フェッチのテスト
+public class JpaFetchStrategyMain1 {
 
     public static void main(String[] args) {
         // エンティティマネージャファクトリを取得する
@@ -18,15 +18,11 @@ public class JpaCascadeStrategyMain4 {
         // エンティティマネージャを取得する
         EntityManager entityManager = emf.createEntityManager();
 
-        // エンティティトランザクションを開始する
-        EntityTransaction entityTransaction = entityManager.getTransaction();
-        entityTransaction.begin();
-
-        // remove操作（DELETE）、Many側からカスケード
+        // Employee → Department（イーガーフェッチ）
+        System.out.println("===== findメソッド呼び出し =====");
         Employee employee = entityManager.find(Employee.class, 10001);
-        entityManager.remove(employee);
-
-        // コミットする
-        entityTransaction.commit();
+        System.out.println("===== 関連エンティティにアクセス =====");
+        Department department = employee.getDepartment();
+        System.out.println(department);
     }
 }

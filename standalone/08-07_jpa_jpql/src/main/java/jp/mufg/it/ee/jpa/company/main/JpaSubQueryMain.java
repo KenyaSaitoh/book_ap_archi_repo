@@ -18,20 +18,20 @@ public class JpaSubQueryMain extends JpaTestBase {
     // 副問い合わせ
     @Test
     public void test1() {
-        System.out.println("[ test1 ] Start");
+        System.out.println("===== TEST1 START =====");
         Query query = entityManager.createQuery(
                 "SELECT e1 FROM Employee AS e1 " +
                 "WHERE e1.salary >= " +
                 "(SELECT AVG(e2.salary) FROM Employee AS e2)");
         List<Employee> resultList = query.getResultList();
         showEmployeeNameList(resultList);
-        System.out.println("[ test1 End ]");
+        System.out.println("===== TEST1 END =====\n");
     }
 
     // 副問い合わせ + EXISTS式 1
     @Test
     public void test2() {
-        System.out.println("[ test2 ] Start");
+        System.out.println("===== TEST2 START =====");
         Query query = entityManager.createQuery(
                 "SELECT e FROM Employee AS e " +
                 "WHERE EXISTS " +
@@ -39,13 +39,13 @@ public class JpaSubQueryMain extends JpaTestBase {
                 "WHERE d.employees = e AND d.departmentId = 5)");
         List<Employee> resultList = query.getResultList();
         showEmployeeNameList(resultList);
-        System.out.println("[ test2 End ]");
+        System.out.println("===== TEST2 END =====\n");
     }
 
     // 副問い合わせ + EXISTS式 2
     @Test
     public void test3() {
-        System.out.println("[ test3 ] Start");
+        System.out.println("===== TEST3 START =====");
         Query query = entityManager.createQuery(
                 "SELECT e FROM Employee AS e " +
                 "WHERE EXISTS " +
@@ -53,13 +53,13 @@ public class JpaSubQueryMain extends JpaTestBase {
                 "WHERE d.departmentId = 5)");
         List<Employee> resultList = query.getResultList();
         showEmployeeNameList(resultList);
-        System.out.println("[ test3 End ]");
+        System.out.println("===== TEST3 END =====\n");
     }
 
     // 副問い合わせ + NOT EXISTS式 1
     @Test
     public void test4() {
-        System.out.println("[ test4 ] Start");
+        System.out.println("===== TEST4 START =====");
         Query query = entityManager.createQuery(
                 "SELECT e FROM Employee AS e " +
                 "WHERE NOT EXISTS " +
@@ -67,13 +67,13 @@ public class JpaSubQueryMain extends JpaTestBase {
                 "WHERE d.employees = e AND d.departmentId = 5)");
         List<Employee> resultList = query.getResultList();
         showEmployeeNameList(resultList);
-        System.out.println("[ test4 End ]");
+        System.out.println("===== TEST4 END =====\n");
     }
 
     // 副問い合わせ + NOT EXISTS式 2
     @Test
     public void test5() {
-        System.out.println("[ test5 ] Start");
+        System.out.println("===== TEST5 START =====");
         Query query = entityManager.createQuery(
                 "SELECT e FROM Employee AS e " +
                 "WHERE NOT EXISTS " +
@@ -81,7 +81,7 @@ public class JpaSubQueryMain extends JpaTestBase {
                 "WHERE d.departmentId = 5)");
         List<Employee> resultList = query.getResultList();
         showEmployeeNameList(resultList);
-        System.out.println("[ test5 End ]");
+        System.out.println("===== TEST5 END =====\n");
     }
 
     private static void showEmployeeList(List<Employee> resultList) {

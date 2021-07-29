@@ -2,51 +2,52 @@ package jp.mufg.it.ee.jpa.company.main;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import org.junit.Test;
 import jp.mufg.it.ee.jpa.company.entity.EmployeeCountTO;
-import jp.mufg.it.ee.jpa.company.test.base.JpaTestBase;
-import jp.mufg.it.ee.jpa.company.test.util.ResultUtil;
-
-import jp.mufg.it.ee.jpa.company.entity.Employee;
-
 
 // グルーピングのテスト
 @SuppressWarnings("unchecked")
-public class JpaGroupByMain extends JpaTestBase {
+public class JpaGroupByMain {
 
-    // グルーピング 1
-    @Test
-    public void test1() {
-        System.out.println("[ test1 ] Start");
+    public static void main(String[] args) {
+        // エンティティマネージャファクトリを取得する
+        EntityManagerFactory emf =
+                Persistence.createEntityManagerFactory("MyPersistenceUnit");
+
+        // エンティティマネージャを取得する
+        EntityManager entityManager = emf.createEntityManager();
+
+        // グルーピング 1
+        {
+        System.out.println("===== TEST1 START =====");
         Query query = entityManager.createQuery(
                 "SELECT e.department, COUNT(e) " +
                 "FROM Employee AS e " +
                 "GROUP BY e.department");
         List<Object[]> resultList = query.getResultList();
         showObjectArrayList(resultList);
-        System.out.println("[ test1 End ]");
-    }
+        System.out.println("===== TEST1 END =====\n");
+        }
 
-    //  グルーピング 2
-    @Test
-    public void test2() {
-        System.out.println("[ test2 ] Start");
+        //  グルーピング 2
+        {
+        System.out.println("===== TEST2 START =====");
         Query query = entityManager.createQuery(
                 "SELECT e.department.departmentId, COUNT(e) " +
                 "FROM Employee AS e " +
                 "GROUP BY e.department.departmentId");
         List<Object[]> resultList = query.getResultList();
         showObjectArrayList(resultList);
-        System.out.println("[ test2 End ]");
-    }
+        System.out.println("===== TEST2 END =====\n");
+        }
 
-    // グルーピング 3
-    // Hibernateではエラーになる。
-    @Test
-    public void test3() {
-        System.out.println("[ test3 ] Start");
+        // グルーピング 3
+        {
+        System.out.println("===== TEST3 START =====");
         Query query = entityManager.createQuery(
                 "SELECT NEW jp.mufg.it.ee.jpa.company.entity.EmployeeCountTO" +
                 "(e.department.departmentId, COUNT(e)) " +
@@ -55,13 +56,12 @@ public class JpaGroupByMain extends JpaTestBase {
                 "HAVING COUNT(e.department.departmentId) <= 3");
         List<EmployeeCountTO> resultList = query.getResultList();
         showEmployeeCountTOList(resultList);
-        System.out.println("[ test3 End ]");
+        System.out.println("===== TEST3 END =====\n");
     }
 
-    // グルーピング 4
-    @Test
-    public void test4() {
-        System.out.println("[ test4 ] Start");
+        // グルーピング 4
+        {
+        System.out.println("===== TEST4 START =====");
         Query query = entityManager.createQuery(
                 "SELECT e.department.departmentId, COUNT(e) " +
                 "FROM Employee AS e " +
@@ -69,12 +69,25 @@ public class JpaGroupByMain extends JpaTestBase {
                 "HAVING COUNT(e.department.departmentId) <= 3");
         List<Object[]> resultList = query.getResultList();
         showObjectArrayList(resultList);
-        System.out.println("[ test4 End ]");
+        System.out.println("===== TEST4 END =====\n");
+        }
     }
 
-    private static void showEmployeeList(List<Employee> resultList) {
-        for (Employee employee : resultList) {
-            System.out.println(employee);
+    private static void showObjectArrayList(List<Object[]> resultList) {
+        for (Object[] items : resultList) {
+            String log = "";
+            for (int i = 0; i < items.length; i++) {
+                log = log + items[i].toString();
+                if (i != items.length - 1) log = log + ", ";
+            }
+            System.out.println(log);
+        }
+    }
+
+    private static void showEmployeeCountTOList(
+            List<EmployeeCountTO> resultList) {
+        for (EmployeeCountTO to : resultList) {
+            System.out.println(to);
         }
     }
 }

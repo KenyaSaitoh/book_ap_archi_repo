@@ -5,7 +5,6 @@ import org.apache.ibatis.session.SqlSession;
 import jp.mufg.it.mybatis.company.common.SqlSessionHolder;
 import jp.mufg.it.mybatis.company.dto.Employee;
 import jp.mufg.it.mybatis.company.mapper.EmpDeptNestMapper;
-import jp.mufg.it.mybatis.company.util.ResultUtil;
 
 /*
  * ネストセレクトによって構造化オブジェクトを取得する
@@ -24,6 +23,6 @@ public class NestSelectMain1 {
         Employee employee = mapper.selectEmployee(10001);
 
         // 結果を表示する
-        ResultUtil.showEmployee(employee);
+        System.out.println(employee);
     }
 }

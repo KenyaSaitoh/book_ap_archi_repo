@@ -14,7 +14,7 @@ public class JpaCascadeOptimisticLockTest extends JpaTestBase {
 
     @Test
     public void test1() {
-        System.out.println("[ test1 ] Start");
+        System.out.println("===== TEST1 START =====");
 
         Department department = entityManager.find(Department.class, 1);
         List<Employee> employees = department.getEmployees();
@@ -38,6 +38,6 @@ public class JpaCascadeOptimisticLockTest extends JpaTestBase {
             // リカバリ
         }
         commit();
-        System.out.println("[ test1 ]");
+        System.out.println("===== TEST1 ]");
     }
 }

@@ -18,7 +18,7 @@ public class JpaNamedNativeQueryMain extends JpaTestBase {
     // 名前付きクエリで結果クラスを使用
     @Test
     public void test1() {
-        System.out.println("[ test1 ] Start");
+        System.out.println("===== TEST1 START =====");
         Query query = entityManager.createNamedQuery("findEmployeesByDepartmentId1")
                 .setParameter(1, 10006); // EMPLOYEE_IDに10006をセットする
         EmployeeQueryResult1 employee =
@@ -28,13 +28,13 @@ public class JpaNamedNativeQueryMain extends JpaTestBase {
                 + employee.getEmployeeName());
         System.out.println("departmentName ---> "
                 + employee.getDepartmentName());
-        System.out.println("[ test1 End ]");
+        System.out.println("===== TEST1 END =====\n");
     }
 
     // 名前付きクエリで結果セットマッピングを使用
     @Test
     public void test2() {
-        System.out.println("[ test2 ] Start");
+        System.out.println("===== TEST2 START =====");
         Query query = entityManager.createNamedQuery("findEmployeesByDepartmentId2")
                 .setParameter(1, 10006); // EMPLOYEE_IDに10006をセットする
         EmployeeQueryResult2 employee =
@@ -44,7 +44,7 @@ public class JpaNamedNativeQueryMain extends JpaTestBase {
                 + employee.getEmployeeName());
         System.out.println("departmentName ---> "
                 + employee.getDepartmentName());
-        System.out.println("[ test2 End ]");
+        System.out.println("===== TEST2 END =====\n");
     }
 
     private static void showEmployeeList(List<Employee> resultList) {

@@ -16,7 +16,7 @@ public class JpaCascadeStrategyTest extends JpaTestBase {
     // persist操作（INSERT）、Many側からカスケード
     @Test
     public void test1() {
-        System.out.println("[ test1 ] Start");
+        System.out.println("===== TEST1 START =====");
         List<Employee> employees = new ArrayList<Employee>();
         Department department =
                 new Department(5, "総務部", "東京本社",  employees, 0L);
@@ -26,13 +26,13 @@ public class JpaCascadeStrategyTest extends JpaTestBase {
         department.getEmployees().add(employee);
         entityManager.persist(employee);
         commit();
-        System.out.println("[ test1 ]");
+        System.out.println("===== TEST1 ]");
     }
 
     // persist操作（INSERT）、One側からカスケード
     @Test
     public void test2() {
-        System.out.println("[ test2 ] Start");
+        System.out.println("===== TEST2 START =====");
         List<Employee> employees = new ArrayList<Employee>();
         Department department =
                 new Department(6, "管理部", "東京本社", employees, 0L);
@@ -42,33 +42,33 @@ public class JpaCascadeStrategyTest extends JpaTestBase {
         department.getEmployees().add(employee);
         entityManager.persist(department);
         commit();
-        System.out.println("[ test2 ]");
+        System.out.println("===== TEST2 ]");
     }
 
     // remove操作（DELETE）
     @Test
     public void test3() {
-        System.out.println("[ test3 ] Start");
+        System.out.println("===== TEST3 START =====");
         Department department = entityManager.find(Department.class, 5);
         entityManager.remove(department);
         commit();
-        System.out.println("[ test3 ]");
+        System.out.println("===== TEST3 ]");
     }
 
     // remove操作（DELETE）
     @Test
     public void test4() {
-        System.out.println("[ test4 ] Start");
+        System.out.println("===== TEST4 START =====");
         Employee employee = entityManager.find(Employee.class, 10001);
         entityManager.remove(employee);
         commit();
-        System.out.println("[ test4 ]");
+        System.out.println("===== TEST4 ]");
     }
 
     // merge操作（UPDATE）
     @Test
     public void test5() {
-        System.out.println("[ test5 ] Start");
+        System.out.println("===== TEST5 START =====");
         Employee employee = entityManager.find(Employee.class, 10012);
         Department department = employee.getDepartment();
         entityManager.clear();  // mergeのテストのために、取得したエンティティオブジェクトを意図的にDETACHED状態にする
@@ -77,19 +77,19 @@ public class JpaCascadeStrategyTest extends JpaTestBase {
         employee.setDepartment(department);
         entityManager.merge(employee);
         commit();
-        System.out.println("[ test5 ]");
+        System.out.println("===== TEST5 ]");
     }
 
     // refresh操作
     @Test
     public void test6() {
-        System.out.println("[ test6 ] Start");
+        System.out.println("===== TEST6 START =====");
         Employee employee = entityManager.find(Employee.class, 10002);
         Department department = employee.getDepartment();
         employee.setSalary(999999);
         department.setDepartmentName("経営企画部"); // もともとは企画部
         entityManager.refresh(employee);
         commit();
-        System.out.println("[ test6 ]");
+        System.out.println("===== TEST6 ]");
     }
 }

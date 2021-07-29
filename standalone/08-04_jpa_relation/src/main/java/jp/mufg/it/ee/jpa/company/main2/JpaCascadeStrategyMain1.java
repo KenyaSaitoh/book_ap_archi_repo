@@ -1,4 +1,4 @@
-package jp.mufg.it.ee.jpa.company.main1;
+package jp.mufg.it.ee.jpa.company.main2;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -15,7 +15,7 @@ import jp.mufg.it.ee.jpa.company.entity.Employee;
 import jp.mufg.it.ee.jpa.company.type.JobType;
 
 // カスケードのテスト
-public class JpaCascadeStrategyMain2 {
+public class JpaCascadeStrategyMain1 {
 
     public static void main(String[] args) {
         // エンティティマネージャファクトリを取得する
@@ -29,16 +29,16 @@ public class JpaCascadeStrategyMain2 {
         EntityTransaction entityTransaction = entityManager.getTransaction();
         entityTransaction.begin();
 
-        // persist操作（INSERT）、One側からカスケード
+        // persist操作（INSERT）、Many側からカスケード
         List<Employee> employees = new ArrayList<>();
-        Department department = new Department(7, "営業第三部", "東京本社",
+        Department department = new Department(6, "営業第二部", "東京本社",
                 employees, 0L);
         Calendar cal = Calendar.getInstance();
-        cal.set(2017, 11, 1);
-        Employee employee = new Employee(10016, "Trent", department,
-                new Date(cal.getTimeInMillis()), JobType.CHIEF, 310000, 0L);
+        cal.set(2017, 10, 1);
+        Employee employee = new Employee(10015, "Steve", department,
+                new Date(cal.getTimeInMillis()),  JobType.LEADER, 380000, 0L);
         department.getEmployees().add(employee);
-        entityManager.persist(department);
+        entityManager.persist(employee);
 
         // コミットする
         entityTransaction.commit();

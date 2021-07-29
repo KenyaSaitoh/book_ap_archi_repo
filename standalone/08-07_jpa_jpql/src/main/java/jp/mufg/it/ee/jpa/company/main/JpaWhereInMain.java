@@ -23,7 +23,7 @@ public class JpaWhereInMain {
         EntityManager entityManager = emf.createEntityManager();
 
         {
-        System.out.println("[ test1 ] Start");
+        System.out.println("===== TEST1 START =====");
         List<Integer> paramList = new ArrayList<Integer>();
         paramList.add(1);
         paramList.add(4);
@@ -33,11 +33,11 @@ public class JpaWhereInMain {
                 .setParameter("departmentId", paramList);
         List<Employee> resultList = query.getResultList();
         showEmployeeList(resultList);
-        System.out.println("[ test1 End ]");
+        System.out.println("===== TEST1 END =====\n");
         }
 
         {
-        System.out.println("[ test2 ] Start");
+        System.out.println("===== TEST2 START =====");
         List<Department> paramList = new ArrayList<Department>();
         Department department1 = entityManager.find(Department.class, 1);
         Department department2 = entityManager.find(Department.class, 4);
@@ -49,7 +49,7 @@ public class JpaWhereInMain {
                 .setParameter("department", paramList);
         List<Employee> resultList = query.getResultList();
         showEmployeeList(resultList);
-        System.out.println("[ test2 ] End");
+        System.out.println("===== TEST2#END =====\n");
         }
     }
 

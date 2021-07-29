@@ -107,10 +107,8 @@ public class EmpDept implements Serializable {
 
     @Override
     public String toString() {
-        return "EmployeeDepartment [employeeId=" + employeeId
-                + ", employeeName=" + employeeName + ", entranceDate="
-                + entranceDate + ", jobType=" + jobType + ", salary=" + salary
-                + ", departmentId=" + departmentId + ", departmentName="
-                + departmentName + ", location=" + location + "]";
+        return "EmpDept [" + employeeId + ", " + employeeName + ", "
+                + entranceDate + ", " + jobType + ", " + salary + ", "
+                + departmentId + ", " + departmentName + ", " + location + "]";
     }
 }

@@ -46,7 +46,7 @@ public class EmployeeTO {
 
     @Override
     public String toString() {
-        return "EmployeeTO [employeeId=" + employeeId + ", employeeName="
-                + employeeName + ", departmentName=" + departmentName + "]";
+        return "EmployeeTO [" + employeeId + ", " + employeeName + ", "
+                + departmentName + "]";
     }
 }

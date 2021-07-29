@@ -8,7 +8,6 @@ import jp.mufg.it.mybatis.company.common.SqlSessionHolder;
 import jp.mufg.it.mybatis.company.dto.Department;
 import jp.mufg.it.mybatis.company.dto.Employee;
 import jp.mufg.it.mybatis.company.mapper.EmpDeptNestMapper;
-import jp.mufg.it.mybatis.company.util.ResultUtil;
 
 /*
  * ネストセレクトによって構造化オブジェクトを取得する
@@ -28,6 +27,12 @@ public class NestSelectMain2 {
 
         // Departmentオブジェクトに関連を持つEmployeeのリストを取得して表示する
         List<Employee> resultList = department.getEmployees();
-        ResultUtil.showEmployeeList(resultList);
+        showEmployeeList(resultList);
+    }
+
+    private static void showEmployeeList(List<Employee> resultList) {
+        for (Employee employee : resultList) {
+            System.out.println(employee);
+        }
     }
 }

@@ -20,7 +20,7 @@ public class JpaConstructorMain {
         EntityManager entityManager = emf.createEntityManager();
 
         {
-        System.out.println("[ test1 ] Start");
+        System.out.println("===== TEST1 START =====");
         Query query = entityManager.createQuery(
                 "SELECT NEW jp.mufg.it.ee.jpa.company.entity.EmployeeTO" +
                 "(e.employeeId, e.employeeName, d.departmentName) " +
@@ -29,12 +29,12 @@ public class JpaConstructorMain {
                 .setParameter("employeeId", 10008);
         EmployeeTO employeeTO = (EmployeeTO)query.getSingleResult();
         System.out.println(employeeTO);
-        System.out.println("[ test1 End ]");
+        System.out.println("===== TEST1 END =====\n");
         }
 
         // コンストラクタ式 2
         {
-        System.out.println("[ test2 ] Start");
+        System.out.println("===== TEST2 START =====");
         Query query = entityManager.createQuery(
                 "SELECT NEW jp.mufg.it.ee.jpa.company.entity.EmployeeDepartment" +
                 "(e.employeeId, e.employeeName, e.salary, d.departmentId, " +
@@ -45,7 +45,7 @@ public class JpaConstructorMain {
         EmployeeDepartment employeeDepartment =
                 (EmployeeDepartment)query.getSingleResult();
         System.out.println(employeeDepartment);
-        System.out.println("[ test2 End ]");
+        System.out.println("===== TEST2 END =====\n");
         }
     }
 }

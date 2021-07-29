@@ -21,20 +21,20 @@ public class JpaNativeQueryMain extends JpaTestBase {
     // NATIVE QUERY 1
     @Test
     public void test1() {
-        System.out.println("[ test1 ] Start");
+        System.out.println("===== TEST1 START =====");
         Query query = entityManager.createNativeQuery(
                 "SELECT EMPLOYEE_NAME FROM EMPLOYEE " +
                 "WHERE EMPLOYEE_ID = ?1")
                 .setParameter(1, 10001);
         Object obj = (Object)query.getSingleResult();
         System.out.println(obj);
-        System.out.println("[ test1 End ]");
+        System.out.println("===== TEST1 END =====\n");
     }
 
     // NATIVE QUERY 2
     @Test
     public void test2() {
-        System.out.println("[ test2 ] Start");
+        System.out.println("===== TEST2 START =====");
         Query query = entityManager.createNativeQuery(
                 "SELECT EMPLOYEE_NAME FROM EMPLOYEE " +
                 "WHERE DEPARTMENT_ID = ?1")
@@ -45,13 +45,13 @@ public class JpaNativeQueryMain extends JpaTestBase {
             Object obj = i.next();
             System.out.println(obj);
         }
-        System.out.println("[ test2 End ]");
+        System.out.println("===== TEST2 END =====\n");
     }
 
     // NATIVE QUERY 3
     @Test
     public void test3() {
-        System.out.println("[ test3 ] Start");
+        System.out.println("===== TEST3 START =====");
         Query query = entityManager.createNativeQuery(
                 "SELECT EMPLOYEE_NAME, MONTHLY_SALARY FROM EMPLOYEE " +
                 "WHERE EMPLOYEE_ID = ?1")
@@ -66,13 +66,13 @@ public class JpaNativeQueryMain extends JpaTestBase {
             Object[] objs = (Object[])value;
             System.out.println(objs[0] + " / " + objs[1]);
         }
-        System.out.println("[ test3 End ]");
+        System.out.println("===== TEST3 END =====\n");
     }
 
     // NATIVE QUERY 4
     @Test
     public void test4() {
-        System.out.println("[ test4 ] Start");
+        System.out.println("===== TEST4 START =====");
         Query query = entityManager.createNativeQuery(
                 "SELECT EMPLOYEE_NAME, MONTHLY_SALARY FROM EMPLOYEE " +
                 "WHERE DEPARTMENT_ID = ?1")
@@ -91,13 +91,13 @@ public class JpaNativeQueryMain extends JpaTestBase {
                 System.out.println(objs[0] + " / " + objs[1]);
             }
         }
-        System.out.println("[ test4 End ]");
+        System.out.println("===== TEST4 END =====\n");
     }
 
     // NATIVE QUERY 5
     @Test
     public void test5() {
-        System.out.println("[ test5 ] Start");
+        System.out.println("===== TEST5 START =====");
         Query query = entityManager.createNativeQuery(
                 "UPDATE EMPLOYEE " +
                 "SET MONTHLY_SALARY = MONTHLY_SALARY + ?3 " +
@@ -106,13 +106,13 @@ public class JpaNativeQueryMain extends JpaTestBase {
                 .setParameter(1, 2);
         int updateCount = query.executeUpdate();
         System.out.println("ヒット件数 ---> " + updateCount);
-        System.out.println("[ test5 End ]");
+        System.out.println("===== TEST5 END =====\n");
     }
 
     // SQL RESULT CLASS
     @Test
     public void test6() {
-        System.out.println("[ test6 ] Start");
+        System.out.println("===== TEST6 START =====");
         Query query = entityManager.createNativeQuery(
                 "SELECT e.EMPLOYEE_ID AS E_EMPLOYEE_ID, " +
                 "e.EMPLOYEE_NAME AS E_EMPLOYEE_NAME, " +
@@ -131,13 +131,13 @@ public class JpaNativeQueryMain extends JpaTestBase {
                 + employee.getEmployeeName());
         System.out.println("departmentName ---> "
                 + employee.getDepartmentName());
-        System.out.println("[ test6 End ]");
+        System.out.println("===== TEST6 END =====\n");
     }
 
     // SQL RESULT SET MAPPING 1
     @Test
     public void test7() {
-        System.out.println("[ test7 ] Start");
+        System.out.println("===== TEST7 START =====");
         // ネイティブクエリを生成する
         Query query = entityManager.createNativeQuery(
                 "SELECT e.EMPLOYEE_ID AS E_EMPLOYEE_ID, " +
@@ -159,13 +159,13 @@ public class JpaNativeQueryMain extends JpaTestBase {
                 + employee.getEmployeeName());
         System.out.println("departmentName ---> "
                 + employee.getDepartmentName());
-        System.out.println("[ test7 End ]");
+        System.out.println("===== TEST7 END =====\n");
     }
 
     // SQL RESULT SET MAPPING 2
     @Test
     public void test8() {
-        System.out.println("[ test8 ] Start");
+        System.out.println("===== TEST8 START =====");
         // ネイティブクエリを生成する
         Query query = entityManager.createNativeQuery(
                 "SELECT e.MONTHLY_SALARY AS E_MONTHLY_SALARY, " +
@@ -181,13 +181,13 @@ public class JpaNativeQueryMain extends JpaTestBase {
         Object[] objs = (Object[])i.next();
         System.out.println("salary ---> " + objs[0]);
         System.out.println("buildingName ---> " + objs[1]);
-        System.out.println("[ test8 End ]");
+        System.out.println("===== TEST8 END =====\n");
     }
 
     // SQL RESULT SET MAPPING 3
     @Test
     public void test9() {
-        System.out.println("[ test9 ] Start");
+        System.out.println("===== TEST9 START =====");
         // ネイティブクエリを生成する
         Query query = entityManager.createNativeQuery(
                 "SELECT e.EMPLOYEE_ID AS E_EMPLOYEE_ID, " +
@@ -214,7 +214,7 @@ public class JpaNativeQueryMain extends JpaTestBase {
             System.out.println("salary ---> " + objs[1]);
             System.out.println("buildingName ---> " + objs[2]);
         }
-        System.out.println("[ test9 End ]");
+        System.out.println("===== TEST9 END =====\n");
     }
 
     private static void showEmployeeList(List<Employee> resultList) {

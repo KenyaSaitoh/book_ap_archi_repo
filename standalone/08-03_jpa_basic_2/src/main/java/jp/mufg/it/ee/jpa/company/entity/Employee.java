@@ -1,5 +1,6 @@
 package jp.mufg.it.ee.jpa.company.entity;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -125,10 +126,9 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "Employee [employeeId=" + employeeId + ", employeeName="
-                + employeeName + ", departmentName=" + departmentName
-                + ", entranceDate=" + entranceDate + ", jobType=" + jobType
-                + ", salary=" + salary + ", photo=" + Arrays.toString(photo)
-                + "]";
+        return "Employee [" + employeeId + ", " + employeeName + ", " +
+                departmentName + ", " +
+                new SimpleDateFormat("yyyy/MM/dd").format(entranceDate) + ", " +
+                jobType + ", " + salary + ", " + Arrays.toString(photo) + "]";
     }
 }

@@ -109,8 +109,7 @@ public class EmployeeQueryResult2 {
 
     @Override
     public String toString() {
-        return "EmployeeQueryResult2 [employeeId=" + employeeId
-                + ", employeeName=" + employeeName + ", departmentName="
-                + departmentName + "]";
+        return "EmployeeQueryResult2 [" + employeeId + ", " + employeeName
+                + ", " + departmentName + "]";
     }
 }

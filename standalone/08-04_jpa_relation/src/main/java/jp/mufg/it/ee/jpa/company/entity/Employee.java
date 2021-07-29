@@ -1,5 +1,6 @@
 package jp.mufg.it.ee.jpa.company.entity;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -131,9 +132,9 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "Employee [employeeId=" + employeeId + ", employeeName="
-                + employeeName + ", department=" + department
-                + ", entranceDate=" + entranceDate + ", jobType=" + jobType
-                + ", salary=" + salary + ", version=" + version + "]";
+        return "Employee [" + employeeId + ", " + employeeName + ", "
+                + department + ", " +
+                new SimpleDateFormat("yyyy/MM/dd").format(entranceDate) + ", " +
+                jobType + ", " + salary + ", " + version + "]";
     }
 }

@@ -1,5 +1,6 @@
 package jp.mufg.it.mybatis.company.dto;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import jp.mufg.it.mybatis.company.type.JobType;
@@ -105,9 +106,9 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "Employee [employeeId=" + employeeId + ", employeeName="
-                + employeeName + ", departmentName=" + departmentName
-                + ", entranceDate=" + entranceDate + ", jobType=" + jobType
-                + ", salary=" + salary + ", version=" + version + "]";
+        return "Employee [" + employeeId + ", " + employeeName + ", " +
+                departmentName + ", " +
+                new SimpleDateFormat("yyyy/MM/dd").format(entranceDate) + ", " +
+                jobType + ", " + salary + ", " + version + "]";
     }
 }

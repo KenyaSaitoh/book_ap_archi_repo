@@ -7,7 +7,6 @@ import org.apache.ibatis.session.SqlSession;
 import jp.mufg.it.mybatis.company.common.SqlSessionHolder;
 import jp.mufg.it.mybatis.company.dto.EmpDept;
 import jp.mufg.it.mybatis.company.mapper.EmpDeptFlatMapper;
-import jp.mufg.it.mybatis.company.util.ResultUtil;
 
 /*
  * ジョインしてフラットオブジェクトを取得する
@@ -23,6 +22,12 @@ public class FlatSelectMain2 {
 
         // SELECT文を発行し結果を表示する
         List<EmpDept> resultList = mapper.selectEmpDeptByDepartmentId(3);
-        ResultUtil.showEmpDeptList(resultList);
+        showEmpDeptList(resultList);
+    }
+
+    private static void showEmpDeptList(List<EmpDept> resultList) {
+        for (EmpDept empDept : resultList) {
+            System.out.println(empDept);
+        }
     }
 }

@@ -17,7 +17,7 @@ public class JpaPathExpressionMain extends JpaTestBase {
     // パス式
     @Test
     public void test1() {
-        System.out.println("[ test1 ] Start");
+        System.out.println("===== TEST1 START =====");
         Query query = entityManager.createQuery(
                 "SELECT e.employeeId, e.employeeName, " +
                 "e.department.departmentName " +
@@ -26,7 +26,7 @@ public class JpaPathExpressionMain extends JpaTestBase {
                 .setParameter("employeeId", 10006);
         Object[] objs = (Object[])query.getSingleResult();
         showObjectArray(objs);
-        System.out.println("[ test1 End ]");
+        System.out.println("===== TEST1 END =====\n");
     }
 
     private static void showEmployeeList(List<Employee> resultList) {

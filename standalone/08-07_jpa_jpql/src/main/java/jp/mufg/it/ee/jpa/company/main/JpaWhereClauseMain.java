@@ -24,19 +24,19 @@ public class JpaWhereClauseMain {
 
         // ARITHMETIC OPERATOR
         {
-        System.out.println("[ test1 ] Start");
+        System.out.println("===== TEST1 START =====");
         Query query = entityManager.createQuery(
                 "SELECT e FROM Employee AS e " +
                 "WHERE e.salary * 0.1 < :salary")
                 .setParameter("salary", 30000);
         List<Employee> resultList = query.getResultList();
         showEmployeeList(resultList);
-        System.out.println("[ test1 End ]");
+        System.out.println("===== TEST1 END =====\n");
         }
 
         // LOGICAL OPERATOR
         {
-        System.out.println("[ test2 ] Start");
+        System.out.println("===== TEST2 START =====");
         Query query = entityManager.createQuery(
                 "SELECT e FROM Employee AS e " +
                 "WHERE :lower <= e.salary AND e.salary <= :upper")
@@ -44,12 +44,12 @@ public class JpaWhereClauseMain {
                 .setParameter("upper", 350000);
         List<Employee> resultList = query.getResultList();
         showEmployeeList(resultList);
-        System.out.println("[ test2 End ]");
+        System.out.println("===== TEST2 END =====\n");
         }
 
         // COMPARISON SYMBOLS
         {
-        System.out.println("[ test3 ] Start");
+        System.out.println("===== TEST3 START =====");
         Query query = entityManager.createQuery(
                 "SELECT e FROM Employee AS e " +
                 "WHERE NOT e.department.departmentId = :departmentId " +
@@ -59,12 +59,12 @@ public class JpaWhereClauseMain {
                 .setParameter("upper", 350000);
         List<Employee> resultList = query.getResultList();
         showEmployeeList(resultList);
-        System.out.println("[ test3 End ]");
+        System.out.println("===== TEST3 END =====\n");
         }
 
         // BETWEEN
         {
-        System.out.println("[ test4 ] Start");
+        System.out.println("===== TEST4 START =====");
         Query query = entityManager.createQuery(
                 "SELECT e FROM Employee AS e " +
                 "WHERE e.salary BETWEEN :lower AND :upper")
@@ -72,12 +72,12 @@ public class JpaWhereClauseMain {
                 .setParameter("upper", 350000);
         List<Employee> resultList = query.getResultList();
         showEmployeeList(resultList);
-        System.out.println("[ test4 End ]");
+        System.out.println("===== TEST4 END =====\n");
         }
 
         // NOT BETWEEN
         {
-        System.out.println("[ test5 ] Start");
+        System.out.println("===== TEST5 START =====");
         Query query = entityManager.createQuery(
                 "SELECT e FROM Employee AS e " +
                 "WHERE e.salary NOT BETWEEN :lower AND :upper")
@@ -85,108 +85,108 @@ public class JpaWhereClauseMain {
                 .setParameter("upper", 450000);
         List<Employee> resultList = query.getResultList();
         showEmployeeList(resultList);
-        System.out.println("[ test5 End ]");
+        System.out.println("===== TEST5 END =====\n");
         }
 
         // IN
         {
-        System.out.println("[ test6 ] Start");
+        System.out.println("===== TEST6 START =====");
         Query query = entityManager.createQuery(
                 "SELECT e FROM Employee e " +
                 "WHERE e.department.departmentId IN (1, 5)");
         List<Employee> resultList = query.getResultList();
         showEmployeeList(resultList);
-        System.out.println("[ test6 End ]");
+        System.out.println("===== TEST6 END =====\n");
         }
 
         // NOT IN
         {
-        System.out.println("[ test7 ] Start");
+        System.out.println("===== TEST7 START =====");
         Query query = entityManager.createQuery(
                 "SELECT e FROM Employee e " +
                 "WHERE e.department.departmentId NOT IN (2, 3, 4)");
         List<Employee> resultList = query.getResultList();
         showEmployeeList(resultList);
-        System.out.println("[ test7 End ]");
+        System.out.println("===== TEST7 END =====\n");
         }
 
         // LIKE 1
         {
-        System.out.println("[ test8 ] Start");
+        System.out.println("===== TEST8 START =====");
         Query query = entityManager.createQuery(
                 "SELECT d FROM Department d " +
                 "WHERE d.location LIKE :location")
                 .setParameter("location", "新宿%");
         List<Department> resultList = query.getResultList();
         showDepartmentList(resultList);
-        System.out.println("[ test8 End ]");
+        System.out.println("===== TEST8 END =====\n");
         }
 
         // LIKE 2
         {
-        System.out.println("[ test9 ] Start");
+        System.out.println("===== TEST9 START =====");
         Query query = entityManager.createQuery(
                 "SELECT d FROM Department d " +
                 "WHERE d.location LIKE '新宿%'");
         List<Department> resultList = query.getResultList();
         showDepartmentList(resultList);
-        System.out.println("[ test9 End ]");
+        System.out.println("===== TEST9 END =====\n");
         }
 
         // NOT LIKE
         {
-        System.out.println("[ test10 ] Start");
+        System.out.println("===== TEST10 START =====");
         Query query = entityManager.createQuery(
                 "SELECT d FROM Department d " +
                 "WHERE d.location NOT LIKE :location")
                 .setParameter("location", "新宿%");
         List<Department> resultList = query.getResultList();
         showDepartmentList(resultList);
-        System.out.println("[ test10 End ]");
+        System.out.println("===== TEST10 END =====\n");
         }
 
         // NULL
         {
-        System.out.println("[ test11 ] Start");
+        System.out.println("===== TEST11 START =====");
         Query query = entityManager.createQuery(
                 "SELECT e FROM Employee e " +
                 "WHERE e.department IS NULL");
         List<Employee> resultList = query.getResultList();
         showEmployeeList(resultList);
-        System.out.println("[ test11 End ]");
+        System.out.println("===== TEST11 END =====\n");
         }
 
         // NOT NULL
         {
-        System.out.println("[ test12 ] Start");
+        System.out.println("===== TEST12 START =====");
         Query query = entityManager.createQuery(
                 "SELECT e FROM Employee e " +
                 "WHERE e.department IS NOT NULL");
         List<Employee> resultList = query.getResultList();
         showEmployeeList(resultList);
-        System.out.println("[ test12 End ]");
+        System.out.println("===== TEST12 END =====\n");
         }
 
         // EMPTY
         {
-        System.out.println("[ test13 ] Start");
+        System.out.println("===== TEST13 START =====");
         Query query = entityManager.createQuery(
                 "SELECT d FROM Department d " +
                 "WHERE d.employees IS EMPTY");
         List<Department> resultList = query.getResultList();
         showDepartmentList(resultList);
-        System.out.println("[ test13 End ]");
+        System.out.println("===== TEST13 END =====\n");
         }
 
         // NOT EMPTY
         {
-        System.out.println("[ test14 ] Start");
+        System.out.println("===== TEST14 START =====");
         Query query = entityManager.createQuery(
                 "SELECT d FROM Department d " +
                 "WHERE d.employees IS NOT EMPTY");
         List<Department> resultList = query.getResultList();
         showDepartmentList(resultList);
-        System.out.println("[ test14 End ]");
+        System.out.println("===== TEST14 END =====\n");
         }
     }
 
