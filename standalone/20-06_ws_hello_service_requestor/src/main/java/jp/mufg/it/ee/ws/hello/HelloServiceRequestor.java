@@ -14,7 +14,7 @@ public class HelloServiceRequestor {
 
         // サービスメソッドを呼び出す
         String message = portType.sayHello("Webservice", 3);
-        System.out.println("  message ---> " + message);
+        System.out.println("  message => " + message);
 
         System.out.println("[ HelloServiceRequestor ] End");
     }

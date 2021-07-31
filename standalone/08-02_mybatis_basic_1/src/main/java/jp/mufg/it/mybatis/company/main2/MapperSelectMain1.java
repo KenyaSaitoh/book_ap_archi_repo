@@ -18,8 +18,8 @@ public class MapperSelectMain1 {
         // Mapperを取得する
         EmployeeMapper mapper = sqlSession.getMapper(EmployeeMapper.class);
 
-        // SELECT文を発行し結果を表示する
+        // SELECT文を発行する
         Employee result = mapper.selectEmployee(10005);
-        System.out.println(result);
+        System.out.println(result); // 検索結果を表示
     }
 }

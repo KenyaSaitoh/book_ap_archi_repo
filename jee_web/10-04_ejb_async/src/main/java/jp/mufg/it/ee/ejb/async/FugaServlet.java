@@ -44,7 +44,7 @@ public class FugaServlet extends HttpServlet {
 
         // 結果を画面に出力する
         PrintWriter out = response.getWriter();
-        out.print("NORMAL END ( Answer ---> " + answer + " )");
+        out.print("NORMAL END ( Answer => " + answer + " )");
         out.close();
     }
 }

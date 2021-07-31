@@ -26,7 +26,7 @@ public class ColorSessionServlet extends HttpServlet {
         // セッションを生成・復元する
         HttpSession session = request.getSession();
 
-        System.out.println("jsessionId ---> " + session.getId());
+        System.out.println("jsessionId => " + session.getId());
 
         ArrayList<String> colorList = null;
         // セッションが新規、またはセッションは新規ではないが

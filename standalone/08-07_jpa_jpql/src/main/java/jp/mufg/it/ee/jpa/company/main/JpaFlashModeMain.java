@@ -1,5 +1,7 @@
 package jp.mufg.it.ee.jpa.company.main;
 
+import static jp.mufg.it.ee.jpa.company.util.ResultUtil.*;
+
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -30,7 +32,7 @@ public class JpaFlashModeMain {
 
         // FlushModeType.AUTO
         {
-        System.out.println("===== TEST1 START =====");
+        System.out.println("##### TEST1 START #####");
         entityManager.setFlushMode(FlushModeType.AUTO);
         Employee employee = entityManager.find(Employee.class, 10013);
         Department department = entityManager.find(Department.class, 1);
@@ -39,14 +41,15 @@ public class JpaFlashModeMain {
                 "SELECT e FROM Employee AS e " +
                 "WHERE e.department.departmentId = 1");
         List<Employee> resultList = query.getResultList();
+        // エンティティトランザクションをコミットする
         entityTransaction.commit();
-        showEmployeeList(resultList);
-        System.out.println("===== TEST1 END =====\n");
+        showEmployeeList(resultList); // 検索結果を表示
+        System.out.println("##### TEST1 END #####\n");
         }
 
         // FlushModeType.COMMIT
         {
-        System.out.println("===== TEST2 START =====");
+        System.out.println("##### TEST2 START #####");
         entityManager.setFlushMode(FlushModeType.COMMIT);
         Employee employee = entityManager.find(Employee.class, 10014);
         Department department = entityManager.find(Department.class, 2);
@@ -55,15 +58,10 @@ public class JpaFlashModeMain {
                 "SELECT e FROM Employee AS e " +
                 "WHERE e.department.departmentId = 2");
         List<Employee> resultList = query.getResultList();
+        // エンティティトランザクションをコミットする
         entityTransaction.commit();
-        showEmployeeList(resultList);
-        System.out.println("===== TEST2 END =====\n");
-        }
-    }
-
-    private static void showEmployeeList(List<Employee> resultList) {
-        for (Employee employee : resultList) {
-            System.out.println(employee);
+        showEmployeeList(resultList); // 検索結果を表示
+        System.out.println("##### TEST2 END #####\n");
         }
     }
 }

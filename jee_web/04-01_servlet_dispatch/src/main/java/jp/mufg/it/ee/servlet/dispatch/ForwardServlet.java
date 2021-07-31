@@ -26,14 +26,14 @@ public class ForwardServlet extends HttpServlet {
         out.println("<head><title>ForwardServlet</title></head>");
         out.println("<body>");
         out.println("<h2>ForwardServlet</h2>");
-        out.println("DispatchMainServletでリクエストスコープにセットされたデータ ---> "
+        out.println("DispatchMainServletでリクエストスコープにセットされたデータ => "
                 + request.getAttribute("userName") + "<br /><br />");
         out.println("HttpServletRequestに格納されているパス関連情報" + "<br />");
-        out.println("RequestURL ---> " + request.getRequestURL() + "<br />");
-        out.println("RequestURI ---> " + request.getRequestURI() + "<br />");
-        out.println("ContextPath ---> " + request.getContextPath() + "<br />");
-        out.println("ServletPath ---> " + request.getServletPath() + "<br />");
-        out.println("Query String ---> " + request.getQueryString() + "<br />");
+        out.println("RequestURL => " + request.getRequestURL() + "<br />");
+        out.println("RequestURI => " + request.getRequestURI() + "<br />");
+        out.println("ContextPath => " + request.getContextPath() + "<br />");
+        out.println("ServletPath => " + request.getServletPath() + "<br />");
+        out.println("Query String => " + request.getQueryString() + "<br />");
         out.println("以下はIncludeServletの処理結果をインクルード");
         out.println("<hr />");
 

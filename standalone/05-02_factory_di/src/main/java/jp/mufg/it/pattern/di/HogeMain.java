@@ -19,7 +19,7 @@ public class HogeMain {
         // Fooのビジネスメソッドを呼び出す
         int result = foo.doBusiness(3);
 
-        System.out.println("result ---> " + result);
+        System.out.println("result => " + result);
         System.out.println("[ HogeMain#main ] End");
     }
 }

@@ -26,13 +26,13 @@ public class ParamViewServlet extends HttpServlet {
         out.println("<head><title>ParamViewServlet</title></head>");
         out.println("<body>");
         out.println("<h2>ParamViewServlet</h2><hr />");
-        out.println("Query String ---> " + request.getQueryString() + "<hr />");
+        out.println("Query String => " + request.getQueryString() + "<hr />");
         String paramName, paramValue;
         Enumeration<String> e = request.getParameterNames();
         while (e.hasMoreElements()) {
             paramName = e.nextElement();
             paramValue = request.getParameter(paramName);
-            out.println(paramName + " ---> " + paramValue + "<br />");
+            out.println(paramName + " => " + paramValue + "<br />");
         }
         out.println("</body>");
         out.println("</html>");

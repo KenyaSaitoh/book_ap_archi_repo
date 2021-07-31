@@ -32,8 +32,8 @@ public class FileUploadServlet extends HttpServlet {
             String contentType = part.getContentType();
             InputStream is = part.getInputStream();
 
-            System.out.println("fileName ---> " + fileName);
-            System.out.println("contentType ---> " + contentType);
+            System.out.println("fileName => " + fileName);
+            System.out.println("contentType => " + contentType);
 
             // 取得したファイルと付属情報をRDBに保存する
             int fileId = fileProcessorBean.uploadFile(fileName, contentType,
@@ -44,7 +44,7 @@ public class FileUploadServlet extends HttpServlet {
 
         // 結果を画面に出力する
         PrintWriter out = response.getWriter();
-        out.print("NORMAL END ---> " + fileIdList);
+        out.print("NORMAL END => " + fileIdList);
         out.close();
     }
 }

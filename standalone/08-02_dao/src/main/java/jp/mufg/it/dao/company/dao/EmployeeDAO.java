@@ -23,7 +23,7 @@ public class EmployeeDAO {
         ResultSet rset = null;
         try {
             String sqlStr = "SELECT EMPLOYEE_ID, EMPLOYEE_NAME, "
-                    + "DEPARTMENT_NAME, MONTHLY_SALARY "
+                    + "DEPARTMENT_NAME, SALARY "
                     + "FROM EMPLOYEE WHERE EMPLOYEE_ID=?";
             pstmt = conn.prepareStatement(sqlStr);
             pstmt.setInt(1, employeeId);
@@ -56,7 +56,7 @@ public class EmployeeDAO {
         ResultSet rset = null;
         try {
             String sqlStr = "SELECT EMPLOYEE_ID, EMPLOYEE_NAME, "
-                    + "DEPARTMENT_NAME, MONTHLY_SALARY FROM EMPLOYEE "
+                    + "DEPARTMENT_NAME, SALARY FROM EMPLOYEE "
                     + "WHERE ? <= SALARY AND SALARY <= ?";
             pstmt = conn.prepareStatement(sqlStr);
             pstmt.setInt(1, lowerSalary);

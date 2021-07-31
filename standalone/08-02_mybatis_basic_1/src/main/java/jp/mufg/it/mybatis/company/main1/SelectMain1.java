@@ -14,13 +14,13 @@ public class SelectMain1 {
         // SqlSessionを取得する
         SqlSession sqlSession = SqlSessionHolder.getInstance().getSqlSession();
 
-        // SELECT文を発行し結果を表示する
+        // SELECT文を発行する
         Employee result = sqlSession.selectOne("selectEmployee", 10005);
-        System.out.println(result);
+        System.out.println(result); // 検索結果を表示
 
-        // SELECT文を発行し結果を表示する
+        // SELECT文を発行する
         // Employeeを単独で受け取るメソッドの場合、ヒットしない場合はnullが返される
         Employee result2 = sqlSession.selectOne("selectEmployee", 99999);
-        System.out.println(result2 == null);
+        System.out.println(result2 == null); // 検索結果がNULLかどうかを表示
     }
 }

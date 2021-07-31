@@ -20,15 +20,15 @@ public class Business {
 
         User carol = new User("HR", 2); // 人事部の主任
         boolean flag1 = checkPermission(carol, userSpecList);
-        System.out.println("Carol ---> " + flag1);
+        System.out.println("Carol => " + flag1);
 
         User alice = new User("SALES", 3); // 営業一部の部長
         boolean flag2 = checkPermission(alice, userSpecList);
-        System.out.println("Alice ---> " + flag2);
+        System.out.println("Alice => " + flag2);
 
         User dave = new User("SALES", 2); // 総務部の課長
         boolean flag3 = checkPermission(dave, userSpecList);
-        System.out.println("Dave ---> " + flag3);
+        System.out.println("Dave => " + flag3);
     }
 
     private boolean checkPermission(User user, List<UserSpec> userSpecList) {

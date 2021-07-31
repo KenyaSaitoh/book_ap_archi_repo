@@ -19,14 +19,14 @@ public class LogInterceptor {
         Object[] params = context.getParameters();
         if (params != null) {
             for (Object param : params)
-                System.out.println("param ---> " + param);
+                System.out.println("param => " + param);
         }
 
         // 呼び出し対象のメソッドを実際に呼び出し、戻り値を受け取る
         Object retVal = context.proceed();
 
         // 戻り値を出力する
-        System.out.println("return ---> " + retVal);
+        System.out.println("return => " + retVal);
 
         // 戻り値を返す
         return retVal;

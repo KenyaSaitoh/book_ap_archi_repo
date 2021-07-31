@@ -26,7 +26,7 @@ public class DynamicSelectMain1 {
         EmployeeDynamicParam paramEmployee =
                 new EmployeeDynamicParam("営業部", 250000, 300000);
 
-        // SELECT文を発行し結果を表示する
+        // SELECT文を発行する
         List<Employee> resultList = mapper
                 .selectDynamicEmployees(paramEmployee);
         ResultUtil.showEmployeeList(resultList);

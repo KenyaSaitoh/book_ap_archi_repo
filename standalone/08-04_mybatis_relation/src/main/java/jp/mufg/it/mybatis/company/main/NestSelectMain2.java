@@ -1,5 +1,7 @@
 package jp.mufg.it.mybatis.company.main;
 
+import static jp.mufg.it.mybatis.company.util.ResultUtil.*;
+
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -27,12 +29,6 @@ public class NestSelectMain2 {
 
         // Departmentオブジェクトに関連を持つEmployeeのリストを取得して表示する
         List<Employee> resultList = department.getEmployees();
-        showEmployeeList(resultList);
-    }
-
-    private static void showEmployeeList(List<Employee> resultList) {
-        for (Employee employee : resultList) {
-            System.out.println(employee);
-        }
+        showEmployeeList(resultList); // 検索結果を表示
     }
 }

@@ -48,10 +48,10 @@ public class QueueReceiverMain {
             Queue replyQueue = (Queue)requestMessage.getJMSReplyTo();
 
             // 要求メッセージの内容を表示する
-            System.out.println("===== RequestMessage =====");
-            System.out.println(" RequestMessage ---> " + text);
-            System.out.println(" JMSMessageID ---> " + requestMessageId);
-            System.out.println(" JMSReplyTo ---> " + replyQueue.getQueueName());
+            System.out.println("##### RequestMessage #####");
+            System.out.println(" RequestMessage => " + text);
+            System.out.println(" JMSMessageID => " + requestMessageId);
+            System.out.println(" JMSReplyTo => " + replyQueue.getQueueName());
 
             // 取得したキューからプロデューサを生成する
             MessageProducer producer = session.createProducer(replyQueue);
@@ -65,10 +65,10 @@ public class QueueReceiverMain {
             producer.send(replyMessage);
 
             // 応答メッセージの内容を表示する
-            System.out.println("===== ReplyMessage =====");
-            System.out.println(" ReplyMessage ---> " + replyMessage.getText());
-            System.out.println(" JMSMessageID ---> " + replyMessage.getJMSMessageID());
-            System.out.println(" JMSCorrelationID ---> " + replyMessage.getJMSCorrelationID());
+            System.out.println("##### ReplyMessage #####");
+            System.out.println(" ReplyMessage => " + replyMessage.getText());
+            System.out.println(" JMSMessageID => " + replyMessage.getJMSMessageID());
+            System.out.println(" JMSCorrelationID => " + replyMessage.getJMSCorrelationID());
         }
     }
 }

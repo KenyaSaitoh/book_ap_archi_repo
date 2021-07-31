@@ -14,9 +14,11 @@ public class UpdateMain2 {
         // SqlSessionを取得する
         SqlSession sqlSession = SqlSessionHolder.getInstance().getSqlSession();
 
-        // UPDATE文を発行しコミットする
+        // UPDATE文を発行する
         EmployeeSalaryParam param = new EmployeeSalaryParam(350000, 1000);
         sqlSession.update("subtractSalaryWithParam", param);
+
+        // コミットする
         sqlSession.commit();
     }
 }

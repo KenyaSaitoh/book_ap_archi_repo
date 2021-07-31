@@ -1,5 +1,7 @@
 package jp.mufg.it.ee.jpa.company.main;
 
+import static jp.mufg.it.ee.jpa.company.util.ResultUtil.*;
+
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -27,17 +29,9 @@ public class JpaConditionSelectMain1 {
                 .setParameter("lowerSalary", 300000)
                 .setParameter("upperSalary", 400000);
         List<Employee> resultList = query.getResultList();
-
-        // 検索結果を標準出力する
-        showEmployeeList(resultList);
+        showEmployeeList(resultList); // 検索結果を表示
 
         // エンティティマネージャをクローズする
         entityManager.close();
-    }
-
-    private static void showEmployeeList(List<Employee> resultList) {
-        for (Employee employee : resultList) {
-            System.out.println(employee);
-        }
     }
 }

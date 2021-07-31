@@ -43,8 +43,8 @@ public class QueueSenderMain {
 
         // 要求メッセージを送信する
         producer.send(requestMessage);
-        System.out.println("===== RequestMessage =====");
-        System.out.println(" RequestMessage ---> " + requestMessage.getText());
+        System.out.println("##### RequestMessage #####");
+        System.out.println(" RequestMessage => " + requestMessage.getText());
         String requestMessageId = requestMessage.getJMSMessageID();
         System.out.println(" JMSMessageID : " + requestMessageId);
 
@@ -62,8 +62,8 @@ public class QueueSenderMain {
                 replyMessageBlockingCache.getAndWaitMessage(requestMessageId);
 
         // メッセージを表示する
-        System.out.println("===== ReplyMessage =====");
-        System.out.println(" ReplyMessage ---> " + replyMessage.getText());
+        System.out.println("##### ReplyMessage #####");
+        System.out.println(" ReplyMessage => " + replyMessage.getText());
 
         // メッセージの受信を停止する
         conn.close();

@@ -18,8 +18,8 @@ public class FlatSelectMain1 {
         // Mapperを取得する
         EmpDeptFlatMapper mapper = sqlSession.getMapper(EmpDeptFlatMapper.class);
 
-        // SELECT文を発行し結果を表示する
+        // SELECT文を発行する
         EmpDept result = mapper.selectEmpDept(10007);
-        System.out.println(result);
+        System.out.println(result); // 検索結果を表示
     }
 }

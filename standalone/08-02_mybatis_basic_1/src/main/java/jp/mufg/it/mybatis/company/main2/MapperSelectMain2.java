@@ -1,5 +1,7 @@
 package jp.mufg.it.mybatis.company.main2;
 
+import static jp.mufg.it.mybatis.company.util.ResultUtil.*;
+
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -20,14 +22,8 @@ public class MapperSelectMain2 {
         // Mapperを取得する
         EmployeeMapper mapper = sqlSession.getMapper(EmployeeMapper.class);
 
-        // SELECT文を発行し結果を表示する
+        // SELECT文を発行する
         List<Employee> resultList = mapper.selectEmployees("営業部", 300000);
-        showEmployeeList(resultList);
-    }
-
-    private static void showEmployeeList(List<Employee> resultList) {
-        for (Employee employee : resultList) {
-            System.out.println(employee);
-        }
+        showEmployeeList(resultList); // 検索結果を表示
     }
 }

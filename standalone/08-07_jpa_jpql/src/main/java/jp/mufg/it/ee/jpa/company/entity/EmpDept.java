@@ -1,6 +1,6 @@
 package jp.mufg.it.ee.jpa.company.entity;
 
-public class EmployeeDepartment {
+public class EmpDept {
     private Integer employeeId;
     private String employeeName;
     private Integer salary;
@@ -9,11 +9,11 @@ public class EmployeeDepartment {
     private String location;
 
     // 引数なしのコンストラクタ
-    public EmployeeDepartment() {
+    public EmpDept() {
     }
 
     // コンストラクタ
-    public EmployeeDepartment(int employeeId, String employeeName,
+    public EmpDept(int employeeId, String employeeName,
             int salary, int departmentId, String departmentName,
             String location) {
         this.employeeId = employeeId;

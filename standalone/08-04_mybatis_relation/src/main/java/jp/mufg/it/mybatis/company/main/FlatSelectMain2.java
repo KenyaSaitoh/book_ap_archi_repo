@@ -1,5 +1,7 @@
 package jp.mufg.it.mybatis.company.main;
 
+import static jp.mufg.it.mybatis.company.util.ResultUtil.*;
+
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -20,14 +22,8 @@ public class FlatSelectMain2 {
         // Mapperを取得する
         EmpDeptFlatMapper mapper = sqlSession.getMapper(EmpDeptFlatMapper.class);
 
-        // SELECT文を発行し結果を表示する
+        // SELECT文を発行する
         List<EmpDept> resultList = mapper.selectEmpDeptByDepartmentId(3);
-        showEmpDeptList(resultList);
-    }
-
-    private static void showEmpDeptList(List<EmpDept> resultList) {
-        for (EmpDept empDept : resultList) {
-            System.out.println(empDept);
-        }
+        showEmpDeptList(resultList);  // 検索結果を表示
     }
 }

@@ -16,29 +16,29 @@ public class JpaInheritanceJoinedTest extends JpaTestBase {
     // フルタイマーを検索 → 更新
     @Test
     public void test1() {
-        System.out.println("===== TEST1 START =====");
+        System.out.println("##### TEST1 START #####");
         Fulltimer fulltimer = entityManager.find(Fulltimer.class, 10015);
         fulltimer.setsalary(fulltimer.getsalary() + 5000);
         commit();
         ResultUtil.showStaff(fulltimer);
-        System.out.println("===== TEST1 ]");
+        System.out.println("##### TEST1 ]");
     }
 
     // パートタイマーを検索 → 更新
     @Test
     public void test2() {
-        System.out.println("===== TEST2 START =====");
+        System.out.println("##### TEST2 START #####");
         Parttimer parttimer = entityManager.find(Parttimer.class, 20004);
         parttimer.setParttimerPayment(parttimer.getParttimerPayment() + 200);
         commit();
         ResultUtil.showParttimer(parttimer);
-        System.out.println("===== TEST2 ]");
+        System.out.println("##### TEST2 ]");
     }
 
     // パートタイマーを挿入
     @Test
     public void test3() {
-        System.out.println("===== TEST3 START =====");
+        System.out.println("##### TEST3 START #####");
         Department department = entityManager.find(Department.class, 5);
         Calendar cal = Calendar.getInstance();
         cal.set(2009, 3, 1);
@@ -47,6 +47,6 @@ public class JpaInheritanceJoinedTest extends JpaTestBase {
         entityManager.persist(parttimer);
         commit();
         ResultUtil.showParttimer(parttimer);
-        System.out.println("===== TEST3 ]");
+        System.out.println("##### TEST3 ]");
     }
 }

@@ -1,5 +1,7 @@
 package jp.mufg.it.mybatis.company.main;
 
+import static jp.mufg.it.mybatis.company.util.ResultUtil.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,15 +28,9 @@ public class SelectMain2 {
         departmentNameList.add("企画部");
         departmentNameList.add("商品開発部");
 
-        // SELECT文を発行し結果を表示する
+        // SELECT文を発行する
         List<Employee> resultList = mapper
                 .selectVariousDepartment(departmentNameList);
-        showEmployeeList(resultList);
-    }
-
-    private static void showEmployeeList(List<Employee> resultList) {
-        for (Employee employee : resultList) {
-            System.out.println(employee);
-        }
+        showEmployeeList(resultList); // 検索結果を表示
     }
 }

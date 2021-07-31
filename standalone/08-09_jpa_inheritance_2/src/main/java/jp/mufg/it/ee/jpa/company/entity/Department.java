@@ -54,7 +54,7 @@ public class Department {
     }
 
     // ビル名へのアクセサメソッド
-    @Column(name = "BUILDING_NAME")
+    @Column(name = "LOCATION")
     public String getBuildingName() {
         return buildingName;
     }

@@ -15,7 +15,7 @@ public class RequestFilter implements ContainerRequestFilter {
     public void filter(ContainerRequestContext requestContext)
             throws IOException {
 
-        System.out.println("length ---> " + requestContext.getLength());
-        System.out.println("SecurityContext ---> " + requestContext.getSecurityContext());
+        System.out.println("length => " + requestContext.getLength());
+        System.out.println("SecurityContext => " + requestContext.getSecurityContext());
     }
 }

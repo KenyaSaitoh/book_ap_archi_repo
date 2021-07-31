@@ -13,18 +13,18 @@ public class JpaEmbeddableTest extends JpaTestBase {
     // 社員を検索
     @Test
     public void test1() {
-        System.out.println("===== TEST1 START =====");
+        System.out.println("##### TEST1 START #####");
         Employee employee = entityManager.find(Employee.class, 10007);
         ResultUtil.showEmployee(employee);
-        System.out.println("===== TEST1 ]");
+        System.out.println("##### TEST1 ]");
     }
 
     // 部署を検索
     @Test
     public void test2() {
-        System.out.println("===== TEST2 START =====");
+        System.out.println("##### TEST2 START #####");
         Department department = entityManager.find(Department.class, 4);
         ResultUtil.showDepartment(department);
-        System.out.println("===== TEST2 ]");
+        System.out.println("##### TEST2 ]");
     }
 }

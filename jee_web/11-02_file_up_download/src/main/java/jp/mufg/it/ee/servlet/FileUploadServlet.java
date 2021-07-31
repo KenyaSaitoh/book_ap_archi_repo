@@ -32,8 +32,8 @@ public class FileUploadServlet extends HttpServlet {
             String fileName = part.getSubmittedFileName();
             String contentType = part.getContentType();
 
-            System.out.println("fileName ---> " + fileName);
-            System.out.println("contentType ---> " + contentType);
+            System.out.println("fileName => " + fileName);
+            System.out.println("contentType => " + contentType);
 
             // ファイルを読み込んでByteArrayOutputStreamに出力する
             BufferedInputStream bis = null;
@@ -63,7 +63,7 @@ public class FileUploadServlet extends HttpServlet {
 
         // 結果を画面に出力する
         PrintWriter out = response.getWriter();
-        out.print("NORMAL END ---> " + fileIdList);
+        out.print("NORMAL END => " + fileIdList);
         out.close();
     }
 }

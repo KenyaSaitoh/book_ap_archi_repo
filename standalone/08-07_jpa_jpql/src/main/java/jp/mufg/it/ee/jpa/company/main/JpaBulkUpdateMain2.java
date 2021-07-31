@@ -30,6 +30,7 @@ public class JpaBulkUpdateMain2 {
                 .setParameter("increase", 2000);
         query.executeUpdate();
 
+        // フラッシュ（SQL発行）する
         entityManager.flush();
 
         // Employeeインスタンスの永続フィールドの値を書き換える

@@ -24,7 +24,7 @@ public class JBatchServlet extends HttpServlet {
         // 結果を画面に出力する。
         PrintWriter out = response.getWriter();
         out.println("NORMAL END");
-        out.println("executionId ---> " + executionId);
+        out.println("executionId => " + executionId);
         out.close();
     }
 }

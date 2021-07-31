@@ -19,7 +19,7 @@ public class HelloAsyncHandler implements AsyncHandler<SayHelloResponse> {
         } catch (ExecutionException ee) {
             throw new RuntimeException(ee);
         }
-        System.out.println("  message ---> " + message);
+        System.out.println("  message => " + message);
 
         System.out.println("[ HelloAsyncHandler#handleResponse ] End");
     }

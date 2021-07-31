@@ -28,8 +28,10 @@ public class UpdateMain {
         employee.setJobType(JobType.LEADER);
         employee.getDepartment().setDepartmentId(3); // これがポイント!
 
-        // UPDATE文を発行しコミットする
+        // UPDATE文を発行する
         mapper2.updateEmployee(employee);
+
+        // コミット数する
         sqlSession.commit();
     }
 }

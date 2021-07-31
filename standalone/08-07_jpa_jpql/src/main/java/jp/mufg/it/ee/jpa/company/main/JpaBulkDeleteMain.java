@@ -25,7 +25,7 @@ public class JpaBulkDeleteMain {
                 "WHERE :salary <= e.salary")
                 .setParameter("salary", 400000);
         int hitCount = query.executeUpdate();
-        System.out.println("ヒット件数 ---> " + hitCount);
+        System.out.println("ヒット件数 => " + hitCount); // 更新結果を表示
 
         // エンティティトランザクションをコミットする
         entityTransaction.commit();

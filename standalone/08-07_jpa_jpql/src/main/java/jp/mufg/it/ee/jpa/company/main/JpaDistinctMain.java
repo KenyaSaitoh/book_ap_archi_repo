@@ -21,22 +21,22 @@ public class JpaDistinctMain {
 
         // DISTINCTありのケース
         {
-        System.out.println("===== TEST1 START =====");
+        System.out.println("##### TEST1 START #####");
         Query query = entityManager.createQuery(
                 "SELECT DISTINCT a.prefecture FROM Address AS a");
         List<String> resultList = query.getResultList();
-        System.out.println(resultList);
-        System.out.println("===== TEST1 END =====\n");
+        System.out.println(resultList); // 検索結果を表示
+        System.out.println("##### TEST1 END #####\n");
         }
 
         // DISTINCTなしのケース
         {
-        System.out.println("===== TEST2 START =====");
+        System.out.println("##### TEST2 START #####");
         Query query = entityManager.createQuery(
                 "SELECT a.prefecture FROM Address AS a");
         List<String> resultList = query.getResultList();
-        System.out.println(resultList);
-        System.out.println("===== TEST2 END =====\n");
+        System.out.println(resultList); // 検索結果を表示
+        System.out.println("##### TEST2 END #####\n");
         }
     }
 }

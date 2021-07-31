@@ -19,25 +19,25 @@ public class IncludeServlet extends HttpServlet {
         // HTMLコードを出力する
         PrintWriter out = response.getWriter();
         out.println("<h2>IncludeServlet</h2>");
-        out.println("DispatchMainServletでリクエストスコープにセットされたデータ ---> " +
+        out.println("DispatchMainServletでリクエストスコープにセットされたデータ => " +
                 request.getAttribute("userName") + "<br /><br />");
         out.println("HttpServletRequestに格納されているForwardServletのパス関連情報" + "<br />");
-        out.println("ForwardServlet RequestURI ---> " +
+        out.println("ForwardServlet RequestURI => " +
                 request.getRequestURI() + "<br />");
-        out.println("ForwardServlet ContextPath ---> " +
+        out.println("ForwardServlet ContextPath => " +
                 request.getContextPath() + "<br />");
-        out.println("ForwardServlet ServletPath ---> " +
+        out.println("ForwardServlet ServletPath => " +
                 request.getServletPath() + "<br />");
-        out.println("ForwardServlet Query String ---> " +
+        out.println("ForwardServlet Query String => " +
                 request.getQueryString() + "<br /><br />");
         out.println("リクエストスコープにセットされたIncludeServletのパス関連情報<br />");
-        out.println("IncludeServlet RequestURI ---> " +
+        out.println("IncludeServlet RequestURI => " +
                 request.getAttribute("javax.servlet.include.request_uri") + "<br />");
-        out.println("IncludeServlet ContextPath ---> " +
+        out.println("IncludeServlet ContextPath => " +
                 request.getAttribute("javax.servlet.include.context_path") + "<br />");
-        out.println("IncludeServlet ServletPath ---> " +
+        out.println("IncludeServlet ServletPath => " +
                 request.getAttribute("javax.servlet.include.servlet_path") + "<br />");
-        out.println("IncludeServlet Query String ---> " +
+        out.println("IncludeServlet Query String => " +
                 request.getAttribute("javax.servlet.include.query_string") + "<br />");
         out.println("<hr />");
     }

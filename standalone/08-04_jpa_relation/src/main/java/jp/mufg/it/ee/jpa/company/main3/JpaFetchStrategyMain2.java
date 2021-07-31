@@ -19,12 +19,12 @@ public class JpaFetchStrategyMain2 {
         EntityManager entityManager = emf.createEntityManager();
 
         // Department → Employee（レイジーフェッチ）
-        System.out.println("===== findメソッド呼び出し =====");
+        System.out.println("##### findメソッド呼び出し #####");
         Department department = entityManager.find(Department.class, 1);
-        System.out.println(department);
-        System.out.println("employees ---> " + department.getEmployees());
-        System.out.println("===== 関連エンティティにアクセス =====");
+        System.out.println(department); // 検索結果を表示
+        System.out.println("employees => " + department.getEmployees());
+        System.out.println("##### 関連エンティティにアクセス #####");
         Employee employee = department.getEmployees().get(0);
-        System.out.println("employees ---> " + department.getEmployees());
+        System.out.println("employees => " + department.getEmployees());
     }
 }

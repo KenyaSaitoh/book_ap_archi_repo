@@ -29,9 +29,9 @@ public class JpaCascadeStrategyMain6 {
         employee.setSalary(480000); // もともとは450000
         department.setDepartmentName("経営企画部"); // もともとは企画部
 
-        System.out.println("refresh前 ---> " + employee);
+        System.out.println("refresh前 => " + employee);
         entityManager.refresh(employee);
-        System.out.println("refresh後 ---> " + employee);
+        System.out.println("refresh後 => " + employee);
 
         // コミットする
         entityTransaction.commit();

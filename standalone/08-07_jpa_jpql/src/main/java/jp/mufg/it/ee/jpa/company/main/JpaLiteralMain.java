@@ -1,5 +1,7 @@
 package jp.mufg.it.ee.jpa.company.main;
 
+import static jp.mufg.it.ee.jpa.company.util.ResultUtil.*;
+
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -24,14 +26,6 @@ public class JpaLiteralMain {
         Query query = entityManager.createQuery("SELECT e FROM Employee AS e "
                 + "WHERE {d '2015-01-01'} <= e.entranceDate");
         List<Employee> resultList = query.getResultList();
-
-        // 取得した結果を表示する。
-        showEmployeeList(resultList);
-    }
-
-    private static void showEmployeeList(List<Employee> resultList) {
-        for (Employee employee : resultList) {
-            System.out.println(employee);
-        }
+        showEmployeeList(resultList); // 検索結果を表示
     }
 }

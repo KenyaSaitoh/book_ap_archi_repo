@@ -16,11 +16,13 @@ public class UpdateMain3 {
         // SqlSessionを取得する
         SqlSession sqlSession = SqlSessionHolder.getInstance().getSqlSession();
 
-        // UPDATE文を発行しコミットする
+        // UPDATE文を発行する
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("salary", 400000);
         param.put("payCut", 3000);
         sqlSession.update("subtractSalaryWithMap", param);
+
+        // コミットする
         sqlSession.commit();
     }
 }

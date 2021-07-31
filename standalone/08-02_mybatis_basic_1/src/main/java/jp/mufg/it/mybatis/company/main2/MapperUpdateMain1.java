@@ -21,9 +21,11 @@ public class MapperUpdateMain1 {
         // SELECT文を発行する
         Employee employee = mapper.selectEmployee(10005);
 
-        // UPDATE文を発行しコミットする
+        // UPDATE文を発行する
         employee.setSalary(employee.getSalary() + 3333);
         mapper.updateEmployee(employee);
+
+        // コミットする
         sqlSession.commit();
     }
 }

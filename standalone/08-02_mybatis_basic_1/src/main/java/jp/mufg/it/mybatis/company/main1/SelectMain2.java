@@ -14,8 +14,8 @@ public class SelectMain2 {
         // SqlSessionを取得する
         SqlSession sqlSession = SqlSessionHolder.getInstance().getSqlSession();
 
-        // SELECT文を発行し結果を表示する
+        // SELECT文を発行する
         Employee result = sqlSession.selectOne("selectEmployee2", 10005);
-        System.out.println(result);
+        System.out.println(result); // 検索結果を表示
     }
 }

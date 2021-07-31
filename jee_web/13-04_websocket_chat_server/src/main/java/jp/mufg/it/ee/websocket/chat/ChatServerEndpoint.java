@@ -26,7 +26,7 @@ public class ChatServerEndpoint {
     @OnMessage
     public void onMessage(String message, Session session) throws IOException {
         System.out.println("[ ChatServerEndpoint#onMessage ]");
-        System.out.println("message ---> " + message);
+        System.out.println("message => " + message);
         for (Session eachSession : sessionSet) {
             eachSession.getBasicRemote().sendText(message);
         }

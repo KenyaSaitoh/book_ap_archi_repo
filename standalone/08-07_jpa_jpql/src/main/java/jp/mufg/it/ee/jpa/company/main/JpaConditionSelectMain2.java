@@ -25,9 +25,7 @@ public class JpaConditionSelectMain2 {
                 "WHERE e.department.departmentId = :departmentId")
                 .setParameter("departmentId", 1);
         List<Employee> resultList = query.getResultList();
-
-        // 検索結果を標準出力する
-        showEmployeeList(resultList);
+        showEmployeeList(resultList); // 検索結果を表示
 
         // エンティティマネージャをクローズする
         entityManager.close();

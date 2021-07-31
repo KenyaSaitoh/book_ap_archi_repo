@@ -70,7 +70,7 @@ public class SalesItemReader implements ItemReader {
             return null;
         }
         Integer salesId = rset.getInt(1);
-        System.out.println("salesId ---> " + salesId);
+        System.out.println("salesId => " + salesId);
         return salesId;
     }
 

@@ -8,7 +8,7 @@ public class BarBean implements Bar {
 
         int result = param * param; // 引数を2乗して返す
 
-        System.out.println("result ---> " + result);
+        System.out.println("result => " + result);
         System.out.println("[ BarImpl#doBusiness ] End");
 
         return result;

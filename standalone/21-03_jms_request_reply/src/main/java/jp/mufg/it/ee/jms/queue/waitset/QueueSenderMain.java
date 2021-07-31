@@ -80,8 +80,8 @@ class SenderThread extends Thread {
     public void run() {
         try {
             producer.send(requestMessage);
-            System.out.println("===== RequestMessage =====");
-            System.out.println(" RequestMessage ---> " + requestMessage.getText());
+            System.out.println("##### RequestMessage #####");
+            System.out.println(" RequestMessage => " + requestMessage.getText());
             String requestMessageId = requestMessage.getJMSMessageID();
             System.out.println(" JMSMessageID : " + requestMessageId);
 
@@ -94,8 +94,8 @@ class SenderThread extends Thread {
                     getAndWaitMessage(requestMessageId);
 
             // メッセージを表示する
-            System.out.println("===== ReplyMessage =====");
-            System.out.println(" ReplyMessage ---> " + replyMessage.getText());
+            System.out.println("##### ReplyMessage #####");
+            System.out.println(" ReplyMessage => " + replyMessage.getText());
         } catch (JMSException jmse) {
             throw new RuntimeException(jmse);
         }

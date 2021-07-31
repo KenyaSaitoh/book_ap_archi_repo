@@ -19,6 +19,8 @@ public class MapperUpdateMain2 {
 
         // UPDATE文を発行しコミットする
         mapper.subtractSalaryWithParam(350000, 1000);
+
+        // コミットする
         sqlSession.commit();
     }
 }

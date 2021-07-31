@@ -58,7 +58,7 @@ public class SalesItemWriter implements ItemWriter {
         Connection conn = ds.getConnection();
         for (Object obj : items) {
             Integer salesId = (Integer)obj;
-            System.out.println("salesId ---> " + salesId);
+            System.out.println("salesId => " + salesId);
             pstmt = conn.prepareStatement(
                     "UPDATE STOCK_PRODUCT SP " +
                     "INNER JOIN (SALES_TRAN ST INNER JOIN SALES_DETAIL SD " +

@@ -35,7 +35,7 @@ public class HelloAsyncServiceCallbackRequestor2 {
                         } catch (ExecutionException ee) {
                             throw new RuntimeException(ee);
                         }
-                        System.out.println("  message ---> " + message);
+                        System.out.println("  message => " + message);
 
                         System.out.println("[ AsyncHandler#handleResponse ] " +
                                 "End");

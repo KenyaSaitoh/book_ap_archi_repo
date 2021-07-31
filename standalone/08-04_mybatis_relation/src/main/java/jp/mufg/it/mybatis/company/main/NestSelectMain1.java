@@ -21,8 +21,6 @@ public class NestSelectMain1 {
 
         // SELECT文を発行し、単一のMany側（Employeeオブジェクト）を取得する
         Employee employee = mapper.selectEmployee(10001);
-
-        // 結果を表示する
-        System.out.println(employee);
+        System.out.println(employee); // 検索結果を表示
     }
 }

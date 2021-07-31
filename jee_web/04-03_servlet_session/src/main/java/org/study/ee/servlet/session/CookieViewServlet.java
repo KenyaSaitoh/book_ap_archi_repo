@@ -29,16 +29,16 @@ public class CookieViewServlet extends HttpServlet {
         out.println("<h2>CookieViewerServle</h2><hr />");
         out.println("WebブラウザからのHTTPリクエスト内にセットされているクッキー一覧<br /><br />");
         for (int i = 0; i < cookies.length; i++) {
-            out.println("Cookie[" + i + "] Name ---> " + cookies[i].getName() + "<br />");
-            out.println("Cookie[" + i + "] Value ---> " + cookies[i].getValue() + "<br />");
-            out.println("Cookie[" + i + "] Comment ---> " + cookies[i].getComment()
+            out.println("Cookie[" + i + "] Name => " + cookies[i].getName() + "<br />");
+            out.println("Cookie[" + i + "] Value => " + cookies[i].getValue() + "<br />");
+            out.println("Cookie[" + i + "] Comment => " + cookies[i].getComment()
                     + "<br />");
-            out.println("Cookie[" + i + "] Max Age ---> " + cookies[i].getMaxAge()
+            out.println("Cookie[" + i + "] Max Age => " + cookies[i].getMaxAge()
                     + "<br />");
-            out.println("Cookie[" + i + "] Domain ---> " + cookies[i].getDomain()
+            out.println("Cookie[" + i + "] Domain => " + cookies[i].getDomain()
                     + "<br />");
-            out.println("Cookie[" + i + "] Path ---> " + cookies[i].getPath() + "<br />");
-            out.println("Cookie[" + i + "] Version ---> " + cookies[i].getVersion()
+            out.println("Cookie[" + i + "] Path => " + cookies[i].getPath() + "<br />");
+            out.println("Cookie[" + i + "] Version => " + cookies[i].getVersion()
                     + "<br />");
             out.println("<br />");
         }

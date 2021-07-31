@@ -33,7 +33,7 @@ public class PessimisticReadLockMain2 {
         Employee employee = entityManager.find(Employee.class, 10001,
                 LockModeType.PESSIMISTIC_READ);
 
-        // 検索結果を標準出力する
-        System.out.println("employeeName ---> " + employee);
+        // 検索結果を表示
+        System.out.println("employeeName => " + employee);
     }
 }

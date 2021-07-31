@@ -21,9 +21,7 @@ public class JpaSelectMain {
 
         // Employeeインスタンスのゲッタにより、カラム値を取得する
         String employeeName = employee.getEmployeeName();
-
-        // 検索結果を標準出力する
-        System.out.println("employeeName ---> " + employeeName);
+        System.out.println("employeeName => " + employeeName);
 
         // エンティティマネージャをクローズする
         entityManager.close();

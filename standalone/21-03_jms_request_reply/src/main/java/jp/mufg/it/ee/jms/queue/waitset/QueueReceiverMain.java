@@ -66,10 +66,10 @@ class ReceiverThread extends Thread {
             Queue replyQueue = (Queue) requestMessage.getJMSReplyTo();
 
             // 要求メッセージの内容を表示する
-            System.out.println("===== RequestMessage =====");
-            System.out.println(" RequestMessage ---> " + text);
-            System.out.println(" JMSMessageID ---> " + requestMessageId);
-            System.out.println(" JMSReplyTo ---> " + replyQueue.getQueueName());
+            System.out.println("##### RequestMessage #####");
+            System.out.println(" RequestMessage => " + text);
+            System.out.println(" JMSMessageID => " + requestMessageId);
+            System.out.println(" JMSReplyTo => " + replyQueue.getQueueName());
 
             // ウェイトする
             System.out.print("処理中");
@@ -95,10 +95,10 @@ class ReceiverThread extends Thread {
             producer.send(replyMessage);
 
             // 応答メッセージの内容を表示する
-            System.out.println("===== ReplyMessage =====");
-            System.out.println(" ReplyMessage ---> " + replyMessage.getText());
-            System.out.println(" JMSMessageID ---> " + replyMessage.getJMSMessageID());
-            System.out.println(" JMSCorrelationID ---> " + replyMessage.getJMSCorrelationID());
+            System.out.println("##### ReplyMessage #####");
+            System.out.println(" ReplyMessage => " + replyMessage.getText());
+            System.out.println(" JMSMessageID => " + replyMessage.getJMSMessageID());
+            System.out.println(" JMSCorrelationID => " + replyMessage.getJMSCorrelationID());
 
         } catch (JMSException jmse) {
             throw new RuntimeException(jmse);

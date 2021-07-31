@@ -1,5 +1,7 @@
 package jp.mufg.it.ee.jpa.company.main;
 
+import static jp.mufg.it.ee.jpa.company.util.ResultUtil.*;
+
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -24,50 +26,35 @@ public class JpaGeneralFunctionMain {
 
         // LENGTH
         {
-        System.out.println("===== TEST1 START =====");
+        System.out.println("##### TEST1 START #####");
         Query query = entityManager.createQuery(
                 "SELECT e FROM Employee AS e " +
-                "WHERE 8 < LENGTH(e.employeeName)");
+                "WHERE 5 < LENGTH(e.employeeName)");
         List<Employee> resultList = query.getResultList();
-        showEmployeeList(resultList);
-        System.out.println("===== TEST1 END =====\n");
+        showEmployeeList(resultList); // 検索結果を表示
+        System.out.println("##### TEST1 END #####\n");
         }
 
         // SIZE
         {
-        System.out.println("===== TEST2 START =====");
+        System.out.println("##### TEST2 START #####");
         Query query = entityManager.createQuery(
                 "SELECT d FROM Department AS d " +
-                "WHERE SIZE(d.employees) = 3");
+                "WHERE SIZE(d.employees) = 5");
         List<Department> resultList = query.getResultList();
-        showDepartmentList(resultList);
-        System.out.println("===== TEST2 END =====\n");
+        showDepartmentList(resultList); // 検索結果を表示
+        System.out.println("##### TEST2 END #####\n");
         }
 
         // SUBSTRING
         {
-        System.out.println("===== TEST3 START =====");
+        System.out.println("##### TEST3 START #####");
         Query query = entityManager.createQuery(
                 "SELECT e FROM Employee AS e " +
-                "WHERE SUBSTRING(e.employeeName, 2, 1) = 'か'");
+                "WHERE SUBSTRING(e.employeeName, 2, 1) = 'a'");
         List<Employee> resultList = query.getResultList();
-        showEmployeeList(resultList);
-        System.out.println("===== TEST3 END =====\n");
-        }
-    }
-
-    private static void showEmployeeList(List<Employee> resultList) {
-        for (Employee employee : resultList) {
-            System.out.println(employee);
-        }
-    }
-
-    private static void showDepartmentList(List<Department> resultList) {
-        for (Department department : resultList) {
-            System.out.println(department);
-            for (Employee employee : department.getEmployees()) {
-                System.out.println("    +---" + employee);
-            }
+        showEmployeeList(resultList); // 検索結果を表示
+        System.out.println("##### TEST3 END #####\n");
         }
     }
 }

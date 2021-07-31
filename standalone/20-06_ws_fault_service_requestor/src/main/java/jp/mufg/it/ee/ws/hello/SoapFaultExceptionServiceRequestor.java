@@ -26,17 +26,17 @@ public class SoapFaultExceptionServiceRequestor {
         try {
             portType.sayHello("Webservice", 3);
         } catch(SOAPFaultException sfe) {
-            System.out.println("===== SOAPFaultException =====");
+            System.out.println("##### SOAPFaultException #####");
             SOAPFault fault = sfe.getFault();
-            System.out.println("  FaultCode ---> " + fault.getFaultCode());
-            System.out.println("  FaultString ---> " + fault.getFaultString());
-            System.out.println("  FaultActor ---> " + fault.getFaultActor());
-            System.out.println("===== Detail =====");
+            System.out.println("  FaultCode => " + fault.getFaultCode());
+            System.out.println("  FaultString => " + fault.getFaultString());
+            System.out.println("  FaultActor => " + fault.getFaultActor());
+            System.out.println("##### Detail #####");
             Detail detail = fault.getDetail();
             Iterator<SOAPElement> i = detail.getChildElements();
             while (i.hasNext()) {
                 SOAPElement element = i.next();
-                System.out.println("  " + element.getTagName() + " ---> " +
+                System.out.println("  " + element.getTagName() + " => " +
                         element.getTextContent());
             }
         }

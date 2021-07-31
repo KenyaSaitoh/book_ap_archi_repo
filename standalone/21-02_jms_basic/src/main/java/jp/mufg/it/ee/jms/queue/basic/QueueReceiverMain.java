@@ -63,16 +63,16 @@ class QueueListener implements MessageListener {
 
             // メッセージを表示する
             String text = requestMessage.getText();
-            System.out.println("===== Message =====");
+            System.out.println("##### Message #####");
             System.out.println(text);
 
             // プロパティを表示する
-            System.out.println("===== Property =====");
+            System.out.println("##### Property #####");
             String property = requestMessage.getStringProperty("propertyName");
             System.out.println(property);
 
             // ヘッダを表示する
-            System.out.println("===== Header =====");
+            System.out.println("##### Header #####");
             System.out.println(" JMSDestination : " +
                     ((Queue)requestMessage.getJMSDestination()).getQueueName());
             System.out.println(" JMSDeliveryMode : " + requestMessage.getJMSDeliveryMode());

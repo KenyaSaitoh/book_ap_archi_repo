@@ -5,6 +5,6 @@ import javax.enterprise.event.Observes;
 public class ConcreteObserver2 {
     public void onEvent(@Observes String eventName) {
         System.out.println(
-                "[ ConcreteObserver2#onEvent ] eventName ---> " + eventName);
+                "[ ConcreteObserver2#onEvent ] eventName => " + eventName);
     }
 }

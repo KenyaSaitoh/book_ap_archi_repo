@@ -1,5 +1,7 @@
 package jp.mufg.it.ee.jpa.company.main;
 
+import static jp.mufg.it.ee.jpa.company.util.ResultUtil.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +25,7 @@ public class JpaWhereInMain {
         EntityManager entityManager = emf.createEntityManager();
 
         {
-        System.out.println("===== TEST1 START =====");
+        System.out.println("##### TEST1 START #####");
         List<Integer> paramList = new ArrayList<Integer>();
         paramList.add(1);
         paramList.add(4);
@@ -32,12 +34,12 @@ public class JpaWhereInMain {
                 "WHERE e.department.departmentId IN :departmentId")
                 .setParameter("departmentId", paramList);
         List<Employee> resultList = query.getResultList();
-        showEmployeeList(resultList);
-        System.out.println("===== TEST1 END =====\n");
+        showEmployeeList(resultList); // 検索結果を表示
+        System.out.println("##### TEST1 END #####\n");
         }
 
         {
-        System.out.println("===== TEST2 START =====");
+        System.out.println("##### TEST2 START #####");
         List<Department> paramList = new ArrayList<Department>();
         Department department1 = entityManager.find(Department.class, 1);
         Department department2 = entityManager.find(Department.class, 4);
@@ -48,14 +50,8 @@ public class JpaWhereInMain {
                 "WHERE e.department IN :department")
                 .setParameter("department", paramList);
         List<Employee> resultList = query.getResultList();
-        showEmployeeList(resultList);
-        System.out.println("===== TEST2#END =====\n");
-        }
-    }
-
-    private static void showEmployeeList(List<Employee> resultList) {
-        for (Employee employee : resultList) {
-            System.out.println(employee);
+        showEmployeeList(resultList); // 検索結果を表示
+        System.out.println("##### TEST2#END #####\n");
         }
     }
 }

@@ -28,8 +28,8 @@ import javax.persistence.SqlResultSetMappings;
 ),
 @SqlResultSetMapping(name = "NativeQueryResult2",
         columns = {
-            @ColumnResult(name = "E_MONTHLY_SALARY"),
-            @ColumnResult(name = "D_BUILDING_NAME")
+            @ColumnResult(name = "E_SALARY"),
+            @ColumnResult(name = "D_LOCATION")
         }
 ),
 @SqlResultSetMapping(name = "NativeQueryResult3",
@@ -47,8 +47,8 @@ import javax.persistence.SqlResultSetMappings;
             )
         },
         columns = {
-            @ColumnResult(name = "E_MONTHLY_SALARY"),
-            @ColumnResult(name = "D_BUILDING_NAME")
+            @ColumnResult(name = "E_SALARY"),
+            @ColumnResult(name = "D_LOCATION")
         }
 )
 })
@@ -56,8 +56,8 @@ import javax.persistence.SqlResultSetMappings;
         query = "SELECT e.EMPLOYEE_ID AS E_EMPLOYEE_ID, " +
                 "e.EMPLOYEE_NAME AS E_EMPLOYEE_NAME, " +
                 "d.DEPARTMENT_NAME AS D_DEPARTMENT_NAME, " +
-                "e.MONTHLY_SALARY AS E_MONTHLY_SALARY, " +
-                "d.BUILDING_NAME AS D_BUILDING_NAME " +
+                "e.SALARY AS E_SALARY, " +
+                "d.LOCATION AS D_LOCATION " +
                 "FROM EMPLOYEE e, DEPARTMENT d " +
                 "WHERE e.DEPARTMENT_ID = d.DEPARTMENT_ID " +
                 "AND e.EMPLOYEE_ID = ?1",

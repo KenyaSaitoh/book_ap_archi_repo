@@ -30,6 +30,6 @@ public class InsertMain2 {
         sqlSession.commit();
 
         // 自動採番されたキーを表示する
-        System.out.println("employeeId ---> " + param.getEmployeeId());
+        System.out.println("employeeId => " + param.getEmployeeId());
     }
 }

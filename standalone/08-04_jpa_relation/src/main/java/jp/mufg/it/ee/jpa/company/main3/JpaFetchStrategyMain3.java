@@ -25,10 +25,12 @@ public class JpaFetchStrategyMain3 {
         // レイジーフェッチにおける「N+1 SELECT」問題
         Query query = entityManager.createQuery("SELECT d FROM Department AS d");
         List<Department> departmentList = (List<Department>)query.getResultList();
+
+        // 検索結果を表示する
         for (Department department: departmentList) {
             List<Employee> employeeList = department.getEmployees();
             for (Employee employee: employeeList) {
-                System.out.println("employeeName ---> " + employee.getEmployeeName());
+                System.out.println("employeeName => " + employee.getEmployeeName());
             }
         }
     }
