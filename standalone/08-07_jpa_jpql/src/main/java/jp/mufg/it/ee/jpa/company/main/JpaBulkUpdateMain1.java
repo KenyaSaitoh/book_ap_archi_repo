@@ -27,8 +27,7 @@ public class JpaBulkUpdateMain1 {
                 .setParameter("increase", 2000)
                 .setParameter("salary", 300000);
         int updateCount = query.executeUpdate();
-        // 更新結果を表示
-        System.out.println("ヒット件数 => " + updateCount);
+        System.out.println("ヒット件数 => " + updateCount); // 更新結果を表示
 
         // エンティティトランザクションをコミットする
         entityTransaction.commit();

@@ -66,9 +66,21 @@ public class JpaQueryMain {
         System.out.println("##### TEST3 END #####\n");
         }
 
+        {
+        // 関連エンティティのプロパティを条件に指定
+        System.out.println("##### TEST4 START #####");
+        Query query = entityManager.createQuery(
+                "SELECT e FROM Employee AS e " +
+                "WHERE e.department.departmentId = :departmentId")
+                .setParameter("departmentId", 3);
+        List<Employee> resultList = query.getResultList();
+        showEmployeeList(resultList); // 検索結果を表示
+        System.out.println("##### TEST4 END #####\n");
+        }
+
         // 時間型の永続フィールドを条件に指定
         {
-        System.out.println("##### TEST4 START #####");
+        System.out.println("##### TEST5 START #####");
         Calendar entranceDate = Calendar.getInstance();
         entranceDate.set(2012, 3, 1);  // 2012年4月1日
         Query query = entityManager.createQuery(
@@ -77,7 +89,7 @@ public class JpaQueryMain {
                 .setParameter("entranceDate", entranceDate, TemporalType.DATE);
         List<Employee> resultList = query.getResultList();
         showEmployeeList(resultList); // 検索結果を表示
-        System.out.println("##### TEST4 END #####\n");
+        System.out.println("##### TEST5 END #####\n");
         }
     }
 }
