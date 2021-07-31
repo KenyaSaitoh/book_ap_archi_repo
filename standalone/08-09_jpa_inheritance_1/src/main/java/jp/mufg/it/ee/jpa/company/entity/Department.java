@@ -10,7 +10,6 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Version;
 
 @Entity
 @Table(name = "DEPARTMENT")
@@ -31,22 +30,17 @@ public class Department {
             fetch = FetchType.LAZY)
     private List<Employee> employees = new ArrayList<Employee>();
 
-    @Column(name = "VERSION")
-    @Version
-    private Long version;
-
     // 引数なしのコンストラクタ
     public Department() {
     }
 
     // コンストラクタ
     public Department(Integer departmentId, String departmentName,
-            String location, List<Employee> employees, Long version) {
+            String location, List<Employee> employees) {
         this.departmentId = departmentId;
         this.departmentName = departmentName;
         this.location = location;
         this.employees = employees;
-        this.version = version;
     }
 
     // 部署IDへのアクセサメソッド
@@ -85,19 +79,9 @@ public class Department {
         this.employees = employees;
     }
 
-    // バージョン（楽観的ロックで使用）へのアクセサメソッド
-    public long getVersion() {
-        return version;
-    }
-
-    public void setVersion(long version) {
-        this.version = version;
-    }
-
     @Override
     public String toString() {
-        return "Department [departmentId=" + departmentId + ", departmentName="
-                + departmentName + ", location=" + location + ", employees="
-                + employees + ", version=" + version + "]";
+        return "Department [" + departmentId + ", " + departmentName + ", "
+                + location + "]";
     }
 }

@@ -57,7 +57,6 @@ public class Address {
 
     @Override
     public String toString() {
-        return "Address [zipCode=" + zipCode + ", city=" + city + ", street="
-                + street + "]";
+        return "Address [" + zipCode + ", " + city + ", " + street + "]";
     }
 }

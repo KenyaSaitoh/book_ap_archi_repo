@@ -29,6 +29,6 @@ public class DynamicSelectMain2 {
         // SELECT文を発行する
         List<Employee> resultList = mapper
                 .selectDynamicEmployees(paramEmployee);
-        ResultUtil.showEmployeeList(resultList);
+        ResultUtil.showEmployeeList(resultList); // 検索結果を表示
     }
 }

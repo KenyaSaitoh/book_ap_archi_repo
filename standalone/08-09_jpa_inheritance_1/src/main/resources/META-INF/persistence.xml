@@ -9,6 +9,9 @@
   <persistence-unit name="MyPersistenceUnit" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>jp.mufg.it.ee.jpa.company.entity.Employee</class>
+    <class>jp.mufg.it.ee.jpa.company.entity.Department</class>
+    <class>jp.mufg.it.ee.jpa.company.entity.Fulltimer</class>
+    <class>jp.mufg.it.ee.jpa.company.entity.Parttimer</class>
     <properties>
       <property name="javax.persistence.jdbc.driver"
                 value="com.mysql.jdbc.Driver" />

@@ -1,5 +1,6 @@
 package jp.mufg.it.ee.jpa.company.entity;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -11,7 +12,8 @@ import javax.persistence.Table;
 @Table(name = "PARTTIMER")
 @DiscriminatorValue(value = "2")
 public class Parttimer extends Employee {
-    private Integer parttimerPayment;
+    @Column(name = "WAGE")
+    private Integer wage;
 
     // 引数なしのコンストラクタ
     public Parttimer() {
@@ -19,24 +21,26 @@ public class Parttimer extends Employee {
     }
 
     // コンストラクタ
-    public Parttimer(Integer employeeId, String employeeName, Department department,
-            Integer employeeType, Date entranceDate, Integer parttimerPayment) {
-        super(employeeId, employeeName, department, employeeType, entranceDate);
-        this.parttimerPayment = parttimerPayment;
+    public Parttimer(Integer employeeId, String employeeName,
+            Department department, Date entranceDate, Integer wage) {
+        super(employeeId, employeeName, department, entranceDate);
+        this.wage = wage;
     }
 
     // 時給（パート）へのアクセサメソッド
-    @Column(name = "PARTTIMER_PAYMENT")
-    public Integer getParttimerPayment() {
-        return parttimerPayment;
+    public Integer getWage() {
+        return wage;
     }
 
-    public void setParttimerPayment(Integer parttimerPayment) {
-        this.parttimerPayment = parttimerPayment;
+    public void setWage(Integer wage) {
+        this.wage = wage;
     }
 
     @Override
     public String toString() {
-        return "Parttimer [parttimerPayment=" + parttimerPayment + "]";
+        return "Parttimer [" + getEmployeeId() + ", " + getEmployeeName() + ", "
+                + getDepartment() + ", " +
+                new SimpleDateFormat("yyyy/MM/dd").format(getEntranceDate()) +
+                ", " + wage + "]";
     }
 }
