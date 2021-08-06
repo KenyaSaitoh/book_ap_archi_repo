@@ -11,7 +11,7 @@ import javax.persistence.Persistence;
 import jp.mufg.it.ee.jpa.company.entity.Department;
 import jp.mufg.it.ee.jpa.company.entity.Parttimer;
 
-// Single Table per Class Hierarchy戦略のテスト
+// Joined Subclass戦略のテスト
 public class JpaInheritanceMain3 {
 
     public static void main(String[] args) {

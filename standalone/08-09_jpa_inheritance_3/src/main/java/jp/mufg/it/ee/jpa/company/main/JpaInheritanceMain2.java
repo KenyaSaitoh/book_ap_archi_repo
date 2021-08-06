@@ -7,7 +7,7 @@ import javax.persistence.Persistence;
 
 import jp.mufg.it.ee.jpa.company.entity.Parttimer;
 
-// Joined Subclass戦略のテスト
+// Table per Concrete Class戦略のテスト
 public class JpaInheritanceMain2 {
 
     public static void main(String[] args) {

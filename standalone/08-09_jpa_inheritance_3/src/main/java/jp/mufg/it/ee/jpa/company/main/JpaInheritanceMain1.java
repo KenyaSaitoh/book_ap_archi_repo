@@ -5,10 +5,10 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-import jp.mufg.it.ee.jpa.company.entity.Parttimer;
+import jp.mufg.it.ee.jpa.company.entity.Fulltimer;
 
-// Joined Subclass戦略のテスト
-public class JpaInheritanceMain2 {
+// Table per Concrete Class戦略のテスト
+public class JpaInheritanceMain1 {
 
     public static void main(String[] args) {
         // エンティティマネージャファクトリを取得する
@@ -22,12 +22,12 @@ public class JpaInheritanceMain2 {
         EntityTransaction entityTransaction = entityManager.getTransaction();
         entityTransaction.begin();
 
-        // パートタイマーを検索 → 更新
-        Parttimer parttimer = entityManager.find(Parttimer.class, 10021);
-        parttimer.setWage(parttimer.getWage() + 200);
+        // フルタイマーを検索 → 更新
+        Fulltimer fulltimer = entityManager.find(Fulltimer.class, 10001);
+        fulltimer.setSalary(fulltimer.getSalary() + 5000);
 
         // エンティティトランザクションをコミットする
         entityTransaction.commit();
-        System.out.println(parttimer);
+        System.out.println(fulltimer);
     }
 }

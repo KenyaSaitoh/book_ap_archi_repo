@@ -7,7 +7,7 @@ import javax.persistence.Persistence;
 
 import jp.mufg.it.ee.jpa.company.entity.Fulltimer;
 
-// Single Table per Class Hierarchy戦略のテスト
+// Joined Subclass戦略のテスト
 public class JpaInheritanceMain1 {
 
     public static void main(String[] args) {

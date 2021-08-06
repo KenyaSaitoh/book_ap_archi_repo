@@ -1,0 +1,7 @@
+// 依存関係設定
+dependencies {
+    compile "javax:javaee-api:7.0"
+    runtime "mysql:mysql-connector-java:5.1.47"
+    runtime "org.eclipse.persistence:eclipselink:2.7.6"
+    testCompile "junit:junit:4.12"
+}
